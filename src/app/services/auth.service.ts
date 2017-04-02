@@ -11,9 +11,23 @@ import { User } from '../models/user.model';
 export class AuthService {
 
   apiUrl = 'http://localhost:3000'
-  UID: string
+  UID: string = null
+  user = null
+  isAuthenticated = false
 
   constructor(private af: AngularFire, private http: Http) {
+    af.auth.subscribe(user => {
+      if (user) {
+        this.UID = user.uid
+        this.user = user
+        this.isAuthenticated = true
+      }
+      else {
+        this.UID = null
+        this.user = null
+        this.isAuthenticated = false
+      }
+    })
   }
 
   // Log user into app
@@ -50,11 +64,6 @@ export class AuthService {
   // Returns current user's ID
   getID(): string {
     return this.isAuthenticated ? this.UID : '';
-  }
-
-  // Returns authentication status
-  isAuthenticated(): boolean {
-    return this.UID !== null ? true : false;
   }
 
   createUser(username, credentials) {
