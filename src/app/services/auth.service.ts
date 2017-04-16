@@ -89,19 +89,53 @@ export class AuthService {
   createUser(username, youtube, twitter, facebook, bio, credentials) {
     this.UID = credentials.uid
 
-    // TODO: Strip inputs of potentially harmful data
-
     let user = new User
-    user.strUsername = username
-    user.strUserID = credentials.uid
-    user.strEmail  = credentials.email
-    user.blnEmailVerified = credentials.emailVerified
-    user.strYouTube = youtube
-    user.strTwitter = twitter
-    user.strFacebook = facebook
-    user.strBio = bio
-    console.log({createUser: user})
+    user.strUserID        = credentials.uid                    // valid since from Google
+    user.strEmail         = credentials.email                  // valid since from Google
+    user.blnEmailVerified = credentials.emailVerified          // valid since from Google
+    user.strUsername      = this.escapeHtml(username)
+    user.strYouTube       = this.escapeHtml(youtube)
+    user.strTwitter       = this.escapeHtml(twitter)
+    user.strFacebook      = this.escapeHtml(facebook)
+    user.strBio           = this.escapeHtml(bio)
     return user
+  }
+
+  validateUsername(text) {
+    let isValid = this.validateRequired(text, 3);
+    if(isValid.valid) {
+      this.http.post(`${this.apiUrl}/user/username/unique`, {username: text}).toPromise()
+        .then(response => {
+          let unique = response.json().unique
+          console.log({unique})
+          this.errorUsername = {
+            valid: unique,
+            message: "Username is already taken, please try another"
+          }
+        })
+    }
+    else {
+      this.errorUsername = isValid
+    }
+  }
+
+  validateRequired(text, minLength) {
+    return {
+      valid: text.length >= minLength ? true : false,
+      message: `Must be at least ${minLength} character(s) long`
+    }
+  }
+
+  escapeHtml(text) {
+    var map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
   }
 
 }
