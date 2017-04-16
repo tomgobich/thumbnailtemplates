@@ -21,12 +21,27 @@
     text-align: right;
     padding-right: $pad-3;
     float: left;
+    position: relative;
   }
 
   > input,
+  > textarea,
   .input-group {
     width: 60%;
     float: left;
+  }
+
+  .form-control-feedback {
+    display: inline-block;
+    margin-left: 24%;
+  }
+
+  .remaining {
+    color: rgba($black, .1);
+    line-height: 1em;
+    position: absolute;
+    top: 40px;
+    right: $pad-3;
   }
 
   .input-group-addon {

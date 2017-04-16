@@ -17,6 +17,17 @@ export class AuthService {
   avatar = null
   isAuthenticated = false
 
+  // TODO: Add validation for signup / login inputs
+
+  errorUsername = null
+  errorEmail = null
+  errorPassword = null
+  errorPasswordConfirm = null
+  errorYouTube = null
+  errorTwitter = null
+  errorFacebook = null
+  errorBio = null
+
   constructor(private af: AngularFire, private http: Http) {
     af.auth.subscribe(user => {
       if (user) {
@@ -43,11 +54,11 @@ export class AuthService {
   }
 
   // Sign up user
-  signup(username, email, password) {
+  signup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
     this.af.auth
       .createUser({ email, password })
       .then(user => {
-        let newUser = this.createUser(username, user.auth)
+        let newUser = this.createUser(username, youtube, twitter, facebook, bio, user.auth)
         this.http.post(`${this.apiUrl}/user/create`, newUser).toPromise()
           .then(response => {
             console.log({response})
@@ -75,14 +86,20 @@ export class AuthService {
     return `https://gravatar.com/avatar/${hash}?s=${size}&d=retro&r=r`;
   }
 
-  createUser(username, credentials) {
+  createUser(username, youtube, twitter, facebook, bio, credentials) {
     this.UID = credentials.uid
+
+    // TODO: Strip inputs of potentially harmful data
 
     let user = new User
     user.strUsername = username
     user.strUserID = credentials.uid
     user.strEmail  = credentials.email
     user.blnEmailVerified = credentials.emailVerified
+    user.strYouTube = youtube
+    user.strTwitter = twitter
+    user.strFacebook = facebook
+    user.strBio = bio
     console.log({createUser: user})
     return user
   }

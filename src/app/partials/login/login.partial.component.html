@@ -8,13 +8,14 @@
 
     <form *ngIf="!auth.isAuthenticated">
       <!-- Required Fields -->
-      <div class="form-group" *ngIf="!login">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorUsername}">
         <label for="name" class="col-form-label">Username <span class="req">*</span></label>
         <input
           type="text"
           class="form-control"
           #username
           placeholder="Enter a username">
+        <div class="form-control-feedback">{{ auth.errorUsername }}</div>
       </div>
       <div class="form-group">
         <label for="name" class="col-form-label">Email <span class="req">*</span></label>
@@ -75,6 +76,18 @@
             placeholder="Facebook name">
         </div>
       </div>
+      <div class="form-group" *ngIf="!login">
+        <label for="name" class="col-form-label">
+          Bio
+          <small class="remaining">{{ 500 - bio.value.length }} <br/> Remaining <br/> characters</small>
+        </label>
+        <textarea
+          #bio
+          name="bio"
+          class="form-control"
+          rows="4"
+          placeholder="Who goes there?"></textarea>
+      </div>
 
       <button
         type="submit"
@@ -87,7 +100,15 @@
         type="submit"
         class="btn btn-primary"
         *ngIf="!login"
-        (click)="auth.signup(username.value, email.value, password.value)">
+        (click)="auth.signup(
+          username.value,
+          email.value,
+          password.value,
+          passwordConfirm.value,
+          youtube.value,
+          twitter.value,
+          facebook.value
+        )">
           Sign Up
       </button>
     </form>
