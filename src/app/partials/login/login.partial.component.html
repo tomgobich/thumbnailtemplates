@@ -20,33 +20,45 @@
           <small>{{ auth.errorUsername?.message }}</small>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{'has-danger': auth.errorEmail?.valid === false}">
         <label for="name" class="col-form-label">Email <span class="req">*</span></label>
         <input
           type="text"
           class="form-control"
           #email
+          (blur)="auth.validateEmail(email.value)"
           placeholder="Enter your email">
+        <div class="form-control-feedback" *ngIf="auth.errorEmail?.valid === false">
+          <small>{{ auth.errorEmail?.message }}</small>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{'has-danger': auth.errorPassword?.valid === false}">
         <label for="name" class="col-form-label">Password <span class="req">*</span></label>
         <input
           type="password"
           class="form-control"
           #password
+          (blur)="auth.validatePassword(password.value)"
           placeholder="Enter your password">
+        <div class="form-control-feedback" *ngIf="auth.errorPassword?.valid === false">
+          <small>{{ auth.errorPassword?.message }}</small>
+        </div>
       </div>
-      <div class="form-group" *ngIf="!login">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorPasswordConfirm?.valid === false}">
         <label for="name" class="col-form-label">Confirm <span class="req">*</span></label>
         <input
           type="password"
           class="form-control"
           #passwordConfirm
+          (blur)="auth.validatePasswordConfirm(passwordConfirm.value)"
           placeholder="Confirm your password">
+        <div class="form-control-feedback" *ngIf="auth.errorPasswordConfirm?.valid === false">
+          <small>{{ auth.errorPasswordConfirm?.message }}</small>
+        </div>
       </div>
 
       <!-- Optional Fields -->
-      <div class="form-group" *ngIf="!login">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorYouTube?.valid === false}">
         <label for="name" class="col-form-label">YouTube</label>
         <div class="input-group mb-2 mb-sm-0">
           <div class="input-group-addon">youtube.com/</div>
@@ -54,10 +66,14 @@
             type="text"
             class="form-control"
             #youtube
+            (blur)="auth.validateYouTube(youtube.value)"
             placeholder="YouTube channel">
+          <div class="form-control-feedback" *ngIf="auth.errorYouTube?.valid === false">
+            <small>{{ auth.errorYouTube?.message }}</small>
+          </div>
         </div>
       </div>
-      <div class="form-group" *ngIf="!login">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorTwitter?.valid === false}">
         <label for="name" class="col-form-label">Twitter</label>
         <div class="input-group mb-2 mb-sm-0">
           <div class="input-group-addon">twitter.com/</div>
@@ -65,10 +81,14 @@
             type="text"
             class="form-control"
             #twitter
+            (blur)="auth.validateTwitter(twitter.value)"
             placeholder="Twitter handle">
+          <div class="form-control-feedback" *ngIf="auth.errorTwitter?.valid === false">
+            <small>{{ auth.errorTwitter?.message }}</small>
+          </div>
         </div>
       </div>
-      <div class="form-group" *ngIf="!login">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorFacebook?.valid === false}">
         <label for="name" class="col-form-label">Facebook</label>
         <div class="input-group mb-2 mb-sm-0">
           <div class="input-group-addon">facebook.com/</div>
@@ -76,10 +96,14 @@
             type="text"
             class="form-control"
             #facebook
+            (blur)="auth.validateFacebook(facebook.value)"
             placeholder="Facebook name">
+          <div class="form-control-feedback" *ngIf="auth.errorFacebook?.valid === false">
+            <small>{{ auth.errorFacebook?.message }}</small>
+          </div>
         </div>
       </div>
-      <div class="form-group" *ngIf="!login">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorBio?.valid === false}">
         <label for="name" class="col-form-label">
           Bio
           <small class="remaining">{{ 500 - bio.value.length }} <br/> Remaining <br/> characters</small>
@@ -89,7 +113,12 @@
           name="bio"
           class="form-control"
           rows="4"
+          maxlength="500"
+          (blur)="auth.validateBio(bio.value)"
           placeholder="Who goes there?"></textarea>
+        <div class="form-control-feedback" *ngIf="auth.errorBio?.valid === false">
+          <small>{{ auth.errorBio?.message }}</small>
+        </div>
       </div>
 
       <button
