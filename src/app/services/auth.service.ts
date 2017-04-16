@@ -19,14 +19,14 @@ export class AuthService {
 
   // TODO: Add validation for signup / login inputs
 
-  errorUsername = null
-  errorEmail = null
-  errorPassword = null
-  errorPasswordConfirm = null
-  errorYouTube = null
-  errorTwitter = null
-  errorFacebook = null
-  errorBio = null
+  errorUsername         = { valid: false, message: "" }
+  errorEmail            = { valid: false, message: "" }
+  errorPassword         = { valid: false, message: "" }
+  errorPasswordConfirm  = { valid: false, message: "" }
+  errorYouTube          = { valid: true, message: "" }
+  errorTwitter          = { valid: true, message: "" }
+  errorFacebook         = { valid: true, message: "" }
+  errorBio              = { valid: true, message: "" }
 
   constructor(private af: AngularFire, private http: Http) {
     af.auth.subscribe(user => {
@@ -55,16 +55,19 @@ export class AuthService {
 
   // Sign up user
   signup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
-    this.af.auth
-      .createUser({ email, password })
-      .then(user => {
-        let newUser = this.createUser(username, youtube, twitter, facebook, bio, user.auth)
-        this.http.post(`${this.apiUrl}/user/create`, newUser).toPromise()
-          .then(response => {
-            console.log({response})
-          })
-        console.log({user})
-      })
+    let isValid = this.validateSignup()
+
+    if(isValid) {
+      this.af.auth
+        .createUser({ email, password })
+        .then(user => {
+          let newUser = this.createUser(username, youtube, twitter, facebook, bio, user.auth)
+          this.http.post(`${this.apiUrl}/user/create`, newUser).toPromise()
+            .then(response => {
+              // TODO: Alert user of successful creation ?
+            })
+        })
+    }
   }
 
   // Logs user out of app session
@@ -101,6 +104,13 @@ export class AuthService {
     return user
   }
 
+  validateSignup() {
+    let isValid = true
+    let fields = [this.errorUsername, this.errorEmail, this.errorPassword, this.errorPasswordConfirm, this.errorYouTube, this.errorTwitter, this.errorFacebook, this.errorBio]
+    fields.forEach(field => !field.valid ? isValid = false : "")
+    return isValid
+  }
+
   validateUsername(text) {
     let isValid = this.validateRequired("Username", text, 3, 50);
     if(isValid.valid) {
@@ -133,7 +143,7 @@ export class AuthService {
   }
 
   validatePassword(text) {
-
+    this.errorPassword = this.validateRequired("Password", text, 6, 50)
   }
 
   validatePasswordConfirm(password, confirmation) {
@@ -146,7 +156,7 @@ export class AuthService {
   validateRequired(field, text, minLength, maxLength) {
     return {
       valid: text.length >= minLength ? true : false,
-      message: `${field} be between ${minLength} and ${maxLength} characters long`
+      message: `${field} must be between ${minLength} and ${maxLength} characters long`
     }
   }
 

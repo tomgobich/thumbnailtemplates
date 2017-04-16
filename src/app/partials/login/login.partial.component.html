@@ -8,7 +8,7 @@
 
     <form *ngIf="!auth.isAuthenticated">
       <!-- Required Fields -->
-      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorUsername?.valid === false}">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorUsername?.valid === false && username.dirty}">
         <label for="name" class="col-form-label">Username <span class="req">*</span></label>
         <input
           type="text"
@@ -20,7 +20,7 @@
           <small>{{ auth.errorUsername?.message }}</small>
         </div>
       </div>
-      <div class="form-group" [ngClass]="{'has-danger': auth.errorEmail?.valid === false}">
+      <div class="form-group" [ngClass]="{'has-danger': auth.errorEmail?.valid === false && email.dirty}">
         <label for="name" class="col-form-label">Email <span class="req">*</span></label>
         <input
           type="text"
@@ -32,7 +32,7 @@
           <small>{{ auth.errorEmail?.message }}</small>
         </div>
       </div>
-      <div class="form-group" [ngClass]="{'has-danger': auth.errorPassword?.valid === false}">
+      <div class="form-group" [ngClass]="{'has-danger': auth.errorPassword?.valid === false && password.dirty}">
         <label for="name" class="col-form-label">Password <span class="req">*</span></label>
         <input
           type="password"
@@ -44,7 +44,7 @@
           <small>{{ auth.errorPassword?.message }}</small>
         </div>
       </div>
-      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorPasswordConfirm?.valid === false}">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorPasswordConfirm?.valid === false && passwordConfirm.dirty}">
         <label for="name" class="col-form-label">Confirm <span class="req">*</span></label>
         <input
           type="password"
@@ -58,7 +58,7 @@
       </div>
 
       <!-- Optional Fields -->
-      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorYouTube?.valid === false}">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorYouTube?.valid === false && youtube.dirty}">
         <label for="name" class="col-form-label">YouTube</label>
         <div class="input-group mb-2 mb-sm-0">
           <div class="input-group-addon">youtube.com/</div>
@@ -73,7 +73,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorTwitter?.valid === false}">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorTwitter?.valid === false && twitter.dirty}">
         <label for="name" class="col-form-label">Twitter</label>
         <div class="input-group mb-2 mb-sm-0">
           <div class="input-group-addon">twitter.com/</div>
@@ -88,7 +88,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorFacebook?.valid === false}">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorFacebook?.valid === false && facebook.dirty}">
         <label for="name" class="col-form-label">Facebook</label>
         <div class="input-group mb-2 mb-sm-0">
           <div class="input-group-addon">facebook.com/</div>
@@ -103,7 +103,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorBio?.valid === false}">
+      <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorBio?.valid === false && bio.dirty}">
         <label for="name" class="col-form-label">
           Bio
           <small class="remaining" [ngClass]="{'has-warning': 500 - bio.value.length < 50, 'has-danger': 500 - bio.value.length < 0}">
