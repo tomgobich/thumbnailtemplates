@@ -102,12 +102,11 @@ export class AuthService {
   }
 
   validateUsername(text) {
-    let isValid = this.validateRequired(text, 3);
+    let isValid = this.validateRequired("Username", text, 3, 50);
     if(isValid.valid) {
       this.http.post(`${this.apiUrl}/user/username/unique`, {username: text}).toPromise()
         .then(response => {
           let unique = response.json().unique
-          console.log({unique})
           this.errorUsername = {
             valid: unique,
             message: "Username is already taken, please try another"
@@ -119,10 +118,35 @@ export class AuthService {
     }
   }
 
-  validateRequired(text, minLength) {
+  validateEmail(text) {
+    let isValid = this.validateRequired("Email", text, 3, 50);
+    if(isValid.valid) {
+      let regex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+      this.errorEmail = {
+        valid: regex.test(text),
+        message: "Please enter a valid email"
+      }
+    }
+    else {
+      this.errorEmail = isValid
+    }
+  }
+
+  validatePassword(text) {
+
+  }
+
+  validatePasswordConfirm(password, confirmation) {
+    this.errorPasswordConfirm = {
+      valid: password == confirmation,
+      message: "Passwords do not match, please try again"
+    }
+  }
+
+  validateRequired(field, text, minLength, maxLength) {
     return {
       valid: text.length >= minLength ? true : false,
-      message: `Must be at least ${minLength} character(s) long`
+      message: `${field} be between ${minLength} and ${maxLength} characters long`
     }
   }
 

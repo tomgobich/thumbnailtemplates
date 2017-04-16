@@ -50,7 +50,7 @@
           type="password"
           class="form-control"
           #passwordConfirm
-          (blur)="auth.validatePasswordConfirm(passwordConfirm.value)"
+          (blur)="auth.validatePasswordConfirm(password.value, passwordConfirm.value)"
           placeholder="Confirm your password">
         <div class="form-control-feedback" *ngIf="auth.errorPasswordConfirm?.valid === false">
           <small>{{ auth.errorPasswordConfirm?.message }}</small>
@@ -106,7 +106,9 @@
       <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorBio?.valid === false}">
         <label for="name" class="col-form-label">
           Bio
-          <small class="remaining">{{ 500 - bio.value.length }} <br/> Remaining <br/> characters</small>
+          <small class="remaining" [ngClass]="{'has-warning': 500 - bio.value.length < 50, 'has-danger': 500 - bio.value.length < 0}">
+            {{ 500 - bio.value.length }} <br/> Remaining <br/> characters
+          </small>
         </label>
         <textarea
           #bio
