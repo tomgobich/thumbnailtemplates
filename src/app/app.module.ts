@@ -8,7 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthService } from './services/auth.service';
-import { LoginComponent } from './login/login.component';
+import { LoginPartialComponent } from './partials/login/login.partial.component';
+import { LoginComponent } from './routes/login/login.component';
+import { HomeComponent } from './routes/home/home.component';
+import { HeaderPartialComponent } from './partials/header/header.partial.component';
+import { SignupComponent } from './routes/signup/signup.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -27,7 +31,11 @@ const firebaseAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    LoginPartialComponent,
+    HomeComponent,
+    HeaderPartialComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

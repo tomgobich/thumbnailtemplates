@@ -1,0 +1,32 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-logo">
+        <a href="/"><img class="logo" src="http://placehold.it/350x90"></a>
+      </div>
+      <div class="col-xs-12 col-md-nav pos-relative">
+        <nav>
+          <ul class="navigation clearfix">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
+          </ul>
+          <div id="navSearchWrapper" class="search-wrapper">
+            <input type="text" id="navSearch" value="" placeholder="Search...">
+          </div>
+        </nav>
+        <div class="search-icon-wrapper">
+          <img id="navSearchToggle" class="search-icon" src="http://placehold.it/30x30">
+        </div>
+        <div class="profile-icon-wrapper" *ngIf="auth.isAuthenticated && auth.avatar">
+          <img id="navProfileToggle" class="avatar" [src]="auth.avatar">
+        </div>
+        <div class="login-signup-wrapper" *ngIf="!auth.isAuthenticated">
+          Login
+          Signup
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

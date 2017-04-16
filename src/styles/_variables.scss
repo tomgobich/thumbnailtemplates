@@ -9,7 +9,7 @@
 
 // Start with assigning color names to specific hex values.
 $white:  #fff !default;
-$black:  #000 !default;
+$black:  #333 !default;
 $red:    #d9534f !default;
 $orange: #f0ad4e !default;
 $yellow: #ffd500 !default;
@@ -33,6 +33,10 @@ $brand-info:                $teal !default;
 $brand-warning:             $orange !default;
 $brand-danger:              $red !default;
 $brand-inverse:             $gray-dark !default;
+
+$anim-fast: 100ms ease;
+$anim-med: 300ms ease;
+$anim-slow: 600ms ease;
 
 
 // Options

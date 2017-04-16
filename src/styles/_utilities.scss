@@ -1,0 +1,83 @@
+// ---------------------------------------------
+// Grid Utilities
+// ---------------------------------------------
+.pos-relative {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.table {
+  display: table;
+
+  .table-row {
+    display: table-row;
+
+    .table-cell {
+      display: table-cell;
+
+      &.v-middle {
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.table-md-up {
+  @include media-breakpoint-up (md) {
+    display: table;
+
+    .table-row {
+      display: table-row;
+
+      .table-cell {
+        display: table-cell;
+
+        &.v-middle {
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}
+
+
+// ---------------------------------------------
+// Spacing Utilities
+// ---------------------------------------------
+$pad-1: 4px;
+$pad-2: 8px;
+$pad-3: 15px;
+$pad-4: 30px;
+
+$mar-1: 4px;
+$mar-2: 8px;
+$mar-3: 15px;
+$mar-4: 30px;
+
+
+
+// ---------------------------------------------
+// Text Utilities
+// ---------------------------------------------
+.text-reset {
+  padding: 0;
+  margin: 0;
+}
+
+.page-title {
+  padding-bottom: $pad-3;
+  border-bottom: 1px solid rgba($black, .1);
+  margin-bottom: $pad-3;
+}
+
+.req {
+  color: $red;
+}
+
+.row.vert-title {    // This class MUST be combined with a row
+  padding-left: 40px;
+  position: relative;
+  &.trending:before { @include vertical-heading("Trending", 50px); }
+  &.new:before      { @include vertical-heading("New", 12px); }
+}

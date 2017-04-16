@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
 import { Router, NavigationStart } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
+import { md5 } from './md5.service';
 import 'rxjs/add/operator/toPromise';
 
 import { User } from '../models/user.model';
@@ -13,6 +14,7 @@ export class AuthService {
   apiUrl = 'http://localhost:3000'
   UID: string = null
   user = null
+  avatar = null
   isAuthenticated = false
 
   constructor(private af: AngularFire, private http: Http) {
@@ -20,6 +22,7 @@ export class AuthService {
       if (user) {
         this.UID = user.uid
         this.user = user
+        this.avatar = this.getAvatar(user.auth.email, 50)
         this.isAuthenticated = true
       }
       else {
@@ -64,6 +67,12 @@ export class AuthService {
   // Returns current user's ID
   getID(): string {
     return this.isAuthenticated ? this.UID : '';
+  }
+
+  getAvatar(email: string, size: number): string {
+    size = size > 0 ? size : 30;
+    let hash = md5(email.toLowerCase().trim());
+    return `https://gravatar.com/avatar/${hash}?s=${size}&d=retro&r=r`;
   }
 
   createUser(username, credentials) {
