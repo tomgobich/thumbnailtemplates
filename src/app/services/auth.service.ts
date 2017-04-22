@@ -153,10 +153,44 @@ export class AuthService {
     }
   }
 
+  validateTwitter(text) {
+    this.errorTwitter = this.hasSpecialChars(text)
+  }
+
+  validateYouTube(text) {
+    this.errorYouTube = this.hasSpecialChars(text)
+  }
+
+  validateFacebook(text) {
+    this.errorFacebook = this.hasSpecialChars(text)
+  }
+
+  validateBio(text) {
+    let isValid = text.length <= 500
+    if(isValid) {
+      this.errorBio = this.hasSpecialChars(text);
+    }
+    else {
+      this.errorBio = {
+        valid: isValid,
+        message: `Bio cannot exceed 500 characters, you need to lose ${500 - text.length} characters.`
+      }
+    }
+  }
+
   validateRequired(field, text, minLength, maxLength) {
     return {
       valid: text.length >= minLength ? true : false,
       message: `${field} must be between ${minLength} and ${maxLength} characters long`
+    }
+  }
+
+  hasSpecialChars(text) {
+    let compare = this.escapeHtml(text)
+    let isValid = text == compare
+    return {
+      valid: isValid,
+      message: "Please remove invalid characters (&, <, >, \", ')"
     }
   }
 
