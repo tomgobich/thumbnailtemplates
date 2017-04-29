@@ -1,6 +1,6 @@
 <!-- Trending Section -->
-<div class="row vert-title featured">
+<div class="row vert-title featured" *ngIf="featuredThumbnails.length > 0">
   <div class="col-12 no-pad">
-    <app-featured-thumbnail></app-featured-thumbnail>
+    <app-featured-thumbnail *ngFor="let thumb of featuredThumbnails" [thumb]="thumb"></app-featured-thumbnail>
   </div>
 </div>

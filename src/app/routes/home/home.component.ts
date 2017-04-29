@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { ThumbService } from '../../services/thumb.service'
+import { Thumb } from '../../models/thumb.model'
 
 @Component({
   selector: 'app-home',
@@ -7,11 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  featuredThumbnails
+  featuredThumbnails: Array<Thumb> = []
 
-  constructor() {}
+  constructor(private thumbService: ThumbService) {}
 
   ngOnInit() {
+    this.thumbService.getFeaturedThumbnails().subscribe(thumbnails => {
+      thumbnails.forEach(thumb => {
+        this.featuredThumbnails.push(this.thumbService.buildThumbnail(thumb))
+      })
+    })
   }
 
 }

@@ -55,6 +55,8 @@ export class AuthService {
 
   // Sign up user
   signup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
+    console.log(username)
+
     let isValid = this.validateSignup()
 
     if(isValid) {
@@ -96,11 +98,29 @@ export class AuthService {
     user.strUserID        = credentials.uid                    // valid since from Google
     user.strEmail         = credentials.email                  // valid since from Google
     user.blnEmailVerified = credentials.emailVerified          // valid since from Google
-    user.strUsername      = encodeURIComponent(username)
-    user.strYouTube       = encodeURIComponent(youtube)
-    user.strTwitter       = encodeURIComponent(twitter)
-    user.strFacebook      = encodeURIComponent(facebook)
+    user.strUsername      = encodeURIComponent(username.trim())
+    user.strYouTube       = encodeURIComponent(youtube.trim())
+    user.strTwitter       = encodeURIComponent(twitter.trim())
+    user.strFacebook      = encodeURIComponent(facebook.trim())
     user.strBio           = encodeURIComponent(bio)
+
+    return user
+  }
+
+  buildUser(data) {
+    let user = new User
+
+    user.strUserID        = data.strUserID
+    user.strEmail         = data.strEmail
+    user.blnEmailVerified = data.blnEmailVerified
+    user.strUsername      = data.strUsername
+    user.strAvatar        = data.strAvatar
+    user.strYouTube       = data.strYouTube
+    user.strTwitter       = data.strTwitter
+    user.strFacebook      = data.strFacebook
+    user.strBio           = data.strBio
+    user.intStatusID      = data.intStatusID
+
     return user
   }
 
@@ -115,6 +135,7 @@ export class AuthService {
     let isValid = this.validateRequired("Username", text, 3, 50);
 
     isValid = isValid.valid ? this.hasSpecialChars(text) : isValid
+    isValid = isValid.valid ? this.hasSpaces(text) : isValid
 
     if(isValid.valid) {
       this.http.post(`${this.apiUrl}/user/username/unique`, {username: text}).toPromise()
@@ -183,7 +204,7 @@ export class AuthService {
 
   validateRequired(field, text, minLength, maxLength) {
     return {
-      valid: text.length >= minLength ? true : false,
+      valid: text.trim().length >= minLength ? true : false,
       message: `${field} must be between ${minLength} and ${maxLength} characters long`
     }
   }
@@ -194,6 +215,15 @@ export class AuthService {
     return {
       valid: isValid,
       message: "Please remove invalid characters (&, <, >, \", ')"
+    }
+  }
+
+  hasSpaces(text) {
+    let isValid = !/\s/.test(text.trim())
+    console.log({isValid, text})
+    return {
+      valid: isValid,
+      message: "Please remove all spaces"
     }
   }
 

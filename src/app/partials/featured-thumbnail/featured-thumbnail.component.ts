@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from '../../services/auth.service'
+import { ThumbService } from '../../services/thumb.service'
+import { Thumb } from '../../models/thumb.model'
 
 @Component({
   selector: 'app-featured-thumbnail',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeaturedThumbnailComponent implements OnInit {
 
-  constructor() { }
+  @Input() thumb: Thumb
+
+  avatar: string
+
+  constructor(private authService: AuthService, private thumbService: ThumbService) { }
 
   ngOnInit() {
+    if(this.thumb) {
+      console.log('trying to get thumb with', this.thumb.user.strEmail)
+      this.avatar = this.authService.getAvatar(this.thumb.user.strEmail, 20)
+    }
   }
 
 }

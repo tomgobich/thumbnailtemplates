@@ -1,12 +1,12 @@
-<div class="featured-block">
-  <img class="featured-img" src="https://placehold.it/400x250">
+<div class="featured-block" *ngIf="thumb">
+  <img class="featured-img" [src]="thumbService.getImagePath() + thumb.image.strImageAlias">
   <div class="featured-block-hover">
     <div class="featured-block-details">
-      <h3 class="title">This is the template title</h3>
-      <div class="avatar-wrapper">
-        <img class="avatar" src="http://placehold.it/30x30">
+      <h3 class="title">{{ thumb.strTemplateTitle }}</h3>
+      <div class="avatar-wrapper" *ngIf="avatar">
+        <img class="avatar" [src]="avatar">
       </div>
-      <p class="username">Username</p>
+      <p class="username">{{ thumb.user.strUsername }}</p>
     </div>
     <div class="post-details">
       <p class="counts">Views: 23400, Likes: 23</p>

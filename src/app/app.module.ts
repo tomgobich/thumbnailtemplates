@@ -14,6 +14,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { HomeComponent } from './routes/home/home.component';
 import { HeaderPartialComponent } from './partials/header/header.partial.component';
 import { FeaturedThumbnailComponent } from './partials/featured-thumbnail/featured-thumbnail.component';
+import 'rxjs/Rx';
 
 // Must export the config
 export const firebaseConfig = {
