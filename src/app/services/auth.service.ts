@@ -96,11 +96,11 @@ export class AuthService {
     user.strUserID        = credentials.uid                    // valid since from Google
     user.strEmail         = credentials.email                  // valid since from Google
     user.blnEmailVerified = credentials.emailVerified          // valid since from Google
-    user.strUsername      = this.escapeHtml(username)
-    user.strYouTube       = this.escapeHtml(youtube)
-    user.strTwitter       = this.escapeHtml(twitter)
-    user.strFacebook      = this.escapeHtml(facebook)
-    user.strBio           = this.escapeHtml(bio)
+    user.strUsername      = encodeURIComponent(username)
+    user.strYouTube       = encodeURIComponent(youtube)
+    user.strTwitter       = encodeURIComponent(twitter)
+    user.strFacebook      = encodeURIComponent(facebook)
+    user.strBio           = encodeURIComponent(bio)
     return user
   }
 
@@ -113,6 +113,9 @@ export class AuthService {
 
   validateUsername(text) {
     let isValid = this.validateRequired("Username", text, 3, 50);
+
+    isValid = isValid.valid ? this.hasSpecialChars(text) : isValid
+
     if(isValid.valid) {
       this.http.post(`${this.apiUrl}/user/username/unique`, {username: text}).toPromise()
         .then(response => {

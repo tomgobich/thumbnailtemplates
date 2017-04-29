@@ -8,11 +8,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthService } from './services/auth.service';
+import { ThumbService } from './services/thumb.service';
 import { LoginPartialComponent } from './partials/login/login.partial.component';
 import { LoginComponent } from './routes/login/login.component';
 import { HomeComponent } from './routes/home/home.component';
 import { HeaderPartialComponent } from './partials/header/header.partial.component';
-import { SignupComponent } from './routes/signup/signup.component';
+import { FeaturedThumbnailComponent } from './partials/featured-thumbnail/featured-thumbnail.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -35,7 +36,7 @@ const firebaseAuthConfig = {
     LoginPartialComponent,
     HomeComponent,
     HeaderPartialComponent,
-    SignupComponent
+    FeaturedThumbnailComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +46,8 @@ const firebaseAuthConfig = {
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
   providers: [
-    AuthService
+    AuthService,
+    ThumbService
   ],
   bootstrap: [AppComponent]
 })

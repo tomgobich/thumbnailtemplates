@@ -14,7 +14,7 @@
           type="text"
           class="form-control"
           #username
-          (blur)="auth.validateUsername(username.value)"
+          (keydown)="auth.validateUsername(username.value)"
           placeholder="Enter a username">
         <div class="full-width">
           <div class="form-control-feedback" *ngIf="auth.errorUsername?.valid === false">
@@ -28,7 +28,7 @@
           type="text"
           class="form-control"
           #email
-          (blur)="auth.validateEmail(email.value)"
+          (keydown)="auth.validateEmail(email.value)"
           placeholder="Enter your email">
         <div class="full-width">
           <div class="form-control-feedback" *ngIf="auth.errorEmail?.valid === false">
@@ -42,7 +42,7 @@
           type="password"
           class="form-control"
           #password
-          (blur)="auth.validatePassword(password.value)"
+          (keydown)="auth.validatePassword(password.value)"
           placeholder="Enter your password">
         <div class="full-width">
           <div class="form-control-feedback" *ngIf="auth.errorPassword?.valid === false">
@@ -56,7 +56,7 @@
           type="password"
           class="form-control"
           #passwordConfirm
-          (blur)="auth.validatePasswordConfirm(password.value, passwordConfirm.value)"
+          (keydown)="auth.validatePasswordConfirm(password.value, passwordConfirm.value)"
           placeholder="Confirm your password">
         <div class="full-width">
           <div class="form-control-feedback" *ngIf="auth.errorPasswordConfirm?.valid === false">
@@ -74,7 +74,7 @@
             type="text"
             class="form-control"
             #youtube
-            (blur)="auth.validateYouTube(youtube.value)"
+            (keydown)="auth.validateYouTube(youtube.value)"
             placeholder="YouTube channel">
         </div>
         <div class="full-width">
@@ -91,7 +91,7 @@
             type="text"
             class="form-control"
             #twitter
-            (blur)="auth.validateTwitter(twitter.value)"
+            (keydown)="auth.validateTwitter(twitter.value)"
             placeholder="Twitter handle">
         </div>
         <div class="full-width">
@@ -108,7 +108,7 @@
             type="text"
             class="form-control"
             #facebook
-            (blur)="auth.validateFacebook(facebook.value)"
+            (keydown)="auth.validateFacebook(facebook.value)"
             placeholder="Facebook name">
         </div>
         <div class="full-width">
@@ -130,7 +130,7 @@
           class="form-control"
           rows="4"
           maxlength="500"
-          (blur)="auth.validateBio(bio.value)"
+          (keydown)="auth.validateBio(bio.value)"
           placeholder="Who goes there?"></textarea>
         <div class="full-width">
           <div class="form-control-feedback" *ngIf="auth.errorBio?.valid === false">

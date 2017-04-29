@@ -1,3 +1,7 @@
+@import 'variables';
+@import 'mixins';
+
+
 // ---------------------------------------------
 // Grid Utilities
 // ---------------------------------------------
@@ -11,6 +15,10 @@
   position: relative;
   top: 0;
   left: 0;
+}
+
+.no-pad {
+  padding: 0;
 }
 
 .table {
@@ -81,10 +89,9 @@ $mar-4: 30px;
   color: $red;
 }
 
-.row.vert-title {    // This class MUST be combined with a row
-  padding-left: 40px;
+.row.vert-title {
   position: relative;
-  &.trending:before { @include vertical-heading("Trending", 50px); }
+  &.featured:before { @include vertical-heading("Featured", 61px); }
   &.new:before      { @include vertical-heading("New", 12px); }
 }
 

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './routes/home/home.component';
 import { LoginComponent } from './routes/login/login.component';
-import { SignupComponent } from './routes/signup/signup.component';
 
 const routes: Routes = [
    { path: '',         component: HomeComponent }
