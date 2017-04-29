@@ -1,6 +1,12 @@
 // ---------------------------------------------
 // Grid Utilities
 // ---------------------------------------------
+.full-width {
+  width: 100%;
+  display: block;
+  clear: both;
+}
+
 .pos-relative {
   position: relative;
   top: 0;
@@ -80,4 +86,8 @@ $mar-4: 30px;
   position: relative;
   &.trending:before { @include vertical-heading("Trending", 50px); }
   &.new:before      { @include vertical-heading("New", 12px); }
+}
+
+.form-control-feedback {
+  color: $red;
 }

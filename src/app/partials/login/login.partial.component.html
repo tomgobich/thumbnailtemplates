@@ -16,8 +16,10 @@
           #username
           (blur)="auth.validateUsername(username.value)"
           placeholder="Enter a username">
-        <div class="form-control-feedback" *ngIf="auth.errorUsername?.valid === false">
-          <small>{{ auth.errorUsername?.message }}</small>
+        <div class="full-width">
+          <div class="form-control-feedback" *ngIf="auth.errorUsername?.valid === false">
+            <small>{{ auth.errorUsername?.message }}</small>
+          </div>
         </div>
       </div>
       <div class="form-group" [ngClass]="{'has-danger': auth.errorEmail?.valid === false && email.dirty}">
@@ -28,8 +30,10 @@
           #email
           (blur)="auth.validateEmail(email.value)"
           placeholder="Enter your email">
-        <div class="form-control-feedback" *ngIf="auth.errorEmail?.valid === false">
-          <small>{{ auth.errorEmail?.message }}</small>
+        <div class="full-width">
+          <div class="form-control-feedback" *ngIf="auth.errorEmail?.valid === false">
+            <small>{{ auth.errorEmail?.message }}</small>
+          </div>
         </div>
       </div>
       <div class="form-group" [ngClass]="{'has-danger': auth.errorPassword?.valid === false && password.dirty}">
@@ -40,8 +44,10 @@
           #password
           (blur)="auth.validatePassword(password.value)"
           placeholder="Enter your password">
-        <div class="form-control-feedback" *ngIf="auth.errorPassword?.valid === false">
-          <small>{{ auth.errorPassword?.message }}</small>
+        <div class="full-width">
+          <div class="form-control-feedback" *ngIf="auth.errorPassword?.valid === false">
+            <small>{{ auth.errorPassword?.message }}</small>
+          </div>
         </div>
       </div>
       <div class="form-group" *ngIf="!login" [ngClass]="{'has-danger': auth.errorPasswordConfirm?.valid === false && passwordConfirm.dirty}">
@@ -52,8 +58,10 @@
           #passwordConfirm
           (blur)="auth.validatePasswordConfirm(password.value, passwordConfirm.value)"
           placeholder="Confirm your password">
-        <div class="form-control-feedback" *ngIf="auth.errorPasswordConfirm?.valid === false">
-          <small>{{ auth.errorPasswordConfirm?.message }}</small>
+        <div class="full-width">
+          <div class="form-control-feedback" *ngIf="auth.errorPasswordConfirm?.valid === false">
+            <small>{{ auth.errorPasswordConfirm?.message }}</small>
+          </div>
         </div>
       </div>
 
@@ -68,6 +76,8 @@
             #youtube
             (blur)="auth.validateYouTube(youtube.value)"
             placeholder="YouTube channel">
+        </div>
+        <div class="full-width">
           <div class="form-control-feedback" *ngIf="auth.errorYouTube?.valid === false">
             <small>{{ auth.errorYouTube?.message }}</small>
           </div>
@@ -83,6 +93,8 @@
             #twitter
             (blur)="auth.validateTwitter(twitter.value)"
             placeholder="Twitter handle">
+        </div>
+        <div class="full-width">
           <div class="form-control-feedback" *ngIf="auth.errorTwitter?.valid === false">
             <small>{{ auth.errorTwitter?.message }}</small>
           </div>
@@ -98,6 +110,8 @@
             #facebook
             (blur)="auth.validateFacebook(facebook.value)"
             placeholder="Facebook name">
+        </div>
+        <div class="full-width">
           <div class="form-control-feedback" *ngIf="auth.errorFacebook?.valid === false">
             <small>{{ auth.errorFacebook?.message }}</small>
           </div>
@@ -118,8 +132,10 @@
           maxlength="500"
           (blur)="auth.validateBio(bio.value)"
           placeholder="Who goes there?"></textarea>
-        <div class="form-control-feedback" *ngIf="auth.errorBio?.valid === false">
-          <small>{{ auth.errorBio?.message }}</small>
+        <div class="full-width">
+          <div class="form-control-feedback" *ngIf="auth.errorBio?.valid === false">
+            <small>{{ auth.errorBio?.message }}</small>
+          </div>
         </div>
       </div>
 

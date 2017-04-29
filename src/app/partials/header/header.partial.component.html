@@ -23,8 +23,8 @@
           <img id="navProfileToggle" class="avatar" [src]="auth.avatar">
         </div>
         <div class="login-signup-wrapper" *ngIf="!auth.isAuthenticated">
-          Login
-          Signup
+          <a routerLink="/login">Login</a>
+          <a routerLink="/signup">Signup</a>
         </div>
       </div>
     </div>
