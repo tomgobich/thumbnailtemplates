@@ -16,6 +16,9 @@ export class AuthService {
   user = null
   avatar = null
   isAuthenticated = false
+  loginError = null
+  signupError = null
+  signupSuccess = null
 
   // TODO: Add validation for signup / login inputs
 
@@ -46,18 +49,27 @@ export class AuthService {
 
   // Log user into app
   login(email, password) {
-    this.af.auth
-      .login({ email, password })
-      .then(user => {
-        this.UID = user.uid
+    let isValid = this.validateLogin(email, password)
+
+    if(isValid) {
+      this.af.auth
+        .login({ email, password })
+        .then(user => {
+          this.UID = user.uid
+          console.log('user is now logged in with uid ', user.uid)
+        })
+        .catch(error => {
+          this.loginError = error
+          console.error(error)
       })
+    }
   }
 
   // Sign up user
   signup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
     console.log(username)
 
-    let isValid = this.validateSignup()
+    let isValid = this.validateSignup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio)
 
     if(isValid) {
       this.af.auth
@@ -66,8 +78,13 @@ export class AuthService {
           let newUser = this.createUser(username, youtube, twitter, facebook, bio, user.auth)
           this.http.post(`${this.apiUrl}/user/create`, newUser).toPromise()
             .then(response => {
-              // TODO: Alert user of successful creation ?
+              this.signupSuccess = response.json()
+              console.log(response.json())
             })
+        })
+        .catch(error => {
+          this.signupError = error
+          console.error(error)
         })
     }
   }
@@ -98,11 +115,11 @@ export class AuthService {
     user.strUserID        = credentials.uid                    // valid since from Google
     user.strEmail         = credentials.email                  // valid since from Google
     user.blnEmailVerified = credentials.emailVerified          // valid since from Google
-    user.strUsername      = encodeURIComponent(username.trim())
-    user.strYouTube       = encodeURIComponent(youtube.trim())
-    user.strTwitter       = encodeURIComponent(twitter.trim())
-    user.strFacebook      = encodeURIComponent(facebook.trim())
-    user.strBio           = encodeURIComponent(bio)
+    user.strUsername      = encodeURIComponent(this.replaceNullOrUndefined(username.trim()))
+    user.strYouTube       = encodeURIComponent(this.replaceNullOrUndefined(youtube.trim()))
+    user.strTwitter       = encodeURIComponent(this.replaceNullOrUndefined(twitter.trim()))
+    user.strFacebook      = encodeURIComponent(this.replaceNullOrUndefined(facebook.trim()))
+    user.strBio           = encodeURIComponent(this.replaceNullOrUndefined(bio))
 
     return user
   }
@@ -124,9 +141,30 @@ export class AuthService {
     return user
   }
 
-  validateSignup() {
+  validateLogin(email, password) {
+    let isValid = true
+    let fields = [this.errorEmail, this.errorPassword]
+
+    this.validateEmail(this.replaceNullOrUndefined(email))
+    this.validatePassword(this.replaceNullOrUndefined(password))
+
+    fields.forEach(field => !field.valid ? isValid = false : "")
+    return isValid
+  }
+
+  validateSignup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
     let isValid = true
     let fields = [this.errorUsername, this.errorEmail, this.errorPassword, this.errorPasswordConfirm, this.errorYouTube, this.errorTwitter, this.errorFacebook, this.errorBio]
+
+    this.validateUsername(this.replaceNullOrUndefined(username))
+    this.validateEmail(this.replaceNullOrUndefined(email))
+    this.validatePassword(this.replaceNullOrUndefined(password))
+    this.validatePasswordConfirm(this.replaceNullOrUndefined(password), this.replaceNullOrUndefined(passwordConfirm))
+    this.validateYouTube(this.replaceNullOrUndefined(youtube))
+    this.validateTwitter(this.replaceNullOrUndefined(twitter))
+    this.validateFacebook(this.replaceNullOrUndefined(facebook))
+    this.validateBio(this.replaceNullOrUndefined(bio))
+
     fields.forEach(field => !field.valid ? isValid = false : "")
     return isValid
   }
@@ -191,6 +229,7 @@ export class AuthService {
 
   validateBio(text) {
     let isValid = text.length <= 500
+
     if(isValid) {
       this.errorBio = this.hasSpecialChars(text);
     }
@@ -203,8 +242,10 @@ export class AuthService {
   }
 
   validateRequired(field, text, minLength, maxLength) {
+    let isValid = text.trim().length >= minLength ? true : false
+
     return {
-      valid: text.trim().length >= minLength ? true : false,
+      valid: isValid,
       message: `${field} must be between ${minLength} and ${maxLength} characters long`
     }
   }
@@ -212,6 +253,7 @@ export class AuthService {
   hasSpecialChars(text) {
     let compare = this.escapeHtml(text)
     let isValid = text == compare
+
     return {
       valid: isValid,
       message: "Please remove invalid characters (&, <, >, \", ')"
@@ -220,7 +262,7 @@ export class AuthService {
 
   hasSpaces(text) {
     let isValid = !/\s/.test(text.trim())
-    console.log({isValid, text})
+
     return {
       valid: isValid,
       message: "Please remove all spaces"
@@ -237,6 +279,10 @@ export class AuthService {
     };
 
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+  }
+
+  replaceNullOrUndefined(text) {
+    return text == null || text == undefined ? '' : text
   }
 
 }

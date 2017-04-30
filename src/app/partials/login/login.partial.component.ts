@@ -8,23 +8,13 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginPartialComponent implements OnInit {
 
-  @Input() login: boolean = false;
-
   pageHeading: string;
   pageInstructions: string
 
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    if(this.login) {
-      this.pageHeading = "Login"
-      this.pageInstructions = "Please login using your email and password"
-    }
-    else {
-      this.pageHeading = "Signup"
-      this.pageInstructions = "Please signup by filling out the required fields"
-    }
-
+    this.pageHeading = "Login"
+    this.pageInstructions = "Please login using your email and password"
   }
-
 }

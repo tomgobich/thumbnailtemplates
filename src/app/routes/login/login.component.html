@@ -1,1 +1,2 @@
-<partial-login [login]="login"></partial-login>
+<partial-login *ngIf="login"></partial-login>
+<partial-signup *ngIf="!login"></partial-signup>

@@ -15,6 +15,7 @@ import { HomeComponent } from './routes/home/home.component';
 import { HeaderPartialComponent } from './partials/header/header.partial.component';
 import { FeaturedThumbnailComponent } from './partials/featured-thumbnail/featured-thumbnail.component';
 import 'rxjs/Rx';
+import { SignupPartialComponent } from './partials/signup/signup-partial.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -37,7 +38,8 @@ const firebaseAuthConfig = {
     LoginPartialComponent,
     HomeComponent,
     HeaderPartialComponent,
-    FeaturedThumbnailComponent
+    FeaturedThumbnailComponent,
+    SignupPartialComponent
   ],
   imports: [
     BrowserModule,
