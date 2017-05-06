@@ -41,3 +41,12 @@
     top: 0;
   }
 }
+
+@mixin anchor($color: $brand-primary, $decoration: none, $hoverColor: $brand-primary) {
+  color: $color;
+  text-decoration: $decoration;
+
+  &:hover {
+    color: darken($hoverColor, 10);
+  }
+}

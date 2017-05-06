@@ -14,6 +14,7 @@ export class AuthService {
   apiUrl = 'http://localhost:3000'
   UID: string = null
   user = null
+  username = null
   avatar = null
   isAuthenticated = false
   loginError = null
@@ -38,6 +39,7 @@ export class AuthService {
         this.user = user
         this.avatar = this.getAvatar(user.auth.email, 50)
         this.isAuthenticated = true
+        this.getUsername(user.uid)
       }
       else {
         this.UID = null
@@ -100,6 +102,16 @@ export class AuthService {
   // Returns current user's ID
   getID(): string {
     return this.isAuthenticated ? this.UID : '';
+  }
+
+  getUsername(uid) {
+    this.http.get(`${this.apiUrl}/user/username/${uid}`).toPromise()
+      .then(response => {
+        this.username = response.json().username
+      })
+      .catch(error => {
+        console.error(error);
+      })
   }
 
   getAvatar(email: string, size: number): string {

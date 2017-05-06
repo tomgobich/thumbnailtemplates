@@ -1,26 +1,39 @@
+<div id="headerWrapper">
 <header>
   <div class="container">
     <div class="row">
+      <!-- Logo -->
       <div class="col-xs-12 col-md-logo">
         <a href="/"><img class="logo" src="http://placehold.it/350x90"></a>
       </div>
-      <div class="col-xs-12 col-md-nav pos-relative">
-        <nav>
-          <ul class="navigation clearfix">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Home</a></li>
-          </ul>
-          <div id="navSearchWrapper" class="search-wrapper">
-            <input type="text" id="navSearch" value="" placeholder="Search...">
+      <!-- Menu -->
+      <div class="col-xs-12 col-md-menu">
+        <ul>
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/">Thumbnails</a></li>
+          <li><a routerLink="/">Leaderboard</a></li>
+          <li><a routerLink="/">Request List</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="container">
+    <div class="row">
+      <!-- Search -->
+      <div class="hidden-sm-down col-md-search">
+        <form id="search">
+          <input #search class="form-control" placeholder="Search for templates..." />
+        </form>
+      </div>
+      <!-- Profile -->
+      <div class="hidden-sm-down col-md-profile">
+        <div id="navProfileToggle" class="profile-block" *ngIf="auth.isAuthenticated">
+          <div class="profile-icon-wrapper" *ngIf="auth.avatar">
+            <img class="avatar" [src]="auth.avatar">
           </div>
-        </nav>
-        <div class="search-icon-wrapper">
-          <img id="navSearchToggle" class="search-icon" src="http://placehold.it/30x30">
-        </div>
-        <div class="profile-icon-wrapper" *ngIf="auth.isAuthenticated && auth.avatar">
-          <img id="navProfileToggle" class="avatar" [src]="auth.avatar">
+          <span class="username">{{ auth.username }}</span>
         </div>
         <div class="login-signup-wrapper" *ngIf="!auth.isAuthenticated">
           <a routerLink="/login">Login</a>
@@ -29,4 +42,5 @@
       </div>
     </div>
   </div>
-</header>
+</nav>
+</div>
