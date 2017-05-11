@@ -13,6 +13,4 @@ export class HeaderPartialComponent implements OnInit {
   ngOnInit() {
   }
 
-  
-
 }

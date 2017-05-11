@@ -14,11 +14,13 @@ export class FeaturedThumbnailComponent implements OnInit {
 
   avatar: string
 
-  constructor(private authService: AuthService, private thumbService: ThumbService) { }
+  constructor(
+    private authService: AuthService, 
+    private thumbService: ThumbService
+  ) { }
 
   ngOnInit() {
     if(this.thumb) {
-      console.log('trying to get thumb with', this.thumb.user.strEmail)
       this.avatar = this.authService.getAvatar(this.thumb.user.strEmail, 20)
     }
   }

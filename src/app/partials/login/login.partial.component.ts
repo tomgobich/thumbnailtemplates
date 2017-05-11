@@ -14,4 +14,5 @@ export class LoginPartialComponent implements OnInit {
 
   ngOnInit() {
   }
+  
 }

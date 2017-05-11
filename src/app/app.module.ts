@@ -8,6 +8,7 @@ import { MomentModule } from 'angular2-moment/moment.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { ThumbService } from './services/thumb.service';
 import { LoginPartialComponent } from './partials/login/login.partial.component';
@@ -53,6 +54,7 @@ const firebaseAuthConfig = {
     MomentModule
   ],
   providers: [
+    AuthGuardService,
     AuthService,
     ThumbService
   ],
