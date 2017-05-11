@@ -27,6 +27,7 @@
   text-transform: uppercase;
   transform: rotate(-90deg);
   transform-origin: bottom left;
+  letter-spacing: 1.1px;
   color: $txtColor;
   background-color: $bgColor;
   padding: 0 6px;
@@ -48,5 +49,20 @@
 
   &:hover {
     color: darken($hoverColor, 10);
+  }
+}
+
+@mixin placeholder() {
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    @content;
+  }
+  &::-moz-placeholder { /* Firefox 19+ */
+    @content;
+  }
+  &:-ms-input-placeholder { /* IE 10+ */
+    @content;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    @content;
   }
 }

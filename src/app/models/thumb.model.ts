@@ -12,9 +12,10 @@ export class Thumb {
   intTemplateDownloadCount: number
   intTemplateSortOrder: number
   intTemplateViewCount: number
+  intTemplateLikeCount: number
   strTemplateDownloadContents: string
-  dteTemplateLastUpdatedDate: string
-  dteTemplateReleaseDate: string
+  dteTemplateLastUpdatedDate: Date
+  dteTemplateReleaseDate: Date
   intTemplateStatusID: number
   intCategoryID: number
   strCategory: string

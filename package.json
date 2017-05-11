@@ -22,6 +22,7 @@
     "@angular/router": "^4.0.0",
     "@types/auth0-lock": "^10.10.1",
     "angular2-jwt": "^0.2.0",
+    "angular2-moment": "^1.3.3",
     "angularfire2": "^2.0.0-beta.8",
     "auth0-js": "^8.5.0",
     "auth0-lock": "^10.14.0",

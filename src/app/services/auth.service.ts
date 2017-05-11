@@ -32,14 +32,18 @@ export class AuthService {
   errorFacebook         = { valid: true, message: "" }
   errorBio              = { valid: true, message: "" }
 
-  constructor(private af: AngularFire, private http: Http) {
+  constructor(
+    private af: AngularFire,
+    private http: Http,
+    private router: Router
+  ) {
     af.auth.subscribe(user => {
       if (user) {
         this.UID = user.uid
         this.user = user
         this.avatar = this.getAvatar(user.auth.email, 50)
         this.isAuthenticated = true
-        this.getUsername(user.uid)
+        setTimeout(() => this.getUsername(user.uid), 2500)
       }
       else {
         this.UID = null
@@ -58,7 +62,7 @@ export class AuthService {
         .login({ email, password })
         .then(user => {
           this.UID = user.uid
-          console.log('user is now logged in with uid ', user.uid)
+          this.router.navigate['/']
         })
         .catch(error => {
           this.loginError = error
@@ -69,9 +73,9 @@ export class AuthService {
 
   // Sign up user
   signup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
-    console.log(username)
-
     let isValid = this.validateSignup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio)
+
+    console.log({username, email, password, passwordConfirm, youtube, twitter, facebook, bio})
 
     if(isValid) {
       this.af.auth
@@ -81,7 +85,7 @@ export class AuthService {
           this.http.post(`${this.apiUrl}/user/create`, newUser).toPromise()
             .then(response => {
               this.signupSuccess = response.json()
-              console.log(response.json())
+              this.router.navigate['/']
             })
         })
         .catch(error => {
@@ -94,8 +98,9 @@ export class AuthService {
   // Logs user out of app session
   logout() {
     this.af.auth.logout().then(() => {
-      this.UID = null;
-      console.warn('User has logged out');
+      this.initializeAllVariables();
+      this.router.navigate(['/login'])
+      console.warn('User has logged out')
     })
   }
 
@@ -110,7 +115,7 @@ export class AuthService {
         this.username = response.json().username
       })
       .catch(error => {
-        console.error(error);
+        console.error(error)
       })
   }
 
@@ -295,6 +300,17 @@ export class AuthService {
 
   replaceNullOrUndefined(text) {
     return text == null || text == undefined ? '' : text
+  }
+
+  initializeAllVariables() {
+    this.UID = null
+    this.user = null
+    this.username = null
+    this.avatar = null
+    this.isAuthenticated = false
+    this.loginError = null
+    this.signupError = null
+    this.signupSuccess = null
   }
 
 }

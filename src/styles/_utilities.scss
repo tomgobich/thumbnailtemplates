@@ -17,6 +17,16 @@
   left: 0;
 }
 
+.center-block {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.adblock {
+  padding: $pad-3 0;
+}
+
 .no-pad {
   padding: 0;
 }
@@ -56,20 +66,6 @@
 }
 
 
-// ---------------------------------------------
-// Spacing Utilities
-// ---------------------------------------------
-$pad-1: 4px;
-$pad-2: 8px;
-$pad-3: 15px;
-$pad-4: 30px;
-
-$mar-1: 4px;
-$mar-2: 8px;
-$mar-3: 15px;
-$mar-4: 30px;
-
-
 
 // ---------------------------------------------
 // Text Utilities
@@ -91,8 +87,9 @@ $mar-4: 30px;
 
 .row.vert-title {
   position: relative;
-  &.featured:before { @include vertical-heading("Featured", 61px); }
-  &.new:before      { @include vertical-heading("New", 12px); }
+  &.featured:before { @include vertical-heading("Featured", 63px); }
+  &.liked:before    { @include vertical-heading("Most Liked", 74px); }
+  &.new:before      { @include vertical-heading("Newest", 48px); }
 }
 
 .form-control-feedback {

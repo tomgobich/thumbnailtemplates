@@ -17,9 +17,19 @@ export class ThumbService {
     return 'http://thumbnailtemplates.com/images/thumbs/'
   }
 
+  getThumbnails() {
+    console.debug('getting most recent thumbnails')
+    return this.http.get(`${this.apiUrl}/thumbnails`).map(res => res.json())
+  }
+
   getFeaturedThumbnails() {
-    console.log('getting featured thumbnails')
+    console.debug('getting featured thumbnails')
     return this.http.get(`${this.apiUrl}/thumbnails/featured`).map(res => res.json())
+  }
+
+  getMostLikedThumbnails() {
+    console.debug('getting most liked thumbnails')
+    return this.http.get(`${this.apiUrl}/thumbnails/liked`).map(res => res.json())
   }
 
   buildThumbnail(data): Thumb {
@@ -27,7 +37,7 @@ export class ThumbService {
     let user = this.authService.buildUser(data)
     let image = this.buildImage(data)
 
-    console.log({user})
+    console.debug({user})
 
     thumb.strTemplateID               = data.strTemplateID
     thumb.strTemplateTitle            = data.strTemplateTitle
@@ -38,6 +48,7 @@ export class ThumbService {
     thumb.strTemplateDownload         = data.strTemplateDownload
     thumb.intTemplateSortOrder        = data.intTemplateSortOrder
     thumb.intTemplateViewCount        = data.intTemplateViewCount
+    thumb.intTemplateLikeCount        = data.intTemplateLikeCount
     thumb.intTemplateDownloadCount    = data.intTemplateDownloadCount
     thumb.strTemplateDownloadContents = data.strTemplateDownloadContents
     thumb.dteTemplateLastUpdatedDate  = data.dteTemplateLastUpdatedDate

@@ -1,2 +1,3 @@
-<partial-login *ngIf="login"></partial-login>
-<partial-signup *ngIf="!login"></partial-signup>
+<partial-login [isLogin]="login">
+  <h3 class="heading">{{pageHeading}}</h3>
+</partial-login>

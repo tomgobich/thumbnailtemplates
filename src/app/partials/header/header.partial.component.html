@@ -34,10 +34,21 @@
             <img class="avatar" [src]="auth.avatar">
           </div>
           <span class="username">{{ auth.username }}</span>
+          <div id="navProfileMenu" class="profile-menu">
+            <ul>
+              <li><a routerLink="/">Profile</a></li>
+              <li><a routerLink="/">Dashboard</a></li>
+              <li><a routerLink="/">Upload</a></li>
+              <li><a routerLink="/">Settings</a></li>
+              <li><a href="#" (click)="auth.logout()">Logout</a></li>
+            </ul>
+          </div>
         </div>
         <div class="login-signup-wrapper" *ngIf="!auth.isAuthenticated">
-          <a routerLink="/login">Login</a>
-          <a routerLink="/signup">Signup</a>
+          <ul>
+            <li><a routerLink="/login">Login</a></li>
+            <li><a routerLink="/signup">Signup</a></li>
+          </ul>
         </div>
       </div>
     </div>

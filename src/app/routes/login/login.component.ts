@@ -9,6 +9,7 @@ import { Router, ActivatedRoute, Params, Data } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   login: boolean
+  pageHeading: string = "Login"
 
   constructor(
      private route: ActivatedRoute
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.login = this.route.snapshot.data["login"]
+    if(!this.login) this.pageHeading = "Signup"
   }
 
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { MomentModule } from 'angular2-moment/moment.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +16,8 @@ import { HomeComponent } from './routes/home/home.component';
 import { HeaderPartialComponent } from './partials/header/header.partial.component';
 import { FeaturedThumbnailComponent } from './partials/featured-thumbnail/featured-thumbnail.component';
 import 'rxjs/Rx';
-import { SignupPartialComponent } from './partials/signup/signup-partial.component';
+import { ResponsiveAdComponent } from './partials/responsive-ad/responsive-ad.component';
+import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
 
 // Must export the config
 export const firebaseConfig = {
@@ -39,14 +41,16 @@ const firebaseAuthConfig = {
     HomeComponent,
     HeaderPartialComponent,
     FeaturedThumbnailComponent,
-    SignupPartialComponent
+    ResponsiveAdComponent,
+    ThumbnailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
+    MomentModule
   ],
   providers: [
     AuthService,

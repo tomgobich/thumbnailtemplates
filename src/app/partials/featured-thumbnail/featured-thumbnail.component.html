@@ -9,8 +9,8 @@
       <p class="username">{{ thumb.user.strUsername }}</p>
     </div>
     <div class="post-details">
-      <p class="counts">Views: 23400, Likes: 23</p>
-      <p class="date">Posted: 23 Hours Ago</p>
+      <p class="counts">Views: {{ thumb.intTemplateViewCount | number }}, Likes: 23</p>
+      <p class="date">Posted: {{ thumb.dteTemplateReleaseDate | amCalendar }}</p>
     </div>
   </div>
 </div>

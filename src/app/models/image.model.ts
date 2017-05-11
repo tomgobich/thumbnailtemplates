@@ -3,7 +3,7 @@ export class Image {
   strImageTitle: string
   strImageOwner: string
   strImageAlias: string
-  dteImageUploadDate: string
+  dteImageUploadDate: Date
   blnIsFeaturedImage: boolean
   intImageSTatusID: number
   intImageSortOrder: number

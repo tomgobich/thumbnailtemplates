@@ -1,6 +1,29 @@
-<!-- Trending Section -->
-<div class="row vert-title featured" *ngIf="featuredThumbnails.length > 0">
+<!-- Featured Section -->
+<div class="row vert-title featured thumb-block" *ngIf="featuredThumbnails.length > 0">
   <div class="col-12 no-pad">
-    <app-featured-thumbnail *ngFor="let thumb of featuredThumbnails" [thumb]="thumb"></app-featured-thumbnail>
+    <partial-thumbnail *ngFor="let thumb of featuredThumbnails" [thumb]="thumb"></partial-thumbnail>
+  </div>
+</div>
+
+<!-- Responsive Ad -->
+<!-- <div class="row">
+  <div class="col-12 no-pad">
+    <div class="center-block adblock">
+      <partial-responsive-ad></partial-responsive-ad>
+    </div>
+  </div>
+</div> -->
+
+<!-- Popular Section -->
+<div class="row vert-title liked thumb-block" *ngIf="mostLikedThumbnails.length > 0">
+  <div class="col-12 no-pad">
+    <partial-thumbnail *ngFor="let thumb of mostLikedThumbnails" [thumb]="thumb"></partial-thumbnail>
+  </div>
+</div>
+
+<!-- Newest Section -->
+<div class="row vert-title new thumb-block" *ngIf="newestThumbnails.length > 0">
+  <div class="col-12 no-pad">
+    <partial-thumbnail *ngFor="let thumb of newestThumbnails" [thumb]="thumb"></partial-thumbnail>
   </div>
 </div>
