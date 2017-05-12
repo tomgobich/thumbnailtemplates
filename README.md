@@ -15,12 +15,15 @@ ThumbnailTemplates Build Version 4 [In Development]
 - MySQL database restructured and expanded for added features and user accounts
 - Firebase authentication with user data saved and updated to MySQL
 - More to come!
+
 ThumbnailTemplates Build Version 3 [2015]
 - Added responsiveness
 - PHP logic codebase with MySQL database, all code inline and function based (fun!)
+
 ThumbnailTemplates Build Version 2 [2013]
 - Added base layer of bootstrap
 - All data was hard coded
+
 ThumbnailTemplates Build Version 1 [2011]
 - Built from the ground up from scratch
 
