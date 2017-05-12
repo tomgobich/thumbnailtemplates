@@ -75,8 +75,6 @@ export class AuthService {
   signup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
     let isValid = this.validateSignup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio)
 
-    console.log({username, email, password, passwordConfirm, youtube, twitter, facebook, bio})
-
     if(isValid) {
       this.af.auth
         .createUser({ email, password })
@@ -90,7 +88,6 @@ export class AuthService {
         })
         .catch(error => {
           this.signupError = error
-          console.error(error)
         })
     }
   }

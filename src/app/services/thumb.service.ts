@@ -1,35 +1,41 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable } from '@angular/core'
+import { Http } from '@angular/http'
 import { AuthService } from './auth.service'
 import { Thumb } from '../models/thumb.model'
 import { Image } from '../models/image.model'
 import { User } from '../models/user.model'
+import { Ng2ImgToolsService } from 'ng2-img-tools'
 import 'rxjs/Rx';
 
 @Injectable()
 export class ThumbService {
 
   apiUrl = 'http://localhost:3000'
+  imagePath = 'http://thumbnailtemplates.com/images/thumbs/'
 
-  constructor(private http: Http, private authService: AuthService) { }
-
-  getImagePath() {
-    return 'http://thumbnailtemplates.com/images/thumbs/'
-  }
+  constructor(
+    private http: Http, 
+    private authService: AuthService,
+    private imgToolsService: Ng2ImgToolsService
+    ) { }
 
   getThumbnails() {
-    console.debug('getting most recent thumbnails')
     return this.http.get(`${this.apiUrl}/thumbnails`).map(res => res.json())
   }
 
   getFeaturedThumbnails() {
-    console.debug('getting featured thumbnails')
     return this.http.get(`${this.apiUrl}/thumbnails/featured`).map(res => res.json())
   }
 
   getMostLikedThumbnails() {
-    console.debug('getting most liked thumbnails')
     return this.http.get(`${this.apiUrl}/thumbnails/liked`).map(res => res.json())
+  }
+
+  imgResized(file: File[], maxWidth: number, maxHeight: number) {
+    return this.imgToolsService.resize(file, maxWidth, maxHeight).subscribe(
+        image => image, 
+        error => error.error
+    )
   }
 
   buildThumbnail(data): Thumb {

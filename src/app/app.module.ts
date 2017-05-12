@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { MomentModule } from 'angular2-moment/moment.module';
-
-import { AppRoutingModule } from './app-routing.module';
+import { Ng2ImgToolsModule } from 'ng2-img-tools';
+import { FirebaseModule } from './modules/firebase.module';
+import { AppRoutingModule } from './modules/app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthGuardService } from './services/auth-guard.service';
@@ -15,24 +15,10 @@ import { LoginPartialComponent } from './partials/login/login.partial.component'
 import { LoginComponent } from './routes/login/login.component';
 import { HomeComponent } from './routes/home/home.component';
 import { HeaderPartialComponent } from './partials/header/header.partial.component';
-import { FeaturedThumbnailComponent } from './partials/featured-thumbnail/featured-thumbnail.component';
-import 'rxjs/Rx';
 import { ResponsiveAdComponent } from './partials/responsive-ad/responsive-ad.component';
 import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
+import 'rxjs/Rx';
 
-// Must export the config
-export const firebaseConfig = {
-  apiKey: "AIzaSyAZXrgLEJPJdMe7aMMl4PsRoBNrKeXy7os",
-  authDomain: "thumbnailtemplates.firebaseapp.com",
-  databaseURL: "https://thumbnailtemplates.firebaseio.com",
-  storageBucket: "thumbnailtemplates.appspot.com",
-  messagingSenderId: "365808202826"
-};
-
-const firebaseAuthConfig = {
-  provider: AuthProviders.Password,
-  method: AuthMethods.Password
-};
 
 @NgModule({
   declarations: [
@@ -41,7 +27,6 @@ const firebaseAuthConfig = {
     LoginPartialComponent,
     HomeComponent,
     HeaderPartialComponent,
-    FeaturedThumbnailComponent,
     ResponsiveAdComponent,
     ThumbnailComponent
   ],
@@ -50,8 +35,9 @@ const firebaseAuthConfig = {
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
-    MomentModule
+    FirebaseModule,
+    MomentModule,
+    Ng2ImgToolsModule
   ],
   providers: [
     AuthGuardService,

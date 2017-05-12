@@ -13,12 +13,17 @@ export class ThumbnailComponent implements OnInit {
     @Input() thumb: Thumb
 
     avatar: string
+    thumbImage: string
 
-    constructor(private authService: AuthService, private thumbService: ThumbService) { }
+    constructor(
+      private authService: AuthService, 
+      private thumbService: ThumbService
+    ) { }
 
     ngOnInit() {
       if(this.thumb) {
         this.avatar = this.authService.getAvatar(this.thumb.user.strEmail, 20)
+        this.thumbImage = this.thumbService.imagePath + this.thumb.image.strImageAlias
       }
     }
 
