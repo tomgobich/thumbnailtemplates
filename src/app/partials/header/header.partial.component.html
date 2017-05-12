@@ -36,11 +36,11 @@
           <span class="username">{{ auth.username }}</span>
           <div id="navProfileMenu" class="profile-menu">
             <ul>
-              <li><a routerLink="/">Profile</a></li>
-              <li><a routerLink="/">Dashboard</a></li>
-              <li><a routerLink="/">Upload</a></li>
-              <li><a routerLink="/">Settings</a></li>
-              <li><a href="#" (click)="auth.logout()">Logout</a></li>
+              <li><a routerLink="/user/profile">Profile</a></li>
+              <li><a routerLink="/user/dashboard">Dashboard</a></li>
+              <li><a routerLink="/user/upload">Upload</a></li>
+              <li><a routerLink="/user/settings">Settings</a></li>
+              <li><a routerLink="/" (click)="auth.logout()">Logout</a></li>
             </ul>
           </div>
         </div>

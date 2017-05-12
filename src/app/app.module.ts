@@ -1,3 +1,4 @@
+import 'rxjs/Rx';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +18,7 @@ import { HomeComponent } from './routes/home/home.component';
 import { HeaderPartialComponent } from './partials/header/header.partial.component';
 import { ResponsiveAdComponent } from './partials/responsive-ad/responsive-ad.component';
 import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
-import 'rxjs/Rx';
+import { ProfileComponent } from './routes/user/profile/profile.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import 'rxjs/Rx';
     HomeComponent,
     HeaderPartialComponent,
     ResponsiveAdComponent,
-    ThumbnailComponent
+    ThumbnailComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
