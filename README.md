@@ -1,5 +1,3 @@
-# ThumbnailtemplatesV4
-
 # ThumbnailTemplates Build Version 4
 
 [ThumbnailTemplates](http://thumbnailtemplates.com) is a content-creator resource website for thumbnails. ThumbnailTemplates currently provides over 100 thumbnail templates for free to the public, readily available for use.
