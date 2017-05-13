@@ -8,6 +8,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderPartialComponent implements OnInit {
 
+  // TODO: Change auth to authService to match rest of project
+
   constructor(private auth: AuthService) { }
 
   ngOnInit() {

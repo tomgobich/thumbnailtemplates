@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { ThumbService } from './services/thumb.service';
+import { UtilitiesService } from './services/utilities.service'
 import { LoginPartialComponent } from './partials/login/login.partial.component';
 import { LoginComponent } from './routes/login/login.component';
 import { HomeComponent } from './routes/home/home.component';
@@ -44,7 +45,8 @@ import { ProfileComponent } from './routes/user/profile/profile.component';
   providers: [
     AuthGuardService,
     AuthService,
-    ThumbService
+    ThumbService,
+    UtilitiesService
   ],
   bootstrap: [AppComponent]
 })

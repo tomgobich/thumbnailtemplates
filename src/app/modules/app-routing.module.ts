@@ -21,7 +21,7 @@ const routes: Routes = [
     ,data: { login: false } 
   }
   ,{ 
-     path: 'user/profile'
+     path: 'user/:username'
     ,component: ProfileComponent
   }
   ,{ 

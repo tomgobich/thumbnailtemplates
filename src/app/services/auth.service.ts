@@ -4,6 +4,7 @@ import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 
 import { Router, NavigationStart } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 import { md5 } from './md5.service';
+import { UtilitiesService } from './utilities.service'
 import 'rxjs/add/operator/toPromise';
 
 import { User } from '../models/user.model';
@@ -21,8 +22,6 @@ export class AuthService {
   signupError = null
   signupSuccess = null
 
-  // TODO: Add validation for signup / login inputs
-
   errorUsername         = { valid: false, message: "" }
   errorEmail            = { valid: false, message: "" }
   errorPassword         = { valid: false, message: "" }
@@ -35,7 +34,8 @@ export class AuthService {
   constructor(
     private af: AngularFire,
     private http: Http,
-    private router: Router
+    private router: Router,
+    private utilitiesService: UtilitiesService
   ) {
     af.auth.subscribe(user => {
       if (user) {
@@ -106,20 +106,42 @@ export class AuthService {
     return this.isAuthenticated ? this.UID : '';
   }
 
-  getUsername(uid) {
-    this.http.get(`${this.apiUrl}/user/username/${uid}`).toPromise()
-      .then(response => {
-        this.username = response.json().username
-      })
-      .catch(error => {
-        console.error(error)
-      })
-  }
-
   getAvatar(email: string, size: number): string {
     size = size > 0 ? size : 30;
     let hash = md5(email.toLowerCase().trim());
     return `https://gravatar.com/avatar/${hash}?s=${size}&d=retro&r=r`;
+  }
+
+  async getUsername(uid) {
+    try {
+      const response = await this.http.get(`${this.apiUrl}/getusername/id/${uid}`).toPromise()
+      this.username = response.json().username
+    } 
+    catch(e) {
+      console.error(e)
+    }
+  }
+
+  async getUserByUserID(strUserID: string) {
+    try {
+      let uid = this.utilitiesService.escapeHtml(strUserID)
+      const response = await this.http.get(`${this.apiUrl}/getuser/id/${uid}`).toPromise()
+      return await response.json()
+    }
+    catch(e) {
+      console.error(e)
+    }
+  }
+
+  async getUserByUsername(strUsername: string) {
+    try {
+      let username = this.utilitiesService.escapeHtml(strUsername)
+      const response = await this.http.get(`${this.apiUrl}/getuser/username/${username}`).toPromise()
+      return await response.json()
+    }
+    catch(e) {
+      console.error(e)
+    }
   }
 
   createUser(username, youtube, twitter, facebook, bio, credentials) {
@@ -129,11 +151,11 @@ export class AuthService {
     user.strUserID        = credentials.uid                    // valid since from Google
     user.strEmail         = credentials.email                  // valid since from Google
     user.blnEmailVerified = credentials.emailVerified          // valid since from Google
-    user.strUsername      = encodeURIComponent(this.replaceNullOrUndefined(username.trim()))
-    user.strYouTube       = encodeURIComponent(this.replaceNullOrUndefined(youtube.trim()))
-    user.strTwitter       = encodeURIComponent(this.replaceNullOrUndefined(twitter.trim()))
-    user.strFacebook      = encodeURIComponent(this.replaceNullOrUndefined(facebook.trim()))
-    user.strBio           = encodeURIComponent(this.replaceNullOrUndefined(bio))
+    user.strUsername      = this.utilitiesService.escapeHtml(this.utilitiesService.replaceNullOrUndefined(username.trim()))
+    user.strYouTube       = this.utilitiesService.escapeHtml(this.utilitiesService.replaceNullOrUndefined(youtube.trim()))
+    user.strTwitter       = this.utilitiesService.escapeHtml(this.utilitiesService.replaceNullOrUndefined(twitter.trim()))
+    user.strFacebook      = this.utilitiesService.escapeHtml(this.utilitiesService.replaceNullOrUndefined(facebook.trim()))
+    user.strBio           = this.utilitiesService.escapeHtml(this.utilitiesService.replaceNullOrUndefined(bio))
 
     return user
   }
@@ -159,8 +181,8 @@ export class AuthService {
     let isValid = true
     let fields = [this.errorEmail, this.errorPassword]
 
-    this.validateEmail(this.replaceNullOrUndefined(email))
-    this.validatePassword(this.replaceNullOrUndefined(password))
+    this.validateEmail(email)
+    this.validatePassword(password)
 
     fields.forEach(field => !field.valid ? isValid = false : "")
     return isValid
@@ -170,24 +192,25 @@ export class AuthService {
     let isValid = true
     let fields = [this.errorUsername, this.errorEmail, this.errorPassword, this.errorPasswordConfirm, this.errorYouTube, this.errorTwitter, this.errorFacebook, this.errorBio]
 
-    this.validateUsername(this.replaceNullOrUndefined(username))
-    this.validateEmail(this.replaceNullOrUndefined(email))
-    this.validatePassword(this.replaceNullOrUndefined(password))
-    this.validatePasswordConfirm(this.replaceNullOrUndefined(password), this.replaceNullOrUndefined(passwordConfirm))
-    this.validateYouTube(this.replaceNullOrUndefined(youtube))
-    this.validateTwitter(this.replaceNullOrUndefined(twitter))
-    this.validateFacebook(this.replaceNullOrUndefined(facebook))
-    this.validateBio(this.replaceNullOrUndefined(bio))
+    this.validateUsername(username)
+    this.validateEmail(email)
+    this.validatePassword(password)
+    this.validatePasswordConfirm(password, passwordConfirm)
+    this.validateYouTube(this.utilitiesService.replaceNullOrUndefined(youtube))
+    this.validateTwitter(this.utilitiesService.replaceNullOrUndefined(twitter))
+    this.validateFacebook(this.utilitiesService.replaceNullOrUndefined(facebook))
+    this.validateBio(this.utilitiesService.replaceNullOrUndefined(bio))
 
     fields.forEach(field => !field.valid ? isValid = false : "")
+
     return isValid
   }
 
   validateUsername(text) {
     let isValid = this.validateRequired("Username", text, 3, 50);
 
-    isValid = isValid.valid ? this.hasSpecialChars(text) : isValid
-    isValid = isValid.valid ? this.hasSpaces(text) : isValid
+    isValid = isValid.valid ? this.utilitiesService.hasSpecialChars(text) : isValid
+    isValid = isValid.valid ? this.utilitiesService.hasSpaces(text) : isValid
 
     if(isValid.valid) {
       this.http.post(`${this.apiUrl}/user/username/unique`, {username: text}).toPromise()
@@ -207,7 +230,7 @@ export class AuthService {
   validateEmail(text) {
     let isValid = this.validateRequired("Email", text, 3, 50);
     if(isValid.valid) {
-      let regex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+      let regex = this.utilitiesService.regexEmail
       this.errorEmail = {
         valid: regex.test(text),
         message: "Please enter a valid email"
@@ -230,22 +253,22 @@ export class AuthService {
   }
 
   validateTwitter(text) {
-    this.errorTwitter = this.hasSpecialChars(text)
+    this.errorTwitter = this.utilitiesService.hasSpecialChars(text)
   }
 
   validateYouTube(text) {
-    this.errorYouTube = this.hasSpecialChars(text)
+    this.errorYouTube = this.utilitiesService.hasSpecialChars(text)
   }
 
   validateFacebook(text) {
-    this.errorFacebook = this.hasSpecialChars(text)
+    this.errorFacebook = this.utilitiesService.hasSpecialChars(text)
   }
 
   validateBio(text) {
     let isValid = text.length <= 500
 
     if(isValid) {
-      this.errorBio = this.hasSpecialChars(text);
+      this.errorBio = this.utilitiesService.hasSpecialChars(text);
     }
     else {
       this.errorBio = {
@@ -262,41 +285,6 @@ export class AuthService {
       valid: isValid,
       message: `${field} must be between ${minLength} and ${maxLength} characters long`
     }
-  }
-
-  hasSpecialChars(text) {
-    let compare = this.escapeHtml(text)
-    let isValid = text == compare
-
-    return {
-      valid: isValid,
-      message: "Please remove invalid characters (&, <, >, \", ')"
-    }
-  }
-
-  hasSpaces(text) {
-    let isValid = !/\s/.test(text.trim())
-
-    return {
-      valid: isValid,
-      message: "Please remove all spaces"
-    }
-  }
-
-  escapeHtml(text) {
-    var map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    };
-
-    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-  }
-
-  replaceNullOrUndefined(text) {
-    return text == null || text == undefined ? '' : text
   }
 
   initializeAllVariables() {
