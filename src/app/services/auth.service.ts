@@ -12,6 +12,8 @@ import { User } from '../models/user.model';
 @Injectable()
 export class AuthService {
 
+  // TODO: Move service calls from inside doc models into component logic
+
   apiUrl = 'http://localhost:3000'
   UID: string = null
   user = null
@@ -54,51 +56,46 @@ export class AuthService {
   }
 
   // Log user into app
-  login(email, password) {
+  async login(email, password) {
     let isValid = this.validateLogin(email, password)
 
     if(isValid) {
-      this.af.auth
-        .login({ email, password })
-        .then(user => {
-          this.UID = user.uid
-          this.router.navigate['/']
-        })
-        .catch(error => {
-          this.loginError = error
-          console.error(error)
-      })
+      try {
+        const response = await this.af.auth.login({ email, password })
+        this.UID = response.uid
+        this.router.navigate['/']
+      }
+      catch(e) {
+        this.loginError = e
+        console.error(e)
+      }
     }
   }
 
   // Sign up user
-  signup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
+  async signup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
     let isValid = this.validateSignup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio)
 
     if(isValid) {
-      this.af.auth
-        .createUser({ email, password })
-        .then(user => {
-          let newUser = this.createUser(username, youtube, twitter, facebook, bio, user.auth)
-          this.http.post(`${this.apiUrl}/user/create`, newUser).toPromise()
-            .then(response => {
-              this.signupSuccess = response.json()
-              this.router.navigate['/']
-            })
-        })
-        .catch(error => {
-          this.signupError = error
-        })
+      try {
+        const response = await this.af.auth.createUser({ email, password })
+        const newUser = await this.createUser(username, youtube, twitter, facebook, bio, response.auth)
+        const userResponse = await this.http.post(`${this.apiUrl}/user/create`, newUser).toPromise()
+        this.signupSuccess = await userResponse.json()
+        this.router.navigate['/']
+      }
+      catch(e) {
+        this.signupError = e
+      }
     }
   }
 
   // Logs user out of app session
-  logout() {
-    this.af.auth.logout().then(() => {
-      this.initializeAllVariables();
-      this.router.navigate(['/login'])
-      console.warn('User has logged out')
-    })
+  async logout() {
+    const response = await this.af.auth.logout()
+    this.initializeAllVariables();
+    await this.router.navigate(['/login'])
+    await console.warn('User has logged out')
   }
 
   // Returns current user's ID
