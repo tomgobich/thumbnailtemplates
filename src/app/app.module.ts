@@ -13,6 +13,9 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { ThumbService } from './services/thumb.service';
 import { UtilitiesService } from './services/utilities.service'
+import { ValidateService } from './services/validate.service'
+import { ApiAuthService } from './services/api/api-auth.service'
+
 import { LoginPartialComponent } from './partials/login/login.partial.component';
 import { LoginComponent } from './routes/login/login.component';
 import { HomeComponent } from './routes/home/home.component';
@@ -46,7 +49,9 @@ import { ProfileComponent } from './routes/user/profile/profile.component';
     AuthGuardService,
     AuthService,
     ThumbService,
-    UtilitiesService
+    UtilitiesService,
+    ValidateService,
+    ApiAuthService
   ],
   bootstrap: [AppComponent]
 })

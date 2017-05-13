@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { ValidateService } from '../../services/validate.service'
 
 @Component({
   selector: 'partial-login',
@@ -10,7 +11,10 @@ export class LoginPartialComponent implements OnInit {
 
   @Input() isLogin: boolean
 
-  constructor(private auth: AuthService) { }
+  constructor(
+     private auth: AuthService
+    ,private validateService: ValidateService
+  ) { }
 
   ngOnInit() {
   }

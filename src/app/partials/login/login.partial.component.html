@@ -9,68 +9,70 @@
       </p>
     </div>
 
+    {{ auth.isAuthenticated }}
+
     <form *ngIf="!auth.isAuthenticated">
       <!-- Required Fields -->
-      <div class="form-group" [ngClass]="{'has-danger': auth.errorUsername?.valid === false && username.dirty}" [hidden]="isLogin">
+      <div class="form-group" [ngClass]="{'has-danger': validateService.errorUsername?.valid === false && username.dirty}" [hidden]="isLogin">
         <label for="name" class="col-form-label">Username <span class="req">*</span></label>
         <input
           type="text"
           class="form-control"
           #username
-          (keyup)="auth.validateUsername(username.value)"
+          (keyup)="validateService.validateUsername(username.value)"
           placeholder="Enter a username">
         <div class="full-width">
-          <div class="form-control-feedback" *ngIf="auth.errorUsername?.valid === false">
-            <small>{{ auth.errorUsername?.message }}</small>
+          <div class="form-control-feedback" *ngIf="validateService.errorUsername?.valid === false">
+            <small>{{ validateService.errorUsername?.message }}</small>
           </div>
         </div>
       </div>
-      <div class="form-group" [ngClass]="{'has-danger': auth.errorEmail?.valid === false && email.dirty}">
+      <div class="form-group" [ngClass]="{'has-danger': validateService.errorEmail?.valid === false && email.dirty}">
         <label for="name" class="col-form-label">Email <span class="req">*</span></label>
         <input
           type="text"
           class="form-control"
           #email
-          (keyup)="auth.validateEmail(email.value)"
+          (keyup)="validateService.validateEmail(email.value)"
           placeholder="Enter your email">
         <div class="full-width">
-          <div class="form-control-feedback" *ngIf="auth.errorEmail?.valid === false">
-            <small>{{ auth.errorEmail?.message }}</small>
+          <div class="form-control-feedback" *ngIf="validateService.errorEmail?.valid === false">
+            <small>{{ validateService.errorEmail?.message }}</small>
           </div>
         </div>
       </div>
-      <div class="form-group" [ngClass]="{'has-danger': auth.errorPassword?.valid === false && password.dirty}">
+      <div class="form-group" [ngClass]="{'has-danger': validateService.errorPassword?.valid === false && password.dirty}">
         <label for="name" class="col-form-label">Password <span class="req">*</span></label>
         <input
           type="password"
           class="form-control"
           #password
-          (keyup)="auth.validatePassword(password.value)"
+          (keyup)="validateService.validatePassword(password.value)"
           placeholder="Enter your password">
         <div class="full-width">
-          <div class="form-control-feedback" *ngIf="auth.errorPassword?.valid === false">
-            <small>{{ auth.errorPassword?.message }}</small>
+          <div class="form-control-feedback" *ngIf="validateService.errorPassword?.valid === false">
+            <small>{{ validateService.errorPassword?.message }}</small>
           </div>
         </div>
       </div>
-      <div class="form-group" [ngClass]="{'has-danger': auth.errorPasswordConfirm?.valid === false && passwordConfirm.dirty}" [hidden]="isLogin">
+      <div class="form-group" [ngClass]="{'has-danger': validateService.errorPasswordConfirm?.valid === false && passwordConfirm.dirty}" [hidden]="isLogin">
         <label for="name" class="col-form-label">Confirm <span class="req">*</span></label>
         <input
           type="password"
           class="form-control"
           #passwordConfirm
-          (keyup)="auth.validatePasswordConfirm(password.value, passwordConfirm.value)"
+          (keyup)="validateService.validatePasswordConfirm(password.value, passwordConfirm.value)"
           placeholder="Confirm your password">
         <div class="full-width">
-          <div class="form-control-feedback" *ngIf="auth.errorPasswordConfirm?.valid === false">
-            <small>{{ auth.errorPasswordConfirm?.message }}</small>
+          <div class="form-control-feedback" *ngIf="validateService.errorPasswordConfirm?.valid === false">
+            <small>{{ validateService.errorPasswordConfirm?.message }}</small>
           </div>
         </div>
       </div>
 
       <!-- Optional Fields -->
       <div class="optional-fields" [hidden]="isLogin">
-        <div class="form-group" [ngClass]="{'has-danger': auth.errorYouTube?.valid === false && youtube.dirty}">
+        <div class="form-group" [ngClass]="{'has-danger': validateService.errorYouTube?.valid === false && youtube.dirty}">
           <label for="name" class="col-form-label">YouTube</label>
           <div class="input-group mb-2 mb-sm-0">
             <div class="input-group-addon">youtube.com/</div>
@@ -78,16 +80,16 @@
               type="text"
               class="form-control"
               #youtube
-              (keyup)="auth.validateYouTube(youtube.value)"
+              (keyup)="validateService.validateYouTube(youtube.value)"
               placeholder="YouTube channel">
           </div>
           <div class="full-width">
-            <div class="form-control-feedback" *ngIf="auth.errorYouTube?.valid === false">
-              <small>{{ auth.errorYouTube?.message }}</small>
+            <div class="form-control-feedback" *ngIf="validateService.errorYouTube?.valid === false">
+              <small>{{ validateService.errorYouTube?.message }}</small>
             </div>
           </div>
         </div>
-        <div class="form-group" [ngClass]="{'has-danger': auth.errorTwitter?.valid === false && twitter.dirty}">
+        <div class="form-group" [ngClass]="{'has-danger': validateService.errorTwitter?.valid === false && twitter.dirty}">
           <label for="name" class="col-form-label">Twitter</label>
           <div class="input-group mb-2 mb-sm-0">
             <div class="input-group-addon">twitter.com/</div>
@@ -95,16 +97,16 @@
               type="text"
               class="form-control"
               #twitter
-              (keyup)="auth.validateTwitter(twitter.value)"
+              (keyup)="validateService.validateTwitter(twitter.value)"
               placeholder="Twitter handle">
           </div>
           <div class="full-width">
-            <div class="form-control-feedback" *ngIf="auth.errorTwitter?.valid === false">
-              <small>{{ auth.errorTwitter?.message }}</small>
+            <div class="form-control-feedback" *ngIf="validateService.errorTwitter?.valid === false">
+              <small>{{ validateService.errorTwitter?.message }}</small>
             </div>
           </div>
         </div>
-        <div class="form-group" [ngClass]="{'has-danger': auth.errorFacebook?.valid === false && facebook.dirty}">
+        <div class="form-group" [ngClass]="{'has-danger': validateService.errorFacebook?.valid === false && facebook.dirty}">
           <label for="name" class="col-form-label">Facebook</label>
           <div class="input-group mb-2 mb-sm-0">
             <div class="input-group-addon">facebook.com/</div>
@@ -112,16 +114,16 @@
               type="text"
               class="form-control"
               #facebook
-              (keyup)="auth.validateFacebook(facebook.value)"
+              (keyup)="validateService.validateFacebook(facebook.value)"
               placeholder="Facebook name">
           </div>
           <div class="full-width">
-            <div class="form-control-feedback" *ngIf="auth.errorFacebook?.valid === false">
-              <small>{{ auth.errorFacebook?.message }}</small>
+            <div class="form-control-feedback" *ngIf="validateService.errorFacebook?.valid === false">
+              <small>{{ validateService.errorFacebook?.message }}</small>
             </div>
           </div>
         </div>
-        <div class="form-group" [ngClass]="{'has-danger': auth.errorBio?.valid === false && bio.dirty}">
+        <div class="form-group" [ngClass]="{'has-danger': validateService.errorBio?.valid === false && bio.dirty}">
           <label for="name" class="col-form-label">
             Bio
             <small class="remaining" [ngClass]="{'has-warning': 500 - bio.value.length < 50, 'has-danger': 500 - bio.value.length < 0}">
@@ -134,11 +136,11 @@
             class="form-control"
             rows="4"
             maxlength="500"
-            (keyup)="auth.validateBio(bio.value)"
+            (keyup)="validateService.validateBio(bio.value)"
             placeholder="Who goes there?"></textarea>
           <div class="full-width">
-            <div class="form-control-feedback" *ngIf="auth.errorBio?.valid === false">
-              <small>{{ auth.errorBio?.message }}</small>
+            <div class="form-control-feedback" *ngIf="validateService.errorBio?.valid === false">
+              <small>{{ validateService.errorBio?.message }}</small>
             </div>
           </div>
         </div>
