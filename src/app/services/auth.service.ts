@@ -1,7 +1,7 @@
 import { Injectable, ApplicationRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { environment } from '../../environments/environment'
-import { AngularFire, AuthProviders, AuthMethods, FirebaseListObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth'
 import { Router, NavigationStart } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 import { md5 } from './md5.service';
@@ -28,7 +28,7 @@ export class AuthService {
   signupSuccess = null
 
   constructor(
-     private af: AngularFire
+     private afAuth: AngularFireAuth
     ,private http: Http
     ,private router: Router
     ,private apiAuthService: ApiAuthService
@@ -36,11 +36,11 @@ export class AuthService {
     ,private utilitiesService: UtilitiesService
     ,private ar: ApplicationRef
   ) {
-    af.auth.subscribe(user => {
+    afAuth.authState.subscribe(user => {
       if (user) {
         this.UID = user.uid
         this.user = user
-        this.avatar = this.getAvatar(user.auth.email, 50)
+        this.avatar = this.getAvatar(user.email, 50)
         this.isAuthenticated = true
         setTimeout(() => this.getUsername(user.uid), 2500)
       }
@@ -83,7 +83,7 @@ export class AuthService {
 
   // Logs user out of app session
   async logout() {
-    const response = await this.af.auth.logout()
+    const response = await this.afAuth.auth.signOut()
     await this.initializeAllVariables();
     await this.router.navigate(['/login'])
     await console.warn('User has logged out')
@@ -104,7 +104,7 @@ export class AuthService {
     try {
       const response = await this.http.get(`${this.apiUrl}/getusername/id/${uid}`).toPromise()
       this.username = response.json().username
-    } 
+    }
     catch(e) {
       console.error(e)
     }
