@@ -10,7 +10,7 @@ export class HeaderPartialComponent implements OnInit {
 
   // TODO: Change auth to authService to match rest of project
 
-  constructor(private auth: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }

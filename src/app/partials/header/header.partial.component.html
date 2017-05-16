@@ -29,22 +29,22 @@
       </div>
       <!-- Profile -->
       <div class="hidden-sm-down col-md-profile">
-        <div id="navProfileToggle" class="profile-block" *ngIf="auth.isAuthenticated">
-          <div class="profile-icon-wrapper" *ngIf="auth.avatar">
-            <img class="avatar" [src]="auth.avatar">
+        <div id="navProfileToggle" class="profile-block" *ngIf="authService.isAuthenticated">
+          <div class="profile-icon-wrapper" *ngIf="authService.avatar">
+            <img class="avatar" [src]="authService.avatar">
           </div>
-          <span class="username">{{ auth.username }}</span>
+          <span class="username">{{ authService.username }}</span>
           <div id="navProfileMenu" class="profile-menu">
             <ul>
-              <li><a [routerLink]="['/user', auth?.username || {}]">Profile</a></li>
+              <li><a [routerLink]="['/user', authService?.username || {}]">Profile</a></li>
               <li><a routerLink="/user/dashboard">Dashboard</a></li>
               <li><a routerLink="/user/upload">Upload</a></li>
               <li><a routerLink="/user/settings">Settings</a></li>
-              <li><a routerLink="/" (click)="auth.logout()">Logout</a></li>
+              <li><a routerLink="/" (click)="authService.logout()">Logout</a></li>
             </ul>
           </div>
         </div>
-        <div class="login-signup-wrapper" *ngIf="!auth.isAuthenticated">
+        <div class="login-signup-wrapper" *ngIf="!authService.isAuthenticated">
           <ul>
             <li><a routerLink="/login">Login</a></li>
             <li><a routerLink="/signup">Signup</a></li>
