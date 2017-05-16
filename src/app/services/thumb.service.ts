@@ -5,16 +5,17 @@ import { Thumb } from '../models/thumb.model'
 import { Image } from '../models/image.model'
 import { User } from '../models/user.model'
 import { Ng2ImgToolsService } from 'ng2-img-tools'
+import { environment } from '../../environments/environment'
 import 'rxjs/Rx';
 
 @Injectable()
 export class ThumbService {
 
-  apiUrl = 'http://localhost:3000'
-  imagePath = 'http://thumbnailtemplates.com/images/thumbs/'
+  apiUrl = environment.apiUrl
+  imagePath = environment.imageUrl
 
   constructor(
-    private http: Http, 
+    private http: Http,
     private authService: AuthService,
     private imgToolsService: Ng2ImgToolsService
     ) { }
@@ -33,7 +34,7 @@ export class ThumbService {
 
   imgResized(file: File[], maxWidth: number, maxHeight: number) {
     return this.imgToolsService.resize(file, maxWidth, maxHeight).subscribe(
-        image => image, 
+        image => image,
         error => error.error
     )
   }
@@ -42,8 +43,6 @@ export class ThumbService {
     let thumb = new Thumb
     let user = this.authService.buildUser(data)
     let image = this.buildImage(data)
-
-    console.debug({user})
 
     thumb.strTemplateID               = data.strTemplateID
     thumb.strTemplateTitle            = data.strTemplateTitle

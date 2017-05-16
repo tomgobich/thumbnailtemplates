@@ -34,6 +34,10 @@ export class ApiAuthService {
     }
   }
 
+  async logoutUser() {
+    await this.afAuth.auth.signOut()
+  }
+
   /**
    * Creates user account record in database
    *

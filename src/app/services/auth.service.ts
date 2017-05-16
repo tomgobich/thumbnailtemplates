@@ -45,9 +45,7 @@ export class AuthService {
         setTimeout(() => this.getUsername(user.uid), 2500)
       }
       else {
-        this.UID = null
-        this.user = null
-        this.isAuthenticated = false
+        this.initializeAllVariables()
       }
     })
   }
@@ -82,11 +80,10 @@ export class AuthService {
   }
 
   // Logs user out of app session
-  async logout() {
-    const response = await this.afAuth.auth.signOut()
-    await this.initializeAllVariables();
-    await this.router.navigate(['/login'])
-    await console.warn('User has logged out')
+  logout() {
+    this.apiAuthService.logoutUser();
+    this.initializeAllVariables();
+    this.router.navigate(['/login'])
   }
 
   // Returns current user's ID
