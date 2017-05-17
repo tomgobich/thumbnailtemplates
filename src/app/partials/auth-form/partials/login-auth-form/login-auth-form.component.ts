@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-login-auth-form',
   templateUrl: './login-auth-form.component.html',
-  styleUrls: ['./login-auth-form.component.scss']
+  styleUrls: ['../../auth-form.component.scss']
 })
-export class LoginAuthFormComponent implements OnInit {
+export class LoginAuthFormComponent {
+
+  @Input() parent: FormGroup
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

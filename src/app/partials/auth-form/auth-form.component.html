@@ -1,2 +1,17 @@
-<pre *ngIf="isLogin">{{ login.value | json }}</pre>
-<pre *ngIf="!isLogin">{{ signup.value | json }}</pre>
+<div *ngIf="isLogin">
+    <form [formGroup]="login" (ngSubmit)="loginUser">
+        <app-login-auth-form
+            [parent]="login">
+        </app-login-auth-form>
+    </form>
+    <pre>{{ login.value | json }}</pre>
+</div>
+
+<div *ngIf="!isLogin">
+    <form [formGroup]="signup" (ngSubmit)="signupUser">
+        <app-signup-auth-form
+            [parent]="signup">
+        </app-signup-auth-form>
+    </form>
+    <pre>{{ signup.value | json }}</pre>
+</div>

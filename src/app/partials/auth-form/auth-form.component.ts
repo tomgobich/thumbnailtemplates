@@ -6,43 +6,40 @@ import { FormBuilder, FormGroup } from '@angular/forms'
   templateUrl: './auth-form.component.html',
   styleUrls: ['./auth-form.component.scss']
 })
-export class AuthFormComponent implements OnInit {
+export class AuthFormComponent {
 
   @Input() isLogin: boolean
 
-  login: FormGroup
-  signup: FormGroup
+  login = this.fb.group({
+    email: '',
+    password: ''
+  })
+
+  signup = this.fb.group({
+    required: this.fb.group({
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }),
+    optional: this.fb.group({
+      youtube: '',
+      twitter: '',
+      facebook: '',
+      bio: ''
+    })
+  })
 
   constructor(
     private fb: FormBuilder
   ) { }
 
-  ngOnInit() {
-    this.isLogin ? this.buildLoginForm() : this.buildSignupForm()
+  loginUser() {
+    console.log(this.login.value)
   }
 
-  buildLoginForm() {
-    this.login = this.fb.group({
-      email: '',
-      password: ''
-    })
-  }
-
-  buildSignupForm() {
-    this.signup = this.fb.group({
-      required: this.fb.group({
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-      }),
-      optional: this.fb.group({
-        youtube: '',
-        twitter: '',
-        facebook: '',
-        bio: ''
-      })
-    })
+  signupUser() {
+    console.log(this.signup.value)
   }
 
 }
