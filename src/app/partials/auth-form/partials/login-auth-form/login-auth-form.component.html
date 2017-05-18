@@ -1,12 +1,53 @@
 <div [formGroup]="parent">
-  <input
-    type="email"
-    class="form-control"
-    placeholder="Enter your email"
-    formControlName="email">
-  <input
-    type="password"
-    class="form-control"
-    placeholder="Enter your password"
-    formControlName="password">
+  <div class="form-group">
+    <input
+      type="email"
+      class="form-control"
+      formControlName="email">
+    <label
+      class="inline-label"
+      [class.active]="parent.get('email').value">
+      Enter your email
+    </label>
+    <div
+      class="invalid"
+      *ngIf="required('email')">
+      Please enter an email, I don't know where to look without one! 😦
+    </div>
+    <div
+      class="invalid"
+      *ngIf="invalidEmail">
+      Please use a valid email, ex: tomcat@jerrymouse.com 🐭
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="password"
+      class="form-control"
+      formControlName="password">
+    <label
+      class="inline-label"
+      [class.active]="parent.get('password').value">
+      Enter your password
+    </label>
+    <div
+      class="invalid"
+      *ngIf="required('password')">
+      Can't get in without your password! 🦇
+    </div>
+    <div
+      class="invalid"
+      *ngIf="invalidPassword">
+      Please include at least 1 uppercase, 1 lowercase, and 1 number! 😉
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="parent.invalid">
+    Login
+  </button>
+
 </div>

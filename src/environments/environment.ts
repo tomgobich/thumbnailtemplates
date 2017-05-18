@@ -8,3 +8,9 @@ export const environment = {
   ,apiUrl: 'http://localhost:3000'
   ,imageUrl: 'http://thumbnailtemplates.com/images/thumbs/'
 };
+
+export const regex = {
+   // Requires at least 1 lowercase, 1 uppercase, 1 number, and 6 characters total
+   mediumPassword: new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")
+  ,strongPassword: new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
+}

@@ -1,8 +1,41 @@
 @import 'importable';
 
+.form-group {
+    position: relative;
+    margin: 30px 0 20px;
+}
+
+.inline-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(8px, 8px);
+    transition: transform 300ms ease,
+                font-size 300ms ease;
+    pointer-events: none;
+
+    // IE11 Fix
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='your_transparent.png', sizingMethod='scale');
+    background: none !important;
+}
+
 input {
     display: block;
     clear: both;
-    padding: 6px 8px;
-    margin-bottom: 10px;
+    padding: 10px 8px 6px;
+}
+
+.inline-label.active,
+input:focus + .inline-label {
+    font-size: .95em;
+    transform: translate(0px, -25px);
+}
+
+.invalid {
+    width: 100%;
+    background-color: $red;
+    color: $white;
+    font-size: .9em;
+    line-height: 1em;
+    padding: 6px;
 }

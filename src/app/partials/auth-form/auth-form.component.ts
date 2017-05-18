@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms'
+import { Component, OnInit, Input } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { AuthValidators } from '../../classes/validators/auth.validators'
 
 @Component({
   selector: 'app-auth-form',
@@ -11,8 +12,8 @@ export class AuthFormComponent {
   @Input() isLogin: boolean
 
   login = this.fb.group({
-    email: '',
-    password: ''
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, AuthValidators.password]]
   })
 
   signup = this.fb.group({
