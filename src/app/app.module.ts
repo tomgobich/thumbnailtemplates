@@ -23,11 +23,8 @@ import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
 import { ProfileComponent } from './routes/user/profile/profile.component';
 
 // Login / Signup Components
-import { AuthFormComponent } from './partials/auth-form/auth-form.component';
 import { LoginComponent } from './routes/login/login.component';
 import { LoginPartialComponent } from './partials/login/login.partial.component'; // old <to be removed>
-import { LoginAuthFormComponent } from './partials/auth-form/partials/login-auth-form/login-auth-form.component';
-import { SignupAuthFormComponent } from './partials/auth-form/partials/signup-auth-form/signup-auth-form.component';
 import { EmailComponent } from './partials/form-inputs/email.component';
 import { PasswordComponent } from './partials/form-inputs/password.component';
 import { UsernameComponent } from './partials/form-inputs/username.component'
@@ -42,11 +39,8 @@ import { SignupComponent } from './routes/signup/signup.component'
     ResponsiveAdComponent,
     ThumbnailComponent,
     ProfileComponent,
-    AuthFormComponent,
     LoginComponent,
     LoginPartialComponent,
-    LoginAuthFormComponent,
-    SignupAuthFormComponent,
     EmailComponent,
     PasswordComponent,
     UsernameComponent,
