@@ -20,4 +20,5 @@ export class AuthValidators {
         const valid = regex.mediumPassword.test(control.value)
         return valid ? null : { invalidPassword: true }
     }
+
 }

@@ -1,9 +1,39 @@
-<!--<partial-login [isLogin]="login">
-  <h3 class="heading">{{pageHeading}}</h3>
-</partial-login>-->
-
 <div class="row">
-  <div class="col-xs-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-    <app-auth-form [isLogin]="login"></app-auth-form>
+  <div class="col-xs-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
+    <div
+      class="error invalid"
+      *ngIf="authService.loginError">
+      <i class="zmdi zmdi-alert-circle"></i>
+      {{ authService.loginError }}
+    </div>
+
+    <form [formGroup]="login" (submit)="loginUser()">
+      <h3>Login</h3>
+      <a routerLink="/signup">
+          Need an account? Click here to signup!
+      </a>
+
+      <app-email
+        [parent]="login">
+      </app-email>
+
+      <app-password
+        [parent]="login">
+      </app-password>
+
+      <button
+        type="submit"
+        class="btn btn-primary btn-block submit"
+        [disabled]="login.invalid">
+        Login
+      </button>
+    </form>
+
+    <div *ngIf="!login">
+      <h3>Create An Account</h3>
+      <a routerLink="/login">
+          Already have an account? Click here to go to login!
+      </a>
+    </div>
   </div>
 </div>

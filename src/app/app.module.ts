@@ -28,6 +28,10 @@ import { LoginComponent } from './routes/login/login.component';
 import { LoginPartialComponent } from './partials/login/login.partial.component'; // old <to be removed>
 import { LoginAuthFormComponent } from './partials/auth-form/partials/login-auth-form/login-auth-form.component';
 import { SignupAuthFormComponent } from './partials/auth-form/partials/signup-auth-form/signup-auth-form.component';
+import { EmailComponent } from './partials/form-inputs/email.component';
+import { PasswordComponent } from './partials/form-inputs/password.component';
+import { UsernameComponent } from './partials/form-inputs/username.component'
+import { SignupComponent } from './routes/signup/signup.component'
 
 
 @NgModule({
@@ -42,7 +46,11 @@ import { SignupAuthFormComponent } from './partials/auth-form/partials/signup-au
     LoginComponent,
     LoginPartialComponent,
     LoginAuthFormComponent,
-    SignupAuthFormComponent
+    SignupAuthFormComponent,
+    EmailComponent,
+    PasswordComponent,
+    UsernameComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

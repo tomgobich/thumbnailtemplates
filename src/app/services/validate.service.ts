@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiAuthService } from './api/api-auth.service'
 import { UtilitiesService } from './utilities.service'
+import { FormGroup, AbstractControl } from '@angular/forms'
+
+import 'rxjs/add/operator/map'
 
 @Injectable()
 export class ValidateService {
@@ -19,14 +22,14 @@ export class ValidateService {
     ,private utilitiesService: UtilitiesService
   ) { }
 
-  
+
   /**
    * Validates full user login
-   * 
-   * @param {any} email 
-   * @param {any} password 
-   * @returns 
-   * 
+   *
+   * @param {any} email
+   * @param {any} password
+   * @returns
+   *
    * @memberof ValidateService
    */
   validateLogin(email, password) {
@@ -42,17 +45,17 @@ export class ValidateService {
 
   /**
    * Validates full user signup
-   * 
-   * @param {any} username 
-   * @param {any} email 
-   * @param {any} password 
-   * @param {any} passwordConfirm 
-   * @param {any} youtube 
-   * @param {any} twitter 
-   * @param {any} facebook 
-   * @param {any} bio 
-   * @returns 
-   * 
+   *
+   * @param {any} username
+   * @param {any} email
+   * @param {any} password
+   * @param {any} passwordConfirm
+   * @param {any} youtube
+   * @param {any} twitter
+   * @param {any} facebook
+   * @param {any} bio
+   * @returns
+   *
    * @memberof ValidateService
    */
   validateSignup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
@@ -75,35 +78,35 @@ export class ValidateService {
 
   /**
    * Validates username
-   * 
-   * @param {string} text 
-   * 
+   *
+   * @param {string} text
+   *
    * @memberof ValidateService
    */
   validateUsername(text: string) {
-    let isValid = this.validateRequired("Username", text, 3, 50);
+    // let isValid = this.validateRequired("Username", text, 3, 50);
 
-    isValid = isValid.valid ? this.utilitiesService.hasSpecialChars(text) : isValid
-    isValid = isValid.valid ? this.utilitiesService.hasSpaces(text) : isValid
+    // isValid = isValid.valid ? this.utilitiesService.hasSpecialChars(text) : isValid
+    // isValid = isValid.valid ? this.utilitiesService.hasSpaces(text) : isValid
 
-    if (isValid.valid) {
-      this.apiAuthService.isUsernameUnique(text).then(isValidResponse => {
-        this.errorUsername = {
-          valid: isValidResponse,
-          message: "Username is already taken, please try another"
-        }
-      })
-    } 
-    else {
-      this.errorUsername = isValid
-    }
-  }  
+    // if (isValid.valid) {
+    //   this.apiAuthService.isUsernameUnique(text).then(isValidResponse => {
+    //     this.errorUsername = {
+    //       valid: isValidResponse,
+    //       message: "Username is already taken, please try another"
+    //     }
+    //   })
+    // }
+    // else {
+    //   this.errorUsername = isValid
+    // }
+  }
 
   /**
    * Validates email
-   * 
-   * @param {any} text 
-   * 
+   *
+   * @param {any} text
+   *
    * @memberof ValidateService
    */
   validateEmail(text) {
@@ -122,9 +125,9 @@ export class ValidateService {
 
   /**
    * Validates password
-   * 
-   * @param {any} text 
-   * 
+   *
+   * @param {any} text
+   *
    * @memberof ValidateService
    */
   validatePassword(text) {
@@ -133,10 +136,10 @@ export class ValidateService {
 
   /**
    * Validates password confirm / password match
-   * 
-   * @param {any} password 
-   * @param {any} confirmation 
-   * 
+   *
+   * @param {any} password
+   * @param {any} confirmation
+   *
    * @memberof ValidateService
    */
   validatePasswordConfirm(password, confirmation) {
@@ -148,9 +151,9 @@ export class ValidateService {
 
   /**
    * Validates twitter (optional)
-   * 
-   * @param {any} text 
-   * 
+   *
+   * @param {any} text
+   *
    * @memberof ValidateService
    */
   validateTwitter(text) {
@@ -159,9 +162,9 @@ export class ValidateService {
 
   /**
    * Validates youtube (optional)
-   * 
-   * @param {any} text 
-   * 
+   *
+   * @param {any} text
+   *
    * @memberof ValidateService
    */
   validateYouTube(text) {
@@ -170,9 +173,9 @@ export class ValidateService {
 
   /**
    * Validates facebook (optional)
-   * 
-   * @param {any} text 
-   * 
+   *
+   * @param {any} text
+   *
    * @memberof ValidateService
    */
   validateFacebook(text) {
@@ -181,9 +184,9 @@ export class ValidateService {
 
   /**
    * Validates bio (optional)
-   * 
-   * @param {any} text 
-   * 
+   *
+   * @param {any} text
+   *
    * @memberof ValidateService
    */
   validateBio(text) {
@@ -202,13 +205,13 @@ export class ValidateService {
 
   /**
    * Validates a required fields bounds
-   * 
-   * @param {any} field 
-   * @param {any} text 
-   * @param {any} minLength 
-   * @param {any} maxLength 
-   * @returns 
-   * 
+   *
+   * @param {any} field
+   * @param {any} text
+   * @param {any} minLength
+   * @param {any} maxLength
+   * @returns
+   *
    * @memberof ValidateService
    */
   validateRequired(field, text, minLength, maxLength) {
@@ -218,6 +221,53 @@ export class ValidateService {
       valid: isValid,
       message: `${field} must be between ${minLength} and ${maxLength} characters long`
     }
+  }
+
+  /**
+   * Returns required validity state
+   *
+   * @param {string} name
+   * @returns
+   *
+   * @memberof LoginAuthFormComponent
+   */
+  required(parent: FormGroup, name: string) {
+    return (
+      parent.get(name).hasError('required') &&
+      parent.get(name).touched
+    )
+  }
+
+  /**
+   * Returns min length validity state
+   *
+   * @param {FormGroup} parent
+   * @param {string} name
+   * @returns
+   *
+   * @memberof ValidateService
+   */
+  minLength(parent: FormGroup, name: string) {
+    return (
+      parent.get(name).hasError('minLength') &&
+      parent.get(name).touched
+    )
+  }
+
+  /**
+   * Returns max length validity state
+   *
+   * @param {FormGroup} parent
+   * @param {string} name
+   * @returns
+   *
+   * @memberof ValidateService
+   */
+  maxLength(parent: FormGroup, name: string) {
+    return (
+      parent.get(name).hasError('maxLength') &&
+      parent.get(name).touched
+    )
   }
 
 }

@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-xs-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
+    <div
+      class="error invalid"
+      *ngIf="authService.loginError">
+      <i class="zmdi zmdi-alert-circle"></i>
+      {{ authService.loginError }}
+    </div>
+
+    <h3>Create An Account</h3>
+    <a routerLink="/login">
+        Already have an account? Click here to go to login!
+    </a>
+
+    <form [formGroup]="signup" (submit)="signupUser()">
+      <div>
+        <app-username
+          [parent]="signup">
+        </app-username>
+
+        <app-email
+          [parent]="signup">
+        </app-email>
+
+        <app-password
+          [parent]="signup">
+        </app-password>
+
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Confirm your password"
+          formControlName="confirmPassword">
+      </div>
+
+      <div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your YouTube"
+          formControlName="youtube">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your Twitter"
+          formControlName="twitter">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your Facebook"
+          formControlName="facebook">
+        <textarea
+          maxlength="500"
+          class="form-control"
+          placeholder="You get 500 characters to describe who you are!"
+          formControlName="bio">
+        </textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary btn-block submit"
+        [disabled]="signup.invalid">
+        Login
+      </button>
+    </form>
+  </div>
+</div>

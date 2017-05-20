@@ -3,31 +3,30 @@ import { Routes, RouterModule } from '@angular/router'
 import { AuthGuardService } from '../services/auth-guard.service'
 import { HomeComponent } from '../routes/home/home.component'
 import { LoginComponent } from '../routes/login/login.component'
+import { SignupComponent } from '../routes/signup/signup.component'
 import { ProfileComponent } from '../routes/user/profile/profile.component'
 
 const routes: Routes = [
-   { 
+   {
      path: ''
-    ,component: HomeComponent 
+    ,component: HomeComponent
   }
-  ,{ 
+  ,{
      path: 'login'
     ,component: LoginComponent
-    ,data: { login: true } 
   }
-  ,{ 
+  ,{
      path: 'signup'
-    ,component: LoginComponent
-    ,data: { login: false } 
+    ,component: SignupComponent
   }
-  ,{ 
+  ,{
      path: 'user/:username'
     ,component: ProfileComponent
   }
-  ,{ 
+  ,{
      path: 'protected'
     ,component: HomeComponent
-    ,canActivate: [AuthGuardService] 
+    ,canActivate: [AuthGuardService]
   }
 ];
 

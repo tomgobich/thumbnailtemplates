@@ -9,6 +9,19 @@ import { ValidateService } from '../../services/validate.service'
 })
 export class LoginPartialComponent implements OnInit {
 
+  // TODO: Delete Component
+
+  // ----------------------------------------
+  // ----------------------------------------
+
+  // OLD LOGIN COMPONENT
+  // Keeping for reference
+
+  // ----------------------------------------
+  // ----------------------------------------
+
+
+
   @Input() isLogin: boolean
 
   constructor(
@@ -18,5 +31,5 @@ export class LoginPartialComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
 }
