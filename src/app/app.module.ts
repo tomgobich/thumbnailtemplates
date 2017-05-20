@@ -1,4 +1,3 @@
-import 'rxjs/Rx';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -29,6 +28,7 @@ import { PasswordComponent } from './partials/form-inputs/password.component';
 import { UsernameComponent } from './partials/form-inputs/username.component'
 import { SignupComponent } from './routes/signup/signup.component'
 
+import 'rxjs/Rx';
 
 @NgModule({
   declarations: [
