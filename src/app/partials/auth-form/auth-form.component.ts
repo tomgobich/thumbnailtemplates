@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthValidators } from '../../classes/validators/auth.validators'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-auth-form',
@@ -32,11 +33,15 @@ export class AuthFormComponent {
   })
 
   constructor(
-    private fb: FormBuilder
+     private fb: FormBuilder
+    ,private authService: AuthService
   ) { }
 
   loginUser() {
-    console.log(this.login.value)
+    this.authService.login(
+      this.login.get('email').value,
+      this.login.get('password').value
+    )
   }
 
   signupUser() {

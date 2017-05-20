@@ -58,7 +58,7 @@ export class AuthService {
       this.apiAuthService.loginUser(email, password).then(response => {
         this.UID = response.data.uid
         this.loginError = response.hasError ? response.message : ''
-        if (!response.hasError) this.router.navigate['/']
+        if (!response.hasError) this.router.navigate(['/'])
       })
     }
   }

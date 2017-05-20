@@ -1,16 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit, Renderer, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms'
+import { AuthService } from '../../../../services/auth.service'
 
 @Component({
   selector: 'app-login-auth-form',
   templateUrl: './login-auth-form.component.html',
   styleUrls: ['../../auth-form.component.scss']
 })
-export class LoginAuthFormComponent {
+export class LoginAuthFormComponent implements AfterViewInit {
 
+  @ViewChild('email') email: ElementRef
   @Input() parent: FormGroup
 
-  constructor() { }
+  constructor(
+     private authService: AuthService
+    ,private renderer: Renderer
+  ) { }
+
+  ngAfterViewInit() {
+    this.renderer.invokeElementMethod(this.email.nativeElement, 'focus')
+  }
 
   get invalidEmail() {
     return (

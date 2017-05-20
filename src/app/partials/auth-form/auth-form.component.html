@@ -1,17 +1,32 @@
 <div *ngIf="isLogin">
-    <form [formGroup]="login" (ngSubmit)="loginUser">
+    <h3>Login</h3>
+    <a routerLink="/signup">
+        Need an account? Click here to get started!
+    </a>
+
+    <form [formGroup]="login" (submit)="loginUser()">
         <app-login-auth-form
             [parent]="login">
         </app-login-auth-form>
     </form>
-    <pre>{{ login.value | json }}</pre>
 </div>
 
 <div *ngIf="!isLogin">
-    <form [formGroup]="signup" (ngSubmit)="signupUser">
+    <h3>Create An Account</h3>
+    <a routerLink="/login">
+        Already have an account? Click here to go to login!
+    </a>
+
+    <form [formGroup]="signup" (submit)="signupUser()">
         <app-signup-auth-form
             [parent]="signup">
         </app-signup-auth-form>
+
+        <p class="info">
+            Your password is securely stored by Google, ThumbnailTemplates doesn't store your password.
+        </p>
+
     </form>
+
     <pre>{{ signup.value | json }}</pre>
 </div>
