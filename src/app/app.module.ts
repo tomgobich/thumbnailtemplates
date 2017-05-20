@@ -22,7 +22,6 @@ import { ResponsiveAdComponent } from './partials/responsive-ad/responsive-ad.co
 import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
 import { ProfileComponent } from './routes/user/profile/profile.component';
 
-// Login / Signup Components
 import { LoginComponent } from './routes/login/login.component';
 import { LoginPartialComponent } from './partials/login/login.partial.component'; // old <to be removed>
 import { EmailComponent } from './partials/form-inputs/email.component';
