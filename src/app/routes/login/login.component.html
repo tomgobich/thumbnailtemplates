@@ -7,12 +7,12 @@
       {{ authService.loginError }}
     </div>
 
-    <form [formGroup]="login" (submit)="loginUser()">
-      <h3>Login</h3>
-      <a routerLink="/signup">
-          Need an account? Click here to signup!
-      </a>
+    <h3>Login</h3>
+    <a routerLink="/signup">
+        Need an account? Click here to signup!
+    </a>
 
+    <form [formGroup]="login" (submit)="loginUser()">
       <app-email
         [parent]="login">
       </app-email>
@@ -28,12 +28,5 @@
         Login
       </button>
     </form>
-
-    <div *ngIf="!login">
-      <h3>Create An Account</h3>
-      <a routerLink="/login">
-          Already have an account? Click here to go to login!
-      </a>
-    </div>
   </div>
 </div>
