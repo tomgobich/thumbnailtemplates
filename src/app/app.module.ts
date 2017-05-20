@@ -27,6 +27,7 @@ import { EmailComponent } from './partials/form-inputs/email.component';
 import { PasswordComponent } from './partials/form-inputs/password.component';
 import { PasswordConfirmComponent } from './partials/form-inputs/password-confirm.component'
 import { UsernameComponent } from './partials/form-inputs/username.component'
+import { YouTubeComponent } from './partials/form-inputs/youtube.component'
 import { SignupComponent } from './routes/signup/signup.component'
 
 import 'rxjs/Rx';
@@ -40,12 +41,13 @@ import 'rxjs/Rx';
     ThumbnailComponent,
     ProfileComponent,
     LoginComponent,
+    SignupComponent,
     LoginPartialComponent,
     EmailComponent,
     PasswordComponent,
     PasswordConfirmComponent,
     UsernameComponent,
-    SignupComponent
+    YouTubeComponent
   ],
   imports: [
     BrowserModule,

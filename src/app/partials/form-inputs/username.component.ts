@@ -37,6 +37,12 @@ import { ValidateService } from '../../services/validate.service'
       </div>
       <div
         class="invalid"
+        *ngIf="validateService.pattern(parent, 'username')">
+        <i class="zmdi zmdi-alert-circle"></i>
+        Sorry, usernames can't have special characters!
+      </div>
+      <div
+        class="invalid"
         *ngIf="takenUsername">
         <i class="zmdi zmdi-alert-circle"></i>
         Sorry, that username is already taken, please try another! ☹️

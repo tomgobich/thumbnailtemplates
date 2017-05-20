@@ -18,11 +18,11 @@ export class SignupComponent implements AfterViewInit {
   @Input() parent: FormGroup
 
   signup = this.fb.group({
-    username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)], this.uniqueUsername.bind(this)],
+    username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(regex.textCharacters)], this.uniqueUsername.bind(this)],
     email: ['', [Validators.required, Validators.email], this.uniqueEmail.bind(this)],
     password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), Validators.pattern(regex.mediumPassword)]],
     passwordConfirm: ['', [Validators.required, AuthValidators.passwordMatch]],
-    youtube: '',
+    youtube: ['', [Validators.maxLength(20), Validators.pattern(regex.textCharacters)]],
     twitter: '',
     facebook: '',
     bio: ''

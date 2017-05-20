@@ -10,7 +10,10 @@ export const environment = {
 };
 
 export const regex = {
+   // Limits to word characters and numbers (A-z, 0-9)
+   textCharacters: new RegExp("^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$")
+
    // Requires at least 1 lowercase, 1 uppercase, 1 number, and 6 characters total
-   mediumPassword: new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")
+  ,mediumPassword: new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")
   ,strongPassword: new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
 }
