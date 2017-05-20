@@ -5,6 +5,7 @@ import { AuthValidators } from '../../classes/validators/auth.validators'
 import { AuthService } from '../../services/auth.service'
 import { ApiAuthService } from '../../services/api/api-auth.service'
 import { ValidateService } from '../../services/validate.service'
+import { regex } from '../../../environments/environment'
 
 @Component({
   selector: 'app-signup',
@@ -18,9 +19,9 @@ export class SignupComponent implements AfterViewInit {
 
   signup = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)], this.uniqueUsername.bind(this)],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, AuthValidators.password]],
-    confirmPassword: '',
+    email: ['', [Validators.required, Validators.email], this.uniqueEmail.bind(this)],
+    password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), Validators.pattern(regex.mediumPassword)]],
+    passwordConfirm: ['', [Validators.required, AuthValidators.passwordMatch]],
     youtube: '',
     twitter: '',
     facebook: '',
@@ -50,25 +51,17 @@ export class SignupComponent implements AfterViewInit {
   }
 
   uniqueUsername(control: AbstractControl) {
-    console.log({this: this})
     return new Promise(resolve => {
       this.apiAuthService.isUsernameUnique(control.value)
-      .then(isAvailable => {
-        console.log({isAvailable})
-
-        if(isAvailable) {
-          resolve(null)
-        }
-        else {
-          resolve({ takenUsername: true })
-        }
-      })
+      .then(isAvailable => isAvailable ? resolve(null) : resolve({ takenUsername: true }))
     })
+  }
 
-
-
-    // this.apiAuthService.isUsernameUnique(control.value)
-    // .then(isAvailable => isAvailable ? null : { takenUsername: true })
+  uniqueEmail(control: AbstractControl) {
+    return new Promise(resolve => {
+      this.apiAuthService.isEmailUnique(control.value)
+      .then(isAvailable => isAvailable ? resolve(null) : resolve({ takenEmail: true }))
+    })
   }
 
 }

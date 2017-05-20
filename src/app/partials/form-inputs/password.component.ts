@@ -25,7 +25,19 @@ import { ValidateService } from '../../services/validate.service'
         </div>
         <div
             class="invalid"
-            *ngIf="invalidPassword">
+            *ngIf="validateService.minLength(parent, 'password')">
+            <i class="zmdi zmdi-alert-circle"></i>
+            Please include at least 6 characters
+        </div>
+        <div
+            class="invalid"
+            *ngIf="validateService.maxLength(parent, 'password')">
+            <i class="zmdi zmdi-alert-circle"></i>
+            Please limit your password to 30 characters
+        </div>
+        <div
+            class="invalid"
+            *ngIf="validateService.pattern(parent, 'password')">
             <i class="zmdi zmdi-alert-circle"></i>
             Please include at least 1 capital letter, 1 number, and 6 characters
         </div>

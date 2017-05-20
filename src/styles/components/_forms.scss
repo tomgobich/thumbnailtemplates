@@ -5,7 +5,7 @@ form {
 
     .form-group {
         position: relative;
-        margin: 30px 0 20px;
+        margin: 30px 0;
     }
 
     .inline-label {
@@ -32,7 +32,7 @@ form {
 
     .inline-label.active,
     input:focus + .inline-label {
-        color: $brand-primary;
+        color: $gray-dark;
         font-size: .95em;
         transform: translate(0px, -25px);
     }
@@ -66,6 +66,14 @@ input {
     font-size: .9em;
     line-height: 1em;
     padding: 6px 6px 6px 0;
+
+    a {
+        color: darken($red, 20);
+
+        &:hover {
+            color: lighten($red, 10);
+        }
+    }
 }
 
 .btn.submit {

@@ -250,7 +250,7 @@ export class ValidateService {
   minLength(parent: FormGroup, name: string) {
     return (
       parent.get(name).hasError('minLength') &&
-      parent.get(name).touched
+      parent.get(name).dirty
     )
   }
 
@@ -266,7 +266,16 @@ export class ValidateService {
   maxLength(parent: FormGroup, name: string) {
     return (
       parent.get(name).hasError('maxLength') &&
-      parent.get(name).touched
+      parent.get(name).dirty
+    )
+  }
+
+  pattern(parent: FormGroup, name: string) {
+    return (
+      parent.get(name).hasError('pattern') &&
+      parent.get(name).dirty &&
+      !this.minLength(parent, name) &&
+      !this.maxLength(parent, name)
     )
   }
 

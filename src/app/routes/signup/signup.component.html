@@ -26,11 +26,9 @@
           [parent]="signup">
         </app-password>
 
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Confirm your password"
-          formControlName="confirmPassword">
+        <app-password-confirm
+          [parent]="signup">
+        </app-password-confirm>
       </div>
 
       <div>

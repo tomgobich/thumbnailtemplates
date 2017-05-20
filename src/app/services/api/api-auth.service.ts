@@ -70,15 +70,28 @@ export class ApiAuthService {
 
 
   /**
-   * Returns whether a username is unique
+   * Returns whether a username is already used on an account
    *
    * @param {string} text
    * @returns
    *
    * @memberof ApiAuthService
    */
-  async isUsernameUnique(text: string) {
-    const response = await this.http.post(`${this.apiUrl}/user/username/unique`, {username: text}).toPromise()
+  async isUsernameUnique(username: string) {
+    const response = await this.http.post(`${this.apiUrl}/user/username/unique`, { username }).toPromise()
+    return response.json().unique
+  }
+
+  /**
+   * Returns whether an email address is already used on an account
+   *
+   * @param {string} email
+   * @returns
+   *
+   * @memberof ApiAuthService
+   */
+  async isEmailUnique(email: string) {
+    const response = await this.http.post(`${this.apiUrl}/user/email/unique`, { email }).toPromise()
     return response.json().unique
   }
 

@@ -25,6 +25,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { LoginPartialComponent } from './partials/login/login.partial.component'; // old <to be removed>
 import { EmailComponent } from './partials/form-inputs/email.component';
 import { PasswordComponent } from './partials/form-inputs/password.component';
+import { PasswordConfirmComponent } from './partials/form-inputs/password-confirm.component'
 import { UsernameComponent } from './partials/form-inputs/username.component'
 import { SignupComponent } from './routes/signup/signup.component'
 
@@ -42,6 +43,7 @@ import 'rxjs/Rx';
     LoginPartialComponent,
     EmailComponent,
     PasswordComponent,
+    PasswordConfirmComponent,
     UsernameComponent,
     SignupComponent
   ],
@@ -65,4 +67,5 @@ import 'rxjs/Rx';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

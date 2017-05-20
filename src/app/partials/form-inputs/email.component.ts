@@ -29,6 +29,15 @@ import { ValidateService } from '../../services/validate.service'
         <i class="zmdi zmdi-alert-circle"></i>
         Please use a valid email
       </div>
+      <div
+        class="invalid"
+        *ngIf="takenEmail">
+        <i class="zmdi zmdi-alert-circle"></i>
+        Sorry, an account with that email already exists.
+        <a routerLink="/login/forgot">
+          Forget your password?
+        </a>
+      </div>
     </div>
   `
 })
@@ -45,6 +54,13 @@ export class EmailComponent {
       this.parent.get('email').hasError('email') &&
       this.parent.get('email').dirty &&
       !this.validateService.required(this.parent, 'email')
+    )
+  }
+
+  get takenEmail() {
+    return (
+      this.parent.get('email').hasError('takenEmail') &&
+      this.parent.get('email').dirty
     )
   }
 

@@ -21,4 +21,13 @@ export class AuthValidators {
         return valid ? null : { invalidPassword: true }
     }
 
+    static passwordMatch(confirm: AbstractControl) {
+        if(confirm.parent) {
+            let password = confirm.parent.get('password')
+            return password.value == confirm.value ? null : { invalidPasswordMatch: true }
+        }
+
+        return { invalidPasswordMatch: true }
+    }
+
 }
