@@ -5,6 +5,7 @@ import { HomeComponent } from '../routes/home/home.component'
 import { LoginComponent } from '../routes/login/login.component'
 import { SignupComponent } from '../routes/signup/signup.component'
 import { ProfileComponent } from '../routes/user/profile/profile.component'
+import { UploadComponent } from '../routes/user/upload/upload.component'
 
 const routes: Routes = [
    {
@@ -27,6 +28,10 @@ const routes: Routes = [
      path: 'protected'
     ,component: HomeComponent
     ,canActivate: [AuthGuardService]
+  }
+  ,{
+     path: 'user/upload/thumbnail'
+    ,component: UploadComponent
   }
 ];
 

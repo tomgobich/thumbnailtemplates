@@ -6,7 +6,7 @@ import { MomentModule } from 'angular2-moment/moment.module';
 import { Ng2ImgToolsModule } from 'ng2-img-tools';
 import { FirebaseModule } from './modules/firebase.module';
 import { AppRoutingModule } from './modules/app-routing.module';
-import { AppComponent } from './app.component';
+import { Ng2UploaderModule } from 'ng2-uploader'
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
@@ -15,11 +15,13 @@ import { UtilitiesService } from './services/utilities.service'
 import { ValidateService } from './services/validate.service'
 import { ApiAuthService } from './services/api/api-auth.service'
 
+import { AppComponent } from './app.component';
 import { HomeComponent } from './routes/home/home.component';
 import { HeaderPartialComponent } from './partials/header/header.partial.component';
 import { ResponsiveAdComponent } from './partials/responsive-ad/responsive-ad.component';
 import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
 import { ProfileComponent } from './routes/user/profile/profile.component';
+import { UploadComponent } from './routes/user/upload/upload.component';
 
 // TODO: Move into own module!!!
 import { SignupComponent } from './routes/signup/signup.component'
@@ -52,7 +54,8 @@ import 'rxjs/Rx';
     YouTubeComponent,
     TwitterComponent,
     FacebookComponent,
-    BioComponent
+    BioComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import 'rxjs/Rx';
     AppRoutingModule,
     FirebaseModule,
     MomentModule,
-    Ng2ImgToolsModule
+    Ng2ImgToolsModule,
+    Ng2UploaderModule
   ],
   providers: [
     AuthGuardService,
