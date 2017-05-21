@@ -1,11 +1,5 @@
 <div class="row">
-  <div class="col-xs-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4">
-    <div
-      class="error invalid"
-      *ngIf="authService.loginError">
-      <i class="zmdi zmdi-alert-circle"></i>
-      {{ authService.loginError }}
-    </div>
+  <div class="col-xs-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
 
     <h3>Login</h3>
     <a routerLink="/signup">
@@ -20,6 +14,13 @@
       <app-password
         [parent]="login">
       </app-password>
+
+      <div
+        class="error invalid"
+        *ngIf="authService.loginError">
+        <i class="zmdi zmdi-alert-circle"></i>
+        {{ authService.loginError }}
+      </div>
 
       <button
         type="submit"

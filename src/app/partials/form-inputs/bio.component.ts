@@ -3,40 +3,35 @@ import { FormGroup } from '@angular/forms'
 import { ValidateService } from '../../services/validate.service'
 
 @Component({
-  selector: 'app-youtube',
+  selector: 'app-bio',
   encapsulation: ViewEncapsulation.None,
   template: `
     <div [formGroup]="parent" class="form-group">
-        <input
-            #youtube
-            type="text"
+        <textarea
+            #bio
+            rows="3"
             class="form-control"
             [tabIndex]="tabIndex"
-            formControlName="youtube">
+            formControlName="bio">
+        </textarea>
         <label
             class="inline-label"
-            [class.active]="parent.get('youtube').value">
-            What's your YouTube username?
+            [class.active]="parent.get('bio').value">
+            Tell us about yourself
             <span class="faded">
-                Ex: thumbtemps
+                ...within 500 characters
             </span>
         </label>
         <div
             class="invalid"
-            *ngIf="validateService.maxLength(parent, 'youtube')">
+            *ngIf="validateService.maxLength(parent, 'bio')">
             <i class="zmdi zmdi-alert-circle"></i>
-            Please limit your YouTube username to 50 characters
-        </div>
-        <div
-            class="invalid"
-            *ngIf="validateService.pattern(parent, 'youtube')">
-            <i class="zmdi zmdi-alert-circle"></i>
-            Please only enter your username, ex: thumbtemps
+            Please limit your bio to 500 characters!
         </div>
     </div>
   `
 })
-export class YouTubeComponent {
+export class BioComponent {
 
   @Input() parent: FormGroup
   @Input() tabIndex: number

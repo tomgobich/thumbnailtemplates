@@ -3,37 +3,40 @@ import { FormGroup } from '@angular/forms'
 import { ValidateService } from '../../services/validate.service'
 
 @Component({
-  selector: 'app-password-confirm',
+  selector: 'app-twitter',
   encapsulation: ViewEncapsulation.None,
   template: `
     <div [formGroup]="parent" class="form-group">
         <input
-            #passwordConfirm
-            type="password"
+            #twitter
+            type="text"
             class="form-control"
             [tabIndex]="tabIndex"
-            formControlName="passwordConfirm">
+            formControlName="twitter">
         <label
             class="inline-label"
-            [class.active]="parent.get('passwordConfirm').value">
-            Confirm your password
+            [class.active]="parent.get('twitter').value">
+            What's your Twitter username?
+            <span class="faded">
+                Ex: thumbtemps
+            </span>
         </label>
         <div
             class="invalid"
-            *ngIf="validateService.required(parent, 'passwordConfirm')">
+            *ngIf="validateService.maxLength(parent, 'twitter')">
             <i class="zmdi zmdi-alert-circle"></i>
-            Please confirm your passwords match!
+            Please limit your Twitter username to 50 characters
         </div>
         <div
             class="invalid"
-            *ngIf="invalidPasswordMatch">
+            *ngIf="validateService.pattern(parent, 'twitter')">
             <i class="zmdi zmdi-alert-circle"></i>
-            Sorry, passwords don't match, please try again!
+            Please only enter your username, ex: thumbtemps
         </div>
     </div>
   `
 })
-export class PasswordConfirmComponent {
+export class TwitterComponent {
 
   @Input() parent: FormGroup
   @Input() tabIndex: number
@@ -41,13 +44,5 @@ export class PasswordConfirmComponent {
   constructor(
     private validateService: ValidateService
   ) { }
-
-  get invalidPasswordMatch() {
-    return (
-      this.parent.get('passwordConfirm').hasError('invalidPasswordMatch') &&
-      this.parent.get('passwordConfirm').dirty &&
-      !this.validateService.required(this.parent, 'passwordConfirm')
-    )
-  }
 
 }

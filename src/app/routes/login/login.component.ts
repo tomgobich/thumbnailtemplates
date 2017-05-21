@@ -17,7 +17,7 @@ export class LoginComponent implements AfterViewInit {
 
   login = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, AuthValidators.password]]
+    password: ['', [Validators.required, Validators.maxLength(30)]],
   })
 
   constructor(
@@ -34,10 +34,7 @@ export class LoginComponent implements AfterViewInit {
   }
 
   loginUser() {
-    this.authService.login(
-      this.login.get('email').value,
-      this.login.get('password').value
-    )
+    this.authService.login(this.login.value)
   }
 
 }

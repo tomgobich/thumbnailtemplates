@@ -22,10 +22,10 @@ export class SignupComponent implements AfterViewInit {
     email: ['', [Validators.required, Validators.email], this.uniqueEmail.bind(this)],
     password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30), Validators.pattern(regex.mediumPassword)]],
     passwordConfirm: ['', [Validators.required, AuthValidators.passwordMatch]],
-    youtube: ['', [Validators.maxLength(20), Validators.pattern(regex.textCharacters)]],
-    twitter: '',
-    facebook: '',
-    bio: ''
+    youtube: ['', [Validators.maxLength(50), Validators.pattern(regex.textCharacters)]],
+    twitter: ['', [Validators.maxLength(50), Validators.pattern(regex.textCharacters)]],
+    facebook: ['', [Validators.maxLength(50), Validators.pattern(regex.textCharacters)]],
+    bio: ['', [Validators.maxLength(500)]]
   })
 
   constructor(
@@ -47,7 +47,7 @@ export class SignupComponent implements AfterViewInit {
   }
 
   signupUser() {
-    console.log(this.signup.value)
+    this.authService.signup(this.signup.value)
   }
 
   uniqueUsername(control: AbstractControl) {

@@ -11,6 +11,7 @@ import { ValidateService } from '../../services/validate.service'
         #email
         type="email"
         class="form-control"
+        [tabIndex]="tabIndex"
         formControlName="email">
       <label
         class="inline-label"
@@ -44,6 +45,7 @@ import { ValidateService } from '../../services/validate.service'
 export class EmailComponent {
 
   @Input() parent: FormGroup
+  @Input() tabIndex: number
 
   constructor(
     private validateService: ValidateService

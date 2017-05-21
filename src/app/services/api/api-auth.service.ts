@@ -56,7 +56,8 @@ export class ApiAuthService {
   async signupUser(username:string, email:string, password:string, passwordConfirm?:string, youtube?:string, twitter?:string, facebook?:string, bio?:string) {
     try {
       const response      = await this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      const newUser       = await this.utilitiesService.createUser(username, youtube, twitter, facebook, bio, response.auth)
+      await console.log({response})
+      const newUser       = await this.utilitiesService.createUser(username, youtube, twitter, facebook, bio, response)
       const userResponse  = await this.http.post(`${this.apiUrl}/user/create`, newUser).toPromise()
       const user          = await userResponse.json().data
       const message       = await userResponse.json().message
@@ -78,8 +79,12 @@ export class ApiAuthService {
    * @memberof ApiAuthService
    */
   async isUsernameUnique(username: string) {
-    const response = await this.http.post(`${this.apiUrl}/user/username/unique`, { username }).toPromise()
-    return response.json().unique
+    if (username) {
+      const response = await this.http.post(`${this.apiUrl}/user/username/unique`, { username }).toPromise()
+      return response.json().unique
+    }
+
+    return false
   }
 
   /**
@@ -91,8 +96,12 @@ export class ApiAuthService {
    * @memberof ApiAuthService
    */
   async isEmailUnique(email: string) {
-    const response = await this.http.post(`${this.apiUrl}/user/email/unique`, { email }).toPromise()
-    return response.json().unique
+    if (email) {
+      const response = await this.http.post(`${this.apiUrl}/user/email/unique`, { email }).toPromise()
+      return response.json().unique
+    }
+
+    return false
   }
 
 }

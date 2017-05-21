@@ -51,32 +51,27 @@ export class AuthService {
   }
 
   // Log user into app
-  login(email, password) {
-    let isValid = this.validateService.validateLogin(email, password)
-
-    if(isValid) {
-      this.apiAuthService.loginUser(email, password).then(response => {
-        this.UID = response.data.uid
-        this.loginError = response.hasError ? response.message : ''
-        if (!response.hasError) this.router.navigate(['/'])
-      })
-    }
+  login(login) {
+    this.apiAuthService
+    .loginUser(login.email, login.password)
+    .then(response => {
+      this.UID = response.data.uid
+      this.loginError = response.hasError ? response.message : ''
+      if (!response.hasError) this.router.navigate(['/'])
+    })
   }
 
   // Sign up user
-  signup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio) {
-    let isValid = this.validateService.validateSignup(username, email, password, passwordConfirm, youtube, twitter, facebook, bio)
-
-    if(isValid) {
-      this.apiAuthService.signupUser(username, email, password, passwordConfirm, youtube, twitter, facebook, bio)
-        .then(response => {
-          // FIXME: Need change detection
-          this.UID = response.data.user.uid
-          this.signupSuccess = response.data.message
-          this.signupError = response.hasError ? response.message : ''
-          if (!response.hasError) this.router.navigate['/']
-        })
-    }
+  signup(signup) {
+    this.apiAuthService
+    .signupUser(signup.username, signup.email, signup.password, signup.passwordConfirm, signup.youtube, signup.twitter, signup.facebook, signup.bio)
+    .then(response => {
+      console.log({response})
+      this.UID = response.data.user.uid
+      this.signupSuccess = response.data.message
+      this.signupError = response.hasError ? response.message : ''
+      if (!response.hasError) this.router.navigate(['/'])
+    })
   }
 
   // Logs user out of app session
@@ -97,6 +92,7 @@ export class AuthService {
     return `https://gravatar.com/avatar/${hash}?s=${size}&d=retro&r=r`;
   }
 
+  // TODO: Move all async calls to api folder, put data handlers here
   async getUsername(uid) {
     try {
       const response = await this.http.get(`${this.apiUrl}/getusername/id/${uid}`).toPromise()

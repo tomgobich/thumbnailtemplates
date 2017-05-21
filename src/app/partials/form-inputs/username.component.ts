@@ -11,6 +11,7 @@ import { ValidateService } from '../../services/validate.service'
         #username
         type="text"
         class="form-control"
+        [tabIndex]="tabIndex"
         formControlName="username">
       <label
         class="inline-label"
@@ -53,6 +54,7 @@ import { ValidateService } from '../../services/validate.service'
 export class UsernameComponent {
 
   @Input() parent: FormGroup
+  @Input() tabIndex: number
 
   constructor(
     private validateService: ValidateService

@@ -11,6 +11,7 @@ import { ValidateService } from '../../services/validate.service'
             #password
             type="password"
             class="form-control"
+            [tabIndex]="tabIndex"
             formControlName="password">
         <label
             class="inline-label"
@@ -47,6 +48,7 @@ import { ValidateService } from '../../services/validate.service'
 export class PasswordComponent {
 
   @Input() parent: FormGroup
+  @Input() tabIndex: number
 
   constructor(
     private validateService: ValidateService
