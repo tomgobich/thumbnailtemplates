@@ -15,6 +15,8 @@ import { UtilitiesService } from './services/utilities.service'
 import { ValidateService } from './services/validate.service'
 import { ApiAuthService } from './services/api/api-auth.service'
 
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload'
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './routes/home/home.component';
 import { HeaderPartialComponent } from './partials/header/header.partial.component';
@@ -55,7 +57,9 @@ import 'rxjs/Rx';
     TwitterComponent,
     FacebookComponent,
     BioComponent,
-    UploadComponent
+    UploadComponent,
+    FileSelectDirective,
+    FileDropDirective
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,7 @@ import 'rxjs/Rx';
     FirebaseModule,
     MomentModule,
     Ng2ImgToolsModule,
-    Ng2UploaderModule
+    Ng2UploaderModule,
   ],
   providers: [
     AuthGuardService,

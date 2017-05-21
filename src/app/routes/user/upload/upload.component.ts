@@ -1,40 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Directive, Component, EventEmitter } from '@angular/core';
+import { FileUploader, FileSelectDirective, FileDropDirective } from 'ng2-file-upload'
+import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })
-export class UploadComponent implements OnInit {
+@Directive({ selector: '[ng2FileSelect]'})
+export class UploadComponent {
 
-  uploadFile: any
-  hasBaseDropZoneOver: boolean = false
-  sizeLimit = 2000000
-  options: Object = {
-    url: 'http://localhost:8080/upload.php'
-  }
+  public uploader: FileUploader = new FileUploader({url: environment.imageUploadUrl});
+  public hasBaseDropZoneOver: boolean = false;
+  public hasAnotherDropZoneOver: boolean = false;
 
-  constructor() { }
+  fileNames: Array<string> = []
+  uploadStatus: string
+  successMsg: string = "You're file(s) have successfully uploaded"
+  failureMsg: string = "An unexpected error occured, please try again"
 
-  ngOnInit() {
-  }
-
-  handleUpload(data) {
-    if (data && data.response) {
-      data = JSON.parse(data.response)
-      this.uploadFile = data
+  constructor() {
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      this.fileNames = []
+      var data = JSON.parse(response)
+      this.uploadStatus = data.status ? this.successMsg : this.failureMsg
+      this.fileNames.push(data.generatedName)
+      console.log({fileNames: this.fileNames})
     }
   }
 
-  fileOverBase(e: any) {
-    this.hasBaseDropZoneOver = e
+  public fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
   }
 
-  beforeUpload(uploadingFile) {
-    if (uploadingFile.size > this.sizeLimit) {
-      uploadingFile.setAbort()
-      alert('File is too large!')
-    }
+  public fileOverAnother(e:any):void {
+    this.hasAnotherDropZoneOver = e;
   }
 
 }
