@@ -28,23 +28,28 @@ form {
         }
     }
 
-    input {
-        display: block;
-        clear: both;
-        padding: 10px 8px 6px;
-    }
-
     .inline-label.active,
     input:focus + .inline-label,
     textarea:focus + .inline-label {
-        color: $gray-dark;
-        font-size: .95em;
-        transform: translate(0px, -25px);
+        color: rgba($gray-dark, .8);
+        font-size: .9em;
+        transform: translate(0px, -20px);
 
         .faded {
             color: rgba($gray-dark, .6);
         }
     }
+}
+
+input.form-control,
+textarea.form-control {
+  background-color: rgba(black, .03);
+  border: none;
+  border-bottom: 2px solid rgba(black, .3);
+
+  &:focus {
+    background-color: rgba(black, .03);
+  }
 }
 
 input {
