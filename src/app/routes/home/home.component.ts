@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ThumbService } from '../../services/thumb.service'
 import { Thumb } from '../../models/thumb.model'
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',

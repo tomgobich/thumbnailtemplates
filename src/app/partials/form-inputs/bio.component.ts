@@ -21,6 +21,9 @@ import { ValidateService } from '../../services/validate.service'
             <span class="faded">
                 ...within 500 characters
             </span>
+            <span class="faded" *ngIf="optional">
+                - Optional
+            </span>
         </label>
         <div
             class="invalid"
@@ -34,6 +37,7 @@ import { ValidateService } from '../../services/validate.service'
 export class BioComponent {
 
   @Input() parent: FormGroup
+  @Input() optional: boolean = false
   @Input() tabIndex: number
 
   constructor(

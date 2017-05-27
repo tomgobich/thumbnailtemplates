@@ -25,21 +25,37 @@
         </app-password-confirm>
       </div>
 
-      <div>
+      <div *ngIf="!isShowingOptional">
+        <span
+          class="link"
+          (click)="isShowingOptional = true">
+          Click here to also complete your user details (YT, TW, FB, Bio)!
+        </span>
+      </div>
+
+      <div *ngIf="isShowingOptional">
+        <p class="title">
+          <strong>User Details</strong>
+        </p>
+
         <app-youtube
-          [parent]="signup">
+          [parent]="signup"
+          [optional]="true">
         </app-youtube>
 
         <app-twitter
-          [parent]="signup">
+          [parent]="signup"
+          [optional]="true">
         </app-twitter>
 
         <app-facebook
-          [parent]="signup">
+          [parent]="signup"
+          [optional]="true">
         </app-facebook>
 
         <app-bio
-          [parent]="signup">
+          [parent]="signup"
+          [optional]="true">
         </app-bio>
       </div>
 
@@ -54,7 +70,7 @@
         type="submit"
         class="btn btn-primary btn-block submit"
         [disabled]="signup.invalid">
-        Login
+        Join ThumbTemps
       </button>
     </form>
   </div>

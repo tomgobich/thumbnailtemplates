@@ -3,3 +3,18 @@
 .thumb-block {
   margin-bottom: 30px;
 }
+
+.row-block {
+  background-color: rgba(black, .03);
+  box-shadow: 1px 1px 3px rgba(black, .03);
+  padding: 10px;
+}
+
+.row-title {
+
+  > * {
+    font-size: 110%;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+}

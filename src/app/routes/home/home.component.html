@@ -1,7 +1,14 @@
 <!-- Featured Section -->
-<div class="row vert-title featured thumb-block" *ngIf="featuredThumbnails.length > 0">
-  <div class="col-12 no-pad">
-    <partial-thumbnail *ngFor="let thumb of featuredThumbnails" [thumb]="thumb"></partial-thumbnail>
+<div class="row">
+  <div class="row-block">
+    <div class="row-title">
+      <h3>
+        Featured
+      </h3>
+    </div>
+    <div class="col-12 no-pad">
+      <partial-thumbnail *ngFor="let thumb of featuredThumbnails" [thumb]="thumb"></partial-thumbnail>
+    </div>
   </div>
 </div>
 
@@ -15,15 +22,15 @@
 </div> -->
 
 <!-- Popular Section -->
-<div class="row vert-title liked thumb-block" *ngIf="mostLikedThumbnails.length > 0">
+<!--<div class="row vert-title liked thumb-block" *ngIf="mostLikedThumbnails.length > 0">
   <div class="col-12 no-pad">
     <partial-thumbnail *ngFor="let thumb of mostLikedThumbnails" [thumb]="thumb"></partial-thumbnail>
   </div>
-</div>
+</div>-->
 
 <!-- Newest Section -->
-<div class="row vert-title new thumb-block" *ngIf="newestThumbnails.length > 0">
+<!--<div class="row vert-title new thumb-block" *ngIf="newestThumbnails.length > 0">
   <div class="col-12 no-pad">
     <partial-thumbnail *ngFor="let thumb of newestThumbnails" [thumb]="thumb"></partial-thumbnail>
   </div>
-</div>
+</div>-->

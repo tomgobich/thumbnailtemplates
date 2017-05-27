@@ -1,229 +1,121 @@
 @import 'importable';
 
-#headerWrapper {
-  margin-bottom: 40px;
-}
-
-@include media-breakpoint-up(md) {
-
-  .col-md-leaderboard {
-    flex: 0 0 728px;
-    order: 2;
-  }
-
-  .col-md-logo {
-    flex: 0 0 30%;
-    padding-right: 15px;
-    order: 1;
-
-    img {
-      width: 100%;
-      max-width: 100%;
-    }
-  }
-
-  .col-md-menu {
-    flex: 0 0 70%;
-    text-transform: uppercase;
-    padding-left: 15px;
-    order: 2;
-    position: relative;
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-
-      li {
-        display: inline-block;
-        line-height: 50px;
-        padding: 15px;
-        transition: background-color 300ms ease,
-                    color 300ms ease;
-
-        &:hover {
-          background-color: $brand-primary;
-        }
-
-        a {
-          @include anchor($color: $white, $hoverColor: $white);
-          display: block;
-        }
-      }
-    }
-  }
-
-  .col-md-search {
-    flex: 0 0 75%;
-    padding-right: 15px;
-    order: 1;
-
-    input {
-      color: $white;
-      background-color: rgba($white, 0);
-      border: 0;
-      padding: 8px;
-      margin: 8px 0;
-      transition: background-color 300ms ease,
-                  color 300ms ease;
-
-      @include placeholder() {
-        color: rgba($white, .3);
-        transition: color 300ms ease;
-      }
-
-      &:focus {
-        background-color: rgba($white, .1);
-
-        @include placeholder() {
-          color: rgba($white, .6);
-        }
-      }
-    }
-  }
-
-  .col-md-profile {
-    flex: 0 0 25%;
-    padding-left: 15px;
-    order: 2;
-  }
-
-}
-
 header {
   width: 100%;
-  background-color: $brand-inverse;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $gray-dark;
   color: $white;
-  padding: 10px 0;
-}
+  padding: 0 15px;
+  margin-bottom: 60px;
 
-nav {
-  width: 100%;
-  background-color: $gray;
-  color: $white;
-  padding: 0;
-}
-
-.col-md-logo {
-
-  img {
-    width: 100%;
-  }
-}
-
-.profile-block {
-  display: inline-block;
-  padding: 8px 15px 13px;
-  position: relative;
-  float: right;
-  transition: background-color 300ms ease,
-              color 300ms ease;
-
-  &:hover {
-    background-color: $brand-primary;
+  .logo-wrapper {
+    flex: 0 0 20%;
+    flex: 0 0 calc(0% + 75px);
   }
 
-  .profile-icon-wrapper {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    display: inline-block;
-    overflow: hidden;
-    position: relative;
-    top: 8px;
+  .left-content {
+    flex: 0 0 40%;
+    flex: 0 0 calc(50% - 75px);
+    text-align: left;
+  }
 
-    img {
-      width: 100%;
+  .right-content {
+    flex: 0 0 40%;
+    flex: 0 0 calc(50% - 75px);
+    text-align: right;
+  }
+
+  .logo {
+    max-width: 75px;
+    padding: 6px 0;
+    float: left;
+  }
+
+  .auth-nav {
+    justify-content: flex-end;
+
+    li {
+      min-width: 50px;
+    }
+  }
+
+  .site-nav,
+  .auth-nav {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    > li {
+
+      a,
+      .link {
+        height: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        padding: 0 10px;
+
+        &:hover,
+        &.active {
+          background-color: $brand-primary;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .site-nav-more,
+    .auth-nav-more {
+      list-style: none;
+      background-color: $gray-light;
+      box-shadow: 1px 1px 3px $rgba1;
+      font-size: 90%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity $anim-fast;
+      padding: 6px 0;
+      margin: 0;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
+      top: 44px;
+      left: -10px;
+      z-index: 999;
 
-  .username:not(:empty) {
-    max-width: 100px;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-    padding-left: 6px;
-  }
-
-  .username:empty {
-    display: none;
-  }
-}
-
-.profile-block:hover .profile-menu {
-  opacity: 1;
-  top: 52px;
-}
-
-.profile-menu {
-  opacity: 0;
-  min-width: 200px;
-  background-color: $gray;
-  padding: 0 0 6px;
-  position: absolute;
-  top: -999px;
-  right: 0;
-  z-index: 999;
-  transition: opacity 300ms ease,
-              position 300ms ease;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      padding: 6px 15px;
-      transition: background-color 300ms ease,
-                  color 300ms ease;
-
-      &:hover {
-        background-color: $brand-primary;
+      a,
+      .link {
+        min-width: 100px;
+        height: unset;
+        display: flex;
+        justify-content: flex-start;
+        padding: 4px 30px 4px 10px;
       }
 
-      a {
-        @include anchor($color: $white, $hoverColor: $white);
-        display: block;
+      &.active {
+        opacity: 1;
+        pointer-events: unset;
       }
     }
-  }
-}
 
-.login-signup-wrapper {
-  display: inline-block;
-  position: relative;
-  float: right;
+    .auth-nav-more {
+      top: 47px;
+      right: -10px;
+      left: unset;
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      display: inline-block;
-      vertical-align: middle;
-
-      transition: background-color 300ms ease,
-                  color 300ms ease;
-
-      &:hover {
-        background-color: $brand-primary;
+      a,
+      .link {
+        justify-content: flex-end;
+        padding: 4px 10px 4px 30px;
       }
+    }
 
-      a {
-        @include anchor($color: $white, $hoverColor: $white);
-        display: block;
-        padding: 13px 15px 14px;
-      }
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
     }
   }
 }

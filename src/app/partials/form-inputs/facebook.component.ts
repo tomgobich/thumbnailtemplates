@@ -19,6 +19,9 @@ import { ValidateService } from '../../services/validate.service'
             <span class="faded">
                 Ex: thumbtemps
             </span>
+            <span class="faded" *ngIf="optional">
+                - Optional
+            </span>
         </label>
         <div
             class="invalid"
@@ -38,6 +41,7 @@ import { ValidateService } from '../../services/validate.service'
 export class FacebookComponent {
 
   @Input() parent: FormGroup
+  @Input() optional: boolean = false
   @Input() tabIndex: number
 
   constructor(

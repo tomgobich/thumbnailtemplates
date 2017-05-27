@@ -17,6 +17,8 @@ export class SignupComponent implements AfterViewInit {
   @ViewChild('username') username: ElementRef
   @Input() parent: FormGroup
 
+  isShowingOptional: boolean = false
+
   signup = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30), Validators.pattern(regex.textCharacters)], this.uniqueUsername.bind(this)],
     email: ['', [Validators.required, Validators.email], this.uniqueEmail.bind(this)],

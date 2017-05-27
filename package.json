@@ -29,6 +29,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "firebase": "^3.9.0",
+    "ng-click-outside": "^2.3.3",
     "ng2-file-upload": "^1.2.1",
     "ng2-file-uploader": "^0.1.4",
     "ng2-img-cropper": "^0.8.8",

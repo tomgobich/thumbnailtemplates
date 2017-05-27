@@ -1,57 +1,73 @@
-<div id="headerWrapper">
-<header>
-  <div class="container">
-    <div class="row">
-      <!-- Logo -->
-      <div class="col-xs-12 col-md-logo">
-        <a href="/"><img class="logo" src="http://placehold.it/350x90"></a>
-      </div>
-      <!-- Menu -->
-      <div class="col-xs-12 col-md-menu">
-        <ul>
-          <li><a routerLink="/">Home</a></li>
-          <li><a routerLink="/">Thumbnails</a></li>
-          <li><a routerLink="/">Leaderboard</a></li>
-          <li><a routerLink="/">Request List</a></li>
-        </ul>
-      </div>
-    </div>
+<header class="flex-container">
+  <!-- Logo -->
+  <div class="logo-wrapper">
+    <img
+      class="logo"
+      alt="ThumbTemps"
+      src="src/assets/images/thumbtemps@2x.png">
   </div>
-</header>
-<nav>
-  <div class="container">
-    <div class="row">
-      <!-- Search -->
-      <div class="hidden-sm-down col-md-search">
-        <form id="search">
-          <input #search class="form-control" placeholder="Search for templates..." />
-        </form>
-      </div>
-      <!-- Profile -->
-      <div class="hidden-sm-down col-md-profile">
-        <div id="navProfileToggle" class="profile-block" *ngIf="authService.isAuthenticated">
-          <div class="profile-icon-wrapper" *ngIf="authService.avatar">
-            <img class="avatar" [src]="authService.avatar">
+  <!-- Main Nav -->
+  <nav class="left-content">
+    <ul class="site-nav clearfix">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/thumbnails">Thumbnails</a></li>
+      <li>
+        <span
+          class="link"
+          [class.active]="isNavMoreActive"
+          (click)="toggleIsNavMoreActive()">
+          <div class="pos-rel inline">
+            <i class="zmdi zmdi-more"></i>
+            More
+            <ul
+              class="site-nav-more"
+              [class.active]="isNavMoreActive">
+              <li><a routerLink="/leaderboard">Leaderboard</a></li>
+              <li><a routerLink="/license">License</a></li>
+              <li><a routerLink="/contact">Contact</a></li>
+            </ul>
           </div>
-          <span class="username">{{ authService.username }}</span>
-          <div id="navProfileMenu" class="profile-menu">
-            <ul>
+        </span>
+      </li>
+    </ul>
+  </nav>
+  <!-- Auth Nav -->
+  <nav class="right-content">
+    <ul class="auth-nav clearfix">
+      <li>
+        <a routerLink="/">
+          <i class="zmdi zmdi-search"></i>
+        </a>
+      </li>
+      <li *ngIf="authService.isAuthenticated">
+        <a routerLink="/">
+          <i class="zmdi zmdi-upload"></i>
+        </a>
+      </li>
+      <li *ngIf="authService.avatar">
+        <div
+          class="link"
+          [class.active]="isProfileNavActive"
+          (click)="toggleIsProfileNavActive()">
+          <div class="pos-rel inline">
+            <img class="avatar" [src]="authService.avatar">
+            <ul
+              class="auth-nav-more"
+              [class.active]="isProfileNavActive">
               <li><a [routerLink]="['/user', authService?.username || {}]">Profile</a></li>
               <li><a routerLink="/user/dashboard">Dashboard</a></li>
-              <li><a routerLink="/user/upload">Upload</a></li>
               <li><a routerLink="/user/settings">Settings</a></li>
               <li><a routerLink="/" (click)="authService.logout()">Logout</a></li>
             </ul>
           </div>
         </div>
-        <div class="login-signup-wrapper" *ngIf="!authService.isAuthenticated">
-          <ul>
-            <li><a routerLink="/login">Login</a></li>
-            <li><a routerLink="/signup">Signup</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
-</div>
+      </li>
+      <li *ngIf="!authService.isAuthenticated">
+        <a routerLink="/login">Login</a>
+      </li>
+      <li *ngIf="!authService.isAuthenticated">
+        <a routerLink="/signup">Signup</a>
+      </li>
+    </ul>
+  </nav>
+</header>

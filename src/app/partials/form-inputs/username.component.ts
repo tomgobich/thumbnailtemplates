@@ -17,6 +17,9 @@ import { ValidateService } from '../../services/validate.service'
         class="inline-label"
         [class.active]="parent.get('username').value">
         Enter a unique username
+        <span class="faded" *ngIf="optional">
+            - Optional
+        </span>
       </label>
       <div
         class="invalid"
@@ -54,6 +57,7 @@ import { ValidateService } from '../../services/validate.service'
 export class UsernameComponent {
 
   @Input() parent: FormGroup
+  @Input() optional: boolean = false
   @Input() tabIndex: number
 
   constructor(

@@ -7,6 +7,7 @@ import { Ng2ImgToolsModule } from 'ng2-img-tools';
 import { FirebaseModule } from './modules/firebase.module';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { Ng2UploaderModule } from 'ng2-uploader'
+import { ClickOutsideModule } from 'ng-click-outside'
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
@@ -71,6 +72,7 @@ import 'rxjs/Rx';
     MomentModule,
     Ng2ImgToolsModule,
     Ng2UploaderModule,
+    ClickOutsideModule
   ],
   providers: [
     AuthGuardService,

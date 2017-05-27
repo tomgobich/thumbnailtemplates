@@ -27,12 +27,18 @@ $gray-lighter:              #eceeef !default;
 $gray-lightest:             #f7f7f9 !default;
 
 // Reassign color vars to semantic color scheme
-$brand-primary:             $blue !default;
+$brand-primary:             #333399 !default;
+$brand-secondary:           #ff00cc !default;
 $brand-success:             $green !default;
 $brand-info:                $teal !default;
 $brand-warning:             $orange !default;
 $brand-danger:              $red !default;
 $brand-inverse:             $gray-dark !default;
+
+$transparent:               rgba(black, 0);
+$rgba1:                     rgba($gray-dark, .03);
+$rgba2:                     rgba($gray-dark, .1);
+$rgba3:                     rgba($gray-dark, .3);
 
 $anim-fast: 100ms ease;
 $anim-med: 300ms ease;

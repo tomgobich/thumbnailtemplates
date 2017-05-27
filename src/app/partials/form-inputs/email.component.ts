@@ -17,6 +17,9 @@ import { ValidateService } from '../../services/validate.service'
         class="inline-label"
         [class.active]="parent.get('email').value">
         Enter your email
+        <span class="faded" *ngIf="optional">
+                - Optional
+            </span>
       </label>
       <div
         class="invalid"
@@ -45,6 +48,7 @@ import { ValidateService } from '../../services/validate.service'
 export class EmailComponent {
 
   @Input() parent: FormGroup
+  @Input() optional: boolean = false
   @Input() tabIndex: number
 
   constructor(

@@ -8,6 +8,7 @@ export const environment = {
   ,apiUrl: 'http://localhost:3000'
   ,imageUrl: 'http://thumbnailtemplates.com/images/thumbs/'
   ,imageUploadUrl: 'http://localhost:8080/upload.php'
+  ,localImageUrl: 'src/assets/images'
 };
 
 export const regex = {

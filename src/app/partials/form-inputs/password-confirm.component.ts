@@ -17,6 +17,9 @@ import { ValidateService } from '../../services/validate.service'
             class="inline-label"
             [class.active]="parent.get('passwordConfirm').value">
             Confirm your password
+            <span class="faded" *ngIf="optional">
+                - Optional
+            </span>
         </label>
         <div
             class="invalid"
@@ -36,6 +39,7 @@ import { ValidateService } from '../../services/validate.service'
 export class PasswordConfirmComponent {
 
   @Input() parent: FormGroup
+  @Input() optional: boolean = false
   @Input() tabIndex: number
 
   constructor(
