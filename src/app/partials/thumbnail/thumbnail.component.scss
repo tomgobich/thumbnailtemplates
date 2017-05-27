@@ -1,7 +1,8 @@
 @import 'importable';
 
 .thumbnail-block {
-  width: 33.334%;
+  width: 25%;
+  border: 1px solid $transparent;
   float: left;
   position: relative;
 
@@ -31,12 +32,18 @@
 }
 
 .thumbnail-block-details {
+  width: 100%;
   padding: $pad-2;
   position: absolute;
   top: 0;
   left: 0;
 
   .title {
+    width: 100%;
+    font-size: 110%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin: 0 0 $pad-1;
   }
 
@@ -56,8 +63,13 @@
   }
 
   .username {
+    width: 80%;
+    width: calc(100% - 30px);
     display: inline-block;
     vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding: 0 0 0 $pad-1;
     margin: 0;
   }

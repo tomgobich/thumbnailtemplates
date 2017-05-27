@@ -4,11 +4,11 @@ import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.scss']
+  templateUrl: './thumbnail.component.html',
+  styleUrls: ['./thumbnail.component.scss']
 })
 @Directive({ selector: '[ng2FileSelect]'})
-export class UploadComponent {
+export class ThumbnailComponent {
 
   public uploader: FileUploader = new FileUploader({url: environment.imageUploadUrl});
   public hasBaseDropZoneOver: boolean = false;

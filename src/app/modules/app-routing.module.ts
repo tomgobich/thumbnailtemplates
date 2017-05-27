@@ -5,7 +5,7 @@ import { HomeComponent } from '../routes/home/home.component'
 import { LoginComponent } from '../routes/login/login.component'
 import { SignupComponent } from '../routes/signup/signup.component'
 import { ProfileComponent } from '../routes/user/profile/profile.component'
-import { UploadComponent } from '../routes/user/upload/upload.component'
+import { ThumbnailComponent as UploadThumbnail } from '../routes/upload/thumbnail/thumbnail.component'
 
 const routes: Routes = [
    {
@@ -30,8 +30,11 @@ const routes: Routes = [
     ,canActivate: [AuthGuardService]
   }
   ,{
-     path: 'user/upload/thumbnail'
-    ,component: UploadComponent
+     path: 'upload'
+    ,component: UploadThumbnail
+    ,children: [
+
+    ]
   }
 ];
 

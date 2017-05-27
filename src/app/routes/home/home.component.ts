@@ -17,19 +17,19 @@ export class HomeComponent implements OnInit {
   constructor(private thumbService: ThumbService) {}
 
   ngOnInit() {
-    this.thumbService.getFeaturedThumbnails().subscribe(thumbnails => {
+    this.thumbService.getFeaturedThumbnails(8).subscribe(thumbnails => {
       thumbnails.forEach(thumb => {
         this.featuredThumbnails.push(this.thumbService.buildThumbnail(thumb))
       })
     })
 
-    this.thumbService.getMostLikedThumbnails().subscribe(thumbnails => {
+    this.thumbService.getMostLikedThumbnails(12).subscribe(thumbnails => {
       thumbnails.forEach(thumb => {
         this.mostLikedThumbnails.push(this.thumbService.buildThumbnail(thumb))
       })
     })
 
-    this.thumbService.getThumbnails().subscribe(thumbnails => {
+    this.thumbService.getThumbnails(16).subscribe(thumbnails => {
       thumbnails.forEach(thumb => {
         this.newestThumbnails.push(this.thumbService.buildThumbnail(thumb))
       })

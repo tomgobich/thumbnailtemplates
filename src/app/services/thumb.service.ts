@@ -5,6 +5,7 @@ import { Thumb } from '../models/thumb.model'
 import { Image } from '../models/image.model'
 import { User } from '../models/user.model'
 import { Ng2ImgToolsService } from 'ng2-img-tools'
+import { ApiThumbService } from './api/api-thumb.service'
 import { environment } from '../../environments/environment'
 import 'rxjs/Rx';
 
@@ -15,21 +16,22 @@ export class ThumbService {
   imagePath = environment.imageUrl
 
   constructor(
-    private http: Http,
-    private authService: AuthService,
-    private imgToolsService: Ng2ImgToolsService
+     private http: Http
+    ,private authService: AuthService
+    ,private apiThumbService: ApiThumbService
+    ,private imgToolsService: Ng2ImgToolsService
     ) { }
 
-  getThumbnails() {
-    return this.http.get(`${this.apiUrl}/thumbnails`).map(res => res.json())
+  getThumbnails(limit?: number) {
+    return this.apiThumbService.getThumbnails(limit)
   }
 
-  getFeaturedThumbnails() {
-    return this.http.get(`${this.apiUrl}/thumbnails/featured`).map(res => res.json())
+  getFeaturedThumbnails(limit?: number) {
+    return this.apiThumbService.getFeaturedThumbnails(limit)
   }
 
-  getMostLikedThumbnails() {
-    return this.http.get(`${this.apiUrl}/thumbnails/liked`).map(res => res.json())
+  getMostLikedThumbnails(limit?: number) {
+    return this.apiThumbService.getMostLikedThumbnails(limit)
   }
 
   imgResized(file: File[], maxWidth: number, maxHeight: number) {

@@ -8,6 +8,7 @@ import { FirebaseModule } from './modules/firebase.module';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { Ng2UploaderModule } from 'ng2-uploader'
 import { ClickOutsideModule } from 'ng-click-outside'
+import { UploadModule } from './routes/upload/upload.module'
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
@@ -15,8 +16,8 @@ import { ThumbService } from './services/thumb.service';
 import { UtilitiesService } from './services/utilities.service'
 import { ValidateService } from './services/validate.service'
 import { ApiAuthService } from './services/api/api-auth.service'
+import { ApiThumbService } from './services/api/api-thumb.service'
 
-import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './routes/home/home.component';
@@ -24,7 +25,6 @@ import { HeaderPartialComponent } from './partials/header/header.partial.compone
 import { ResponsiveAdComponent } from './partials/responsive-ad/responsive-ad.component';
 import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
 import { ProfileComponent } from './routes/user/profile/profile.component';
-import { UploadComponent } from './routes/user/upload/upload.component';
 
 // TODO: Move into own module!!!
 import { SignupComponent } from './routes/signup/signup.component'
@@ -58,9 +58,6 @@ import 'rxjs/Rx';
     TwitterComponent,
     FacebookComponent,
     BioComponent,
-    UploadComponent,
-    FileSelectDirective,
-    FileDropDirective
   ],
   imports: [
     BrowserModule,
@@ -72,7 +69,8 @@ import 'rxjs/Rx';
     MomentModule,
     Ng2ImgToolsModule,
     Ng2UploaderModule,
-    ClickOutsideModule
+    ClickOutsideModule,
+    UploadModule
   ],
   providers: [
     AuthGuardService,
@@ -80,7 +78,8 @@ import 'rxjs/Rx';
     ThumbService,
     UtilitiesService,
     ValidateService,
-    ApiAuthService
+    ApiAuthService,
+    ApiThumbService
   ],
   bootstrap: [AppComponent]
 })

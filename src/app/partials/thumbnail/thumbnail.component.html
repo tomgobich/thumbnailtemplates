@@ -9,8 +9,13 @@
       <p class="username">{{ thumb.user.strUsername }}</p>
     </div>
     <div class="post-details">
-      <p class="counts">Views: {{ thumb.intTemplateViewCount | number }}, Likes: {{ thumb.intTemplateLikeCount | number }}</p>
-      <p class="date">Posted: {{ thumb.dteTemplateReleaseDate | amCalendar }}</p>
+      <p class="counts">
+        <i class="zmdi zmdi-eye"></i>
+        {{ thumb.intTemplateViewCount | number }}
+        &nbsp;&nbsp;
+        <i class="zmdi zmdi-favorite"></i>
+        {{ thumb.intTemplateLikeCount | number }}</p>
+      <p class="date">Released: {{ thumb.dteTemplateReleaseDate | amCalendar }}</p>
     </div>
   </div>
 </div>
