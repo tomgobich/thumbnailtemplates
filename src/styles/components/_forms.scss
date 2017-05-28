@@ -23,10 +23,6 @@ form {
     // IE11 Fix
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='your_transparent.png', sizingMethod='scale');
     background: none !important;
-
-    .faded {
-        color: rgba($gray-dark, .3);
-    }
 }
 
 .inline-label.active,

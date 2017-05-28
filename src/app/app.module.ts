@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment/moment.module';
@@ -9,6 +10,7 @@ import { AppRoutingModule } from './modules/app-routing.module';
 import { Ng2UploaderModule } from 'ng2-uploader'
 import { ClickOutsideModule } from 'ng-click-outside'
 import { UploadModule } from './routes/upload/upload.module'
+import { UserModule } from './routes/user/user.module'
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
@@ -26,18 +28,6 @@ import { ResponsiveAdComponent } from './partials/responsive-ad/responsive-ad.co
 import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
 import { ProfileComponent } from './routes/user/profile/profile.component';
 
-// TODO: Move into own module!!!
-import { SignupComponent } from './routes/signup/signup.component'
-import { LoginComponent } from './routes/login/login.component';
-import { EmailComponent } from './partials/form-inputs/email.component';
-import { PasswordComponent } from './partials/form-inputs/password.component';
-import { PasswordConfirmComponent } from './partials/form-inputs/password-confirm.component'
-import { UsernameComponent } from './partials/form-inputs/username.component'
-import { YouTubeComponent } from './partials/form-inputs/youtube.component'
-import { TwitterComponent } from './partials/form-inputs/twitter.component'
-import { FacebookComponent } from './partials/form-inputs/facebook.component'
-import { BioComponent } from './partials/form-inputs/bio.component'
-
 import 'rxjs/Rx';
 
 @NgModule({
@@ -47,20 +37,11 @@ import 'rxjs/Rx';
     HeaderPartialComponent,
     ResponsiveAdComponent,
     ThumbnailComponent,
-    ProfileComponent,
-    LoginComponent,
-    SignupComponent,
-    EmailComponent,
-    PasswordComponent,
-    PasswordConfirmComponent,
-    UsernameComponent,
-    YouTubeComponent,
-    TwitterComponent,
-    FacebookComponent,
-    BioComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
@@ -70,7 +51,8 @@ import 'rxjs/Rx';
     Ng2ImgToolsModule,
     Ng2UploaderModule,
     ClickOutsideModule,
-    UploadModule
+    UploadModule,
+    UserModule
   ],
   providers: [
     AuthGuardService,

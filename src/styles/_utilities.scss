@@ -87,6 +87,10 @@ h1, h2, h3, h4, h5, h6,
   margin-bottom: $pad-3;
 }
 
+.faded {
+    color: rgba($gray-dark, .3);
+}
+
 .req {
   color: $red;
 }
@@ -118,12 +122,5 @@ h1, h2, h3, h4, h5, h6,
 a,
 a:visited,
 .link {
-  color: $brand-secondary;
-  cursor: pointer;
-  text-decoration: none;
-  transition: color $anim-med;
-
-  &:hover {
-    color: $brand-primary;
-  }
+  @include anchor();
 }

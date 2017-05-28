@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms'
-import { ValidateService } from '../../services/validate.service'
+import { ValidateService } from '../../../../services/validate.service'
 
 @Component({
   selector: 'app-facebook',
@@ -10,15 +10,14 @@ import { ValidateService } from '../../services/validate.service'
         <input
             type="text"
             class="form-control"
+            (focus)="setInitialFocusValue()"
+            (focusout)="clearValueIfDefault()"
             [tabIndex]="tabIndex"
             formControlName="facebook">
         <label
             class="inline-label"
             [class.active]="parent.get('facebook').value">
-            What's your Facebook username?
-            <span class="faded">
-                Ex: thumbtemps
-            </span>
+            Facebook Url
             <span class="faded" *ngIf="optional">
                 - Optional
             </span>
@@ -31,9 +30,9 @@ import { ValidateService } from '../../services/validate.service'
         </div>
         <div
             class="invalid"
-            *ngIf="validateService.pattern(parent, 'facebook')">
+            *ngIf="validateService.url(parent, 'facebook')">
             <i class="zmdi zmdi-alert-circle"></i>
-            Please only enter your username, ex: thumbtemps
+            Please enter a full and valid URL, ex: http://facebook.com/thumbtemps
         </div>
     </div>
   `
@@ -44,8 +43,22 @@ export class FacebookComponent {
   @Input() optional: boolean = false
   @Input() tabIndex: number
 
+  isFirstFocus: boolean = true
+
   constructor(
     private validateService: ValidateService
   ) { }
+
+  setInitialFocusValue() {
+    if (this.isFirstFocus || this.parent.get('facebook').value == '') {
+      this.parent.get('facebook').setValue('http://facebook.com/')
+    }
+  }
+
+  clearValueIfDefault() {
+    if (this.parent.get('facebook').value.trim() == 'http://facebook.com/') {
+      this.parent.get('facebook').setValue('')
+    }
+  }
 
 }

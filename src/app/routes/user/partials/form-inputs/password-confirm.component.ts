@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms'
-import { ValidateService } from '../../services/validate.service'
+import { ValidateService } from '../../../../services/validate.service'
 
 @Component({
   selector: 'app-password-confirm',
@@ -16,7 +16,7 @@ import { ValidateService } from '../../services/validate.service'
         <label
             class="inline-label"
             [class.active]="parent.get('passwordConfirm').value">
-            Confirm your password
+            Confirm Password
             <span class="faded" *ngIf="optional">
                 - Optional
             </span>

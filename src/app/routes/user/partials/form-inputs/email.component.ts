@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms'
-import { ValidateService } from '../../services/validate.service'
+import { ValidateService } from '../../../../services/validate.service'
 
 @Component({
   selector: 'app-email',
@@ -16,7 +16,7 @@ import { ValidateService } from '../../services/validate.service'
       <label
         class="inline-label"
         [class.active]="parent.get('email').value">
-        Enter your email
+        Email
         <span class="faded" *ngIf="optional">
                 - Optional
             </span>

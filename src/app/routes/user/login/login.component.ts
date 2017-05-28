@@ -1,9 +1,9 @@
 import { Component, Input, AfterViewInit, Renderer, ViewChild, ElementRef } from '@angular/core'
 import { Router, ActivatedRoute, Params, Data } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { AuthValidators } from '../../classes/validators/auth.validators'
-import { AuthService } from '../../services/auth.service'
-import { ValidateService } from '../../services/validate.service'
+import { AuthValidators } from '../../../classes/validators/auth.validators'
+import { AuthService } from '../../../services/auth.service'
+import { ValidateService } from '../../../services/validate.service'
 
 @Component({
   selector: 'app-login',

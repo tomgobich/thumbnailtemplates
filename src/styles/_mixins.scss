@@ -66,3 +66,14 @@
     @content;
   }
 }
+
+@mixin anchor($color: $brand-secondary, $hoverColor: $brand-primary) {
+  color: $color;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color $anim-med;
+
+  &:hover {
+    color: $hoverColor;
+  }
+}

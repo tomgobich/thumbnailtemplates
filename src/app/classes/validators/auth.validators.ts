@@ -21,6 +21,15 @@ export class AuthValidators {
         return valid ? null : { invalidPassword: true }
     }
 
+    /**
+     * Confirms password and passwordConfirm are identical
+     *
+     * @static
+     * @param {AbstractControl} confirm
+     * @returns
+     *
+     * @memberof AuthValidators
+     */
     static passwordMatch(confirm: AbstractControl) {
         if(confirm.parent) {
             let password = confirm.parent.get('password')
@@ -28,6 +37,54 @@ export class AuthValidators {
         }
 
         return { invalidPasswordMatch: true }
+    }
+
+    /**
+     * Requires youtube url to start with http://youtube.com/
+     * and prevents dangerous characters from being submitted
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns
+     *
+     * @memberof AuthValidators
+     */
+    static youtubeUrlPattern(control: AbstractControl) {
+        let isCorrectDomain = control.value.startsWith('http://youtube.com/')
+        let hasValidChars = !/[<>"']/g.test(control.value)
+        return isCorrectDomain && hasValidChars ? null : { invalidUrl: true }
+    }
+
+    /**
+     * Requires twitter url to start with http://twitter.com/
+     * and prevents dangerous characters from being submitted
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns
+     *
+     * @memberof AuthValidators
+     */
+    static twitterUrlPattern(control: AbstractControl) {
+        let isCorrectDomain = control.value.startsWith('http://twitter.com/')
+        let hasValidChars = !/[<>"']/g.test(control.value)
+        return isCorrectDomain && hasValidChars ? null : { invalidUrl: true }
+    }
+
+    /**
+     * Requires facebook url to start with http://facebook.com/
+     * and prevents dangerous characters from being submitted
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns
+     *
+     * @memberof AuthValidators
+     */
+    static facebookUrlPattern(control: AbstractControl) {
+        let isCorrectDomain = control.value.startsWith('http://facebook.com/')
+        let hasValidChars = !/[<>"']/g.test(control.value)
+        return isCorrectDomain && hasValidChars ? null : { invalidUrl: true }
     }
 
 }

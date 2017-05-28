@@ -19,8 +19,6 @@ export class UtilitiesService {
   createUser(username, youtube, twitter, facebook, bio, credentials) {
     let user = new User
 
-    console.log({ username, youtube, twitter, facebook, bio, credentials })
-
     user.strUserID        = credentials.uid                    // valid since from Google
     user.strEmail         = credentials.email                  // valid since from Google
     user.blnEmailVerified = credentials.emailVerified          // valid since from Google

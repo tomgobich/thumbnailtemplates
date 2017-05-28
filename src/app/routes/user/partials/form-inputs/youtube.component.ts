@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms'
-import { ValidateService } from '../../services/validate.service'
+import { ValidateService } from '../../../../services/validate.service'
 
 @Component({
   selector: 'app-youtube',
@@ -11,15 +11,14 @@ import { ValidateService } from '../../services/validate.service'
             #youtube
             type="text"
             class="form-control"
+            (focus)="setInitialFocusValue()"
+            (focusout)="clearValueIfDefault()"
             [tabIndex]="tabIndex"
             formControlName="youtube">
         <label
             class="inline-label"
             [class.active]="parent.get('youtube').value">
-            What's your YouTube username?
-            <span class="faded">
-                Ex: thumbtemps
-            </span>
+            YouTube Url
             <span class="faded" *ngIf="optional">
                 - Optional
             </span>
@@ -32,9 +31,9 @@ import { ValidateService } from '../../services/validate.service'
         </div>
         <div
             class="invalid"
-            *ngIf="validateService.pattern(parent, 'youtube')">
+            *ngIf="validateService.url(parent, 'youtube')">
             <i class="zmdi zmdi-alert-circle"></i>
-            Please only enter your username, ex: thumbtemps
+            Please enter a full and valid URL, ex: http://youtube.com/user/thumbtemps
         </div>
     </div>
   `
@@ -45,8 +44,24 @@ export class YouTubeComponent {
   @Input() optional: boolean = false
   @Input() tabIndex: number
 
+  isFirstFocus: boolean = true
+
   constructor(
     private validateService: ValidateService
   ) { }
+
+  setInitialFocusValue() {
+    if (this.isFirstFocus || this.parent.get('youtube').value == '') {
+      this.parent.get('youtube').setValue('http://youtube.com/user/')
+      this.isFirstFocus = false
+    }
+  }
+
+  clearValueIfDefault() {
+    if (this.parent.get('youtube').value.trim() == 'http://youtube.com/' ||
+        this.parent.get('youtube').value.trim() == 'http://youtube.com/user/') {
+      this.parent.get('youtube').setValue('')
+    }
+  }
 
 }

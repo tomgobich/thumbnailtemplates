@@ -279,4 +279,14 @@ export class ValidateService {
     )
   }
 
+  url(parent: FormGroup, name: string) {
+    return (
+      parent.get(name).hasError('invalidUrl') &&
+      parent.get(name).dirty &&
+      parent.get(name).value !== '' &&
+      !this.minLength(parent, name) &&
+      !this.maxLength(parent, name)
+    )
+  }
+
 }

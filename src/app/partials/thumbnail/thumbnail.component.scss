@@ -16,7 +16,7 @@
     height: 100%;
     color: $white;
     background-color: rgba($black, .6);
-    background-image: linear-gradient(to bottom right, rgba($brand-primary, .8), rgba(darken($brand-primary, 10), .6));
+    background-image: linear-gradient(to bottom right, rgba($brand-secondary, .8), rgba($brand-primary, .6));
     opacity: 0;
     z-index: -1;
     transition: 300ms ease;

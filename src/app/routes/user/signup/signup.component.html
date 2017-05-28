@@ -8,6 +8,10 @@
 
     <form [formGroup]="signup" (submit)="signupUser()">
       <div>
+        <p class="title">
+          Account Creation
+        </p>
+
         <app-username
           [parent]="signup">
         </app-username>
@@ -25,17 +29,9 @@
         </app-password-confirm>
       </div>
 
-      <div *ngIf="!isShowingOptional">
-        <span
-          class="link"
-          (click)="isShowingOptional = true">
-          Click here to also complete your user details (YT, TW, FB, Bio)!
-        </span>
-      </div>
-
-      <div *ngIf="isShowingOptional">
+      <div>
         <p class="title">
-          <strong>User Details</strong>
+          User Profile
         </p>
 
         <app-youtube

@@ -5,12 +5,11 @@
 }
 
 .row-title {
-  background-color: $rgba2;
-  padding: $pad-2;
+  padding: $pad-2 $pad-2 $pad-2 0;
 
   > * {
     display: inline-block;
-    font-size: 110%;
+    font-size: 120%;
     text-transform: uppercase;
     background-color: $brand-primary;
     background-image: linear-gradient(to bottom right, $brand-secondary, $brand-primary);
