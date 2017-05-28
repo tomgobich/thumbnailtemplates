@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   exit;
 }
 
-$path = 'uploads/';
+$path = 'src/assets/images/thumbnails';
 
 if (isset($_FILES['file'])) {
   $originalName = $_FILES['file']['name'];

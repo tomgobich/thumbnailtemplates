@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Additional Files
-/src/app/modules/firebase.module.ts
+/src/app/firebase.module.ts

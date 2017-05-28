@@ -5,8 +5,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { Ng2ImgToolsModule } from 'ng2-img-tools';
-import { FirebaseModule } from './modules/firebase.module';
-import { AppRoutingModule } from './modules/app-routing.module';
+import { FirebaseModule } from './firebase.module';
+import { AppRoutingModule } from './app-routing.module';
 import { Ng2UploaderModule } from 'ng2-uploader'
 import { ClickOutsideModule } from 'ng-click-outside'
 import { UploadModule } from './routes/upload/upload.module'
@@ -29,6 +29,9 @@ import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
 import { ProfileComponent } from './routes/user/profile/profile.component';
 
 import 'rxjs/Rx';
+import { BrowseThumbnailsComponent } from './routes/browse/thumbnails/browse-thumbnails.component';
+
+// TODO: Match type check casing
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import 'rxjs/Rx';
     HeaderPartialComponent,
     ResponsiveAdComponent,
     ThumbnailComponent,
-    ProfileComponent
+    ProfileComponent,
+    BrowseThumbnailsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { AuthService } from '../../../services/auth.service'
+import { UtilitiesService } from '../../../services/utilities.service'
 import { User } from '../../../models/user.model'
 
 @Component({
@@ -15,6 +16,7 @@ export class ProfileComponent implements OnInit {
   constructor(
      private route: ActivatedRoute
     ,private authService: AuthService
+    ,private utilitiesService: UtilitiesService
   ) { }
 
   ngOnInit() {
@@ -22,7 +24,7 @@ export class ProfileComponent implements OnInit {
       const username = params["username"]
 
       this.authService.getUserByUsername(username).then(userData => {
-        this.user = this.authService.buildUser(userData.user)
+        this.user = this.utilitiesService.buildUser(userData.user)
       })
     })
   }

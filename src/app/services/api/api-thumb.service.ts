@@ -16,13 +16,13 @@ export class ApiThumbService {
   /**
    * Gets all thumbnails, with optional limit
    *
-   * @param {number} [limit]
+   * @param {Number} [limit]
    * @returns
    *
    * @memberof ApiThumbService
    */
-  getThumbnails(limit?: number) {
-    return this.http.get(`${this.apiUrl}/thumbnails/all/${limit}`).map(res => res.json())
+  getThumbnails(limit?: Number, skip?: Number, intCategoryID?: Number) {
+    return this.http.get(`${this.apiUrl}/thumbnails/all/${limit}/${skip}/${intCategoryID}`).map(res => res.json())
   }
 
   /**
@@ -47,5 +47,16 @@ export class ApiThumbService {
    */
   getMostLikedThumbnails(limit?: number) {
     return this.http.get(`${this.apiUrl}/thumbnails/liked/${limit}`).map(res => res.json())
+  }
+
+  /**
+   * Gets listing of categories
+   *
+   * @returns
+   *
+   * @memberof ApiThumbService
+   */
+  getCategories() {
+    return this.http.get(`${this.apiUrl}/thumbnails/categories`).map(res => res.json())
   }
 }

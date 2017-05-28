@@ -1,10 +1,10 @@
-export class Image {
+export interface Image {
   strImageID: string
   strImageTitle: string
   strImageOwner: string
   strImageAlias: string
   dteImageUploadDate: Date
   blnIsFeaturedImage: boolean
-  intImageSTatusID: number
+  intImageStatusID: number
   intImageSortOrder: number
 }

@@ -69,6 +69,7 @@ header {
         &:hover,
         &.active {
           background-color: $brand-primary;
+          background-image: linear-gradient(to bottom right, rgba($brand-secondary, .6), rgba($brand-primary, .6));
           text-decoration: none;
         }
       }

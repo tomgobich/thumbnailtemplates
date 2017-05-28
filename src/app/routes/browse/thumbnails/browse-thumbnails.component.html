@@ -1,0 +1,30 @@
+<div class="row " *ngIf="thumbnails.length > 0">
+  <div class="col-12">
+    <div class="row-title">
+      <h3>
+        {{ activeCategoryName }} Thumbnails
+      </h3>
+    </div>
+  </div>
+  <div class="col-4">
+    <span>
+      Categories:
+    </span>
+    <select
+      #category
+      (change)="updateCategory($event)">
+      <option
+        *ngFor="let category of categories"
+        [value]="category.intCategoryID"
+        [selected]="category.intCategoryID == activeCategoryID">
+        {{ category.strCategory }}
+      </option>
+    </select>
+  </div>
+  <div class="col-12">
+    <partial-thumbnail
+      *ngFor="let thumb of thumbnails"
+      [thumb]="thumb">
+    </partial-thumbnail>
+  </div>
+</div>

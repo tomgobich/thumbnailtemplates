@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { ThumbService } from '../../services/thumb.service'
+import { UtilitiesService } from '../../services/utilities.service'
 import { Thumb } from '../../models/thumb.model'
 import { environment } from '../../../environments/environment';
+
+import { Category } from '../../models/category.model'
 
 @Component({
   selector: 'app-home',
@@ -14,24 +17,27 @@ export class HomeComponent implements OnInit {
   mostLikedThumbnails: Array<Thumb> = []
   newestThumbnails: Array<Thumb> = []
 
-  constructor(private thumbService: ThumbService) {}
+  constructor(
+     private thumbService: ThumbService
+    ,private utilitiesService: UtilitiesService
+  ) {}
 
   ngOnInit() {
     this.thumbService.getFeaturedThumbnails(8).subscribe(thumbnails => {
       thumbnails.forEach(thumb => {
-        this.featuredThumbnails.push(this.thumbService.buildThumbnail(thumb))
+        this.featuredThumbnails.push(this.utilitiesService.buildThumbnail(thumb))
       })
     })
 
     this.thumbService.getMostLikedThumbnails(12).subscribe(thumbnails => {
       thumbnails.forEach(thumb => {
-        this.mostLikedThumbnails.push(this.thumbService.buildThumbnail(thumb))
+        this.mostLikedThumbnails.push(this.utilitiesService.buildThumbnail(thumb))
       })
     })
 
     this.thumbService.getThumbnails(16).subscribe(thumbnails => {
       thumbnails.forEach(thumb => {
-        this.newestThumbnails.push(this.thumbService.buildThumbnail(thumb))
+        this.newestThumbnails.push(this.utilitiesService.buildThumbnail(thumb))
       })
     })
   }

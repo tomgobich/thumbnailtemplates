@@ -270,6 +270,15 @@ export class ValidateService {
     )
   }
 
+  /**
+   * Returns pattern validity state
+   *
+   * @param {FormGroup} parent
+   * @param {string} name
+   * @returns
+   *
+   * @memberof ValidateService
+   */
   pattern(parent: FormGroup, name: string) {
     return (
       parent.get(name).hasError('pattern') &&
@@ -279,6 +288,15 @@ export class ValidateService {
     )
   }
 
+  /**
+   * Returns url validity state
+   *
+   * @param {FormGroup} parent
+   * @param {string} name
+   * @returns
+   *
+   * @memberof ValidateService
+   */
   url(parent: FormGroup, name: string) {
     return (
       parent.get(name).hasError('invalidUrl') &&

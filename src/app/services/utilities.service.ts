@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Thumb } from '../models/thumb.model'
+import { Category } from '../models/category.model'
+import { Image } from '../models/image.model'
 import { User } from '../models/user.model'
 
 @Injectable()
 export class UtilitiesService {
 
-  regexEmail: RegExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-
-  constructor() { }
-
+  /**
+   * Builds an api response object to consistently handle responses
+   *
+   * @param {*} [res]
+   * @param {boolean} [err]
+   * @param {string} [msg]
+   * @returns
+   *
+   * @memberof UtilitiesService
+   */
   buildResponseObject(res?: any, err?: boolean, msg?: string) {
     const data      = res ? res : ''
     const hasError  = err ? err : false
@@ -16,24 +25,134 @@ export class UtilitiesService {
     return { data, hasError, message }
   }
 
-  createUser(username, youtube, twitter, facebook, bio, credentials) {
-    let user = new User
-
-    user.strUserID        = credentials.uid                    // valid since from Google
-    user.strEmail         = credentials.email                  // valid since from Google
-    user.blnEmailVerified = credentials.emailVerified          // valid since from Google
-    user.strUsername      = this.escapeHtml(this.replaceNullOrUndefined(username.trim()))
-    user.strYouTube       = this.escapeHtml(this.replaceNullOrUndefined(youtube.trim()))
-    user.strTwitter       = this.escapeHtml(this.replaceNullOrUndefined(twitter.trim()))
-    user.strFacebook      = this.escapeHtml(this.replaceNullOrUndefined(facebook.trim()))
-    user.strBio           = this.escapeHtml(this.replaceNullOrUndefined(bio))
-
-    console.log({ user })
-
-    return user
+  /**
+   * Builds valid user object
+   *
+   * @param {any} data
+   * @returns
+   *
+   * @memberof AuthService
+   */
+  buildUser(data) {
+    return {
+       strUserID:         data.strUserID
+      ,strEmail:          data.strEmail
+      ,blnEmailVerified:  data.blnEmailVerified
+      ,strUsername:       data.strUsername
+      ,strAvatar:         data.strAvatar
+      ,strYouTube:        data.strYouTube
+      ,strTwitter:        data.strTwitter
+      ,strFacebook:       data.strFacebook
+      ,strBio:            data.strBio
+      ,intStatusID:       data.intStatusID
+    }
   }
 
-  // Validation check for special characters
+  /**
+   * Builds valid thumbnail object
+   *
+   * @param {any} data
+   * @returns {Thumb}
+   *
+   * @memberof UtilitiesService
+   */
+  buildThumbnail(data): Thumb {
+    let user = this.buildUser(data)
+    let category = this.buildCategory(data)
+    let image = this.buildImage(data)
+
+    return {
+       strTemplateID:               data.strTemplateID
+      ,strTemplateTitle:            data.strTemplateTitle
+      ,strTemplateAlias:            data.strTemplateAlias
+      ,strTemplateDescription:      data.strTemplateDescription
+      ,strTemplateKeywords:         data.strTemplateKeywords
+      ,strTemplateUploadDate:       data.strTemplateUploadDate
+      ,strTemplateDownload:         data.strTemplateDownload
+      ,intTemplateSortOrder:        data.intTemplateSortOrder
+      ,intTemplateViewCount:        data.intTemplateViewCount
+      ,intTemplateLikeCount:        data.intTemplateLikeCount
+      ,intTemplateDownloadCount:    data.intTemplateDownloadCount
+      ,strTemplateDownloadContents: data.strTemplateDownloadContents
+      ,dteTemplateLastUpdatedDate:  data.dteTemplateLastUpdatedDate
+      ,dteTemplateReleaseDate:      data.dteTemplateReleaseDate
+      ,intTemplateStatusID:         data.intTemplateStatusID
+      ,strFontID:                   data.strFontID
+      ,strFont:                     data.strFont
+      ,strFontDownload:             data.strFontDownload
+      ,intFontSortOrder:            data.intFontSortOrder
+      ,category:                    category
+      ,image:                       image
+      ,user:                        user
+    }
+  }
+
+  /**
+   * Builds valid category object
+   *
+   * @param {any} data
+   * @returns {Category}
+   *
+   * @memberof UtilitiesService
+   */
+  buildCategory(data): Category {
+    return {
+       intCategoryID: data.intCategoryID
+      ,strCategory:   data.strCategory
+    }
+  }
+
+  /**
+   * Builds valid image object
+   *
+   * @param {any} data
+   * @returns {Image}
+   *
+   * @memberof UtilitiesService
+   */
+  buildImage(data): Image {
+    return {
+       strImageID:          data.strImageID
+      ,strImageTitle:       data.strImageTitle
+      ,strImageOwner:       data.strImageOwner
+      ,strImageAlias:       data.strImageAlias
+      ,dteImageUploadDate:  data.dteImageUploadDate
+      ,blnIsFeaturedImage:  data.blnIsFeaturedImage
+      ,intImageStatusID:    data.intImageStatusID
+      ,intImageSortOrder:   data.intImageSortOrder
+    }
+  }
+
+  /**
+   * Creates user account model from Google response data
+   * Only use for posting new user to TUsers in database
+   *
+   * @param {any} user
+   * @returns
+   *
+   * @memberof UtilitiesService
+   */
+  createUser(user) {
+    return {
+       strUserID:         this.escapeHtml(this.replaceNullOrUndefined(user.uid))
+      ,strEmail:          this.escapeHtml(this.replaceNullOrUndefined(user.email))
+      ,blnEmailVerified:  this.escapeHtml(this.replaceNullOrUndefined(user.emailVerified))
+      ,strUsername:       this.escapeHtml(this.replaceNullOrUndefined(user.username.trim()))
+      ,strYouTube:        this.escapeHtml(this.replaceNullOrUndefined(user.youtube.trim()))
+      ,strTwitter:        this.escapeHtml(this.replaceNullOrUndefined(user.twitter.trim()))
+      ,strFacebook:       this.escapeHtml(this.replaceNullOrUndefined(user.facebook.trim()))
+      ,strBio:            this.escapeHtml(this.replaceNullOrUndefined(user.bio))
+    }
+  }
+
+  /**
+   * Checks string for special characters
+   *
+   * @param {any} text
+   * @returns
+   *
+   * @memberof UtilitiesService
+   */
   hasSpecialChars(text) {
     let compare = this.escapeHtml(text)
     let isValid = text == compare
@@ -44,7 +163,14 @@ export class UtilitiesService {
     }
   }
 
-  // Validation check for spaces
+  /**
+   * Checks string for spaces
+   *
+   * @param {any} text
+   * @returns
+   *
+   * @memberof UtilitiesService
+   */
   hasSpaces(text) {
     let isValid = !/\s/.test(text.trim())
 
@@ -54,7 +180,14 @@ export class UtilitiesService {
     }
   }
 
-  // Escape any malicious content
+  /**
+   * Replaces potentially harmful characters with markup code equal
+   *
+   * @param {any} text
+   * @returns
+   *
+   * @memberof UtilitiesService
+   */
   escapeHtml(text) {
     var map = {
       '&': '&amp;',
@@ -67,7 +200,15 @@ export class UtilitiesService {
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
   }
 
-  // Prevent thrown errors by replacing null or undefined with empty string
+  /**
+   * Replaces a null or undefined variable with empty string
+   * This is to prevent runtime errors should unexpected data be used
+   *
+   * @param {any} text
+   * @returns
+   *
+   * @memberof UtilitiesService
+   */
   replaceNullOrUndefined(text) {
     return text == null || text == undefined ? '' : text
   }

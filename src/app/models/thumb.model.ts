@@ -1,28 +1,28 @@
 import { User } from './user.model'
+import { Category } from './category.model'
 import { Image } from './image.model'
 
-export class Thumb {
-  strTemplateID: string
-  strTemplateTitle: string
-  strTemplateAlias: string
-  strTemplateDescription: string
-  strTemplateKeywords: string
-  strTemplateUploadDate: string
-  strTemplateDownload: string
-  intTemplateDownloadCount: number
-  intTemplateSortOrder: number
-  intTemplateViewCount: number
-  intTemplateLikeCount: number
-  strTemplateDownloadContents: string
+export interface Thumb {
+  strTemplateID: String
+  strTemplateTitle: String
+  strTemplateAlias: String
+  strTemplateDescription: String
+  strTemplateKeywords: String
+  strTemplateUploadDate: String
+  strTemplateDownload: String
+  intTemplateDownloadCount: Number
+  intTemplateSortOrder: String
+  intTemplateViewCount: String
+  intTemplateLikeCount: Number
+  strTemplateDownloadContents: String
   dteTemplateLastUpdatedDate: Date
   dteTemplateReleaseDate: Date
-  intTemplateStatusID: number
-  intCategoryID: number
-  strCategory: string
-  strFontID: string
-  strFont: string
-  strFontDownload: string
-  intFontSortOrder: number
+  intTemplateStatusID: Number
+  strFontID: String
+  strFont: String
+  strFontDownload: String
+  intFontSortOrder: Number
+  category: Category
   image: Image
   user: User
 }

@@ -1,21 +1,14 @@
 import { Injectable, ApplicationRef } from '@angular/core';
-import { Http } from '@angular/http';
 import { environment } from '../../environments/environment'
 import { AngularFireAuth } from 'angularfire2/auth'
 import { Router, NavigationStart } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 import { md5 } from './md5.service';
 import { ApiAuthService } from './api/api-auth.service'
-import { ValidateService } from './validate.service'
-import { UtilitiesService } from './utilities.service'
 import 'rxjs/add/operator/toPromise';
-
-import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
-
-  // TODO: Move service calls from inside doc models into component logic
 
   apiUrl: string = environment.apiUrl
   UID: string = null
@@ -29,11 +22,8 @@ export class AuthService {
 
   constructor(
      private afAuth: AngularFireAuth
-    ,private http: Http
     ,private router: Router
     ,private apiAuthService: ApiAuthService
-    ,private validateService: ValidateService
-    ,private utilitiesService: UtilitiesService
     ,private ar: ApplicationRef
   ) {
     afAuth.authState.subscribe(user => {
@@ -42,7 +32,7 @@ export class AuthService {
         this.user = user
         this.avatar = this.getAvatar(user.email, 50)
         this.isAuthenticated = true
-        setTimeout(() => this.getUsername(user.uid), 2500)
+        setTimeout(() => this.getUsernameByUid(user.uid), 2500)
       }
       else {
         this.initializeAllVariables()
@@ -50,7 +40,13 @@ export class AuthService {
     })
   }
 
-  // Log user into app
+  /**
+   * Processes user login form submission
+   *
+   * @param {any} login
+   *
+   * @memberof AuthService
+   */
   login(login) {
     this.apiAuthService
     .loginUser(login.email, login.password)
@@ -61,12 +57,17 @@ export class AuthService {
     })
   }
 
-  // Sign up user
+  /**
+   * Processes user signup form submission
+   *
+   * @param {any} signup
+   *
+   * @memberof AuthService
+   */
   signup(signup) {
     this.apiAuthService
-    .signupUser(signup.username, signup.email, signup.password, signup.passwordConfirm, signup.youtube, signup.twitter, signup.facebook, signup.bio)
+    .signupUser(signup)
     .then(response => {
-      console.log({response})
       this.UID = response.data.user.uid
       this.signupSuccess = response.data.message
       this.signupError = response.hasError ? response.message : ''
@@ -74,74 +75,89 @@ export class AuthService {
     })
   }
 
-  // Logs user out of app session
+  /**
+   * Logs user out of session
+   *
+   *
+   * @memberof AuthService
+   */
   logout() {
     this.apiAuthService.logoutUser();
     this.initializeAllVariables();
     this.router.navigate(['/login'])
   }
 
-  // Returns current user's ID
+  /**
+   * Returns currently logged in user's UID
+   *
+   * @returns {string}
+   *
+   * @memberof AuthService
+   */
   getID(): string {
     return this.isAuthenticated ? this.UID : '';
   }
 
+  /**
+   * Gets user's avatar from Gravatar by email
+   *
+   * @param {string} email
+   * @param {number} size
+   * @returns {string}
+   *
+   * @memberof AuthService
+   */
   getAvatar(email: string, size: number): string {
     size = size > 0 ? size : 30;
     let hash = md5(email.toLowerCase().trim());
     return `https://gravatar.com/avatar/${hash}?s=${size}&d=retro&r=r`;
   }
 
-  // TODO: Move all async calls to api folder, put data handlers here
-  async getUsername(uid) {
-    try {
-      const response = await this.http.get(`${this.apiUrl}/getusername/id/${uid}`).toPromise()
-      this.username = response.json().username
-    }
-    catch(e) {
-      console.error(e)
-    }
+  /**
+   * Gets a user's username by UID
+   *
+   * @param {any} uid
+   *
+   * @memberof AuthService
+   */
+  getUsernameByUid(uid) {
+    this.apiAuthService
+    .getUsernameByUid(uid)
+    .then(response => {
+      this.username = response
+    })
   }
 
-  async getUserByUserID(strUserID: string) {
-    try {
-      let uid = this.utilitiesService.escapeHtml(strUserID)
-      const response = await this.http.get(`${this.apiUrl}/getuser/id/${uid}`).toPromise()
-      return await response.json()
-    }
-    catch(e) {
-      console.error(e)
-    }
+  /**
+   * Gets a user's details by UserID
+   *
+   * @param {string} strUserID
+   * @returns
+   *
+   * @memberof AuthService
+   */
+  getUserByUserID(strUserID: string) {
+    return this.apiAuthService.getUserByUserID(strUserID)
   }
 
-  async getUserByUsername(strUsername: string) {
-    try {
-      let username = this.utilitiesService.escapeHtml(strUsername)
-      const response = await this.http.get(`${this.apiUrl}/getuser/username/${username}`).toPromise()
-      return await response.json()
-    }
-    catch(e) {
-      console.error(e)
-    }
+  /**
+   * Gets a user's details by username
+   *
+   * @param {string} strUsername
+   * @returns
+   *
+   * @memberof AuthService
+   */
+  getUserByUsername(strUsername: string) {
+    return this.apiAuthService.getUserByUsername(strUsername)
   }
 
-  buildUser(data) {
-    let user = new User
-
-    user.strUserID        = data.strUserID
-    user.strEmail         = data.strEmail
-    user.blnEmailVerified = data.blnEmailVerified
-    user.strUsername      = data.strUsername
-    user.strAvatar        = data.strAvatar
-    user.strYouTube       = data.strYouTube
-    user.strTwitter       = data.strTwitter
-    user.strFacebook      = data.strFacebook
-    user.strBio           = data.strBio
-    user.intStatusID      = data.intStatusID
-
-    return user
-  }
-
+  /**
+   * Resets all user assessible variables
+   *
+   *
+   * @memberof AuthService
+   */
   initializeAllVariables() {
     this.ar.tick()
     this.UID = null
