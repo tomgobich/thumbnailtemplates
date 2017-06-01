@@ -3,6 +3,8 @@ import { ApiAuthService } from './api/api-auth.service'
 import { UtilitiesService } from './utilities.service'
 import { FormGroup, AbstractControl } from '@angular/forms'
 
+import { regex } from '../../environments/environment'
+
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -112,9 +114,9 @@ export class ValidateService {
   validateEmail(text) {
     let isValid = this.validateRequired("Email", text, 3, 50);
     if(isValid.valid) {
-      let regex = this.utilitiesService.regexEmail
+      let regexEmail = regex.email
       this.errorEmail = {
-        valid: regex.test(text),
+        valid: regexEmail.test(text),
         message: "Please enter a valid email"
       }
     }

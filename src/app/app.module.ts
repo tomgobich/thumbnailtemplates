@@ -31,7 +31,7 @@ import { ProfileComponent } from './routes/user/profile/profile.component';
 import 'rxjs/Rx';
 import { BrowseThumbnailsComponent } from './routes/browse/thumbnails/browse-thumbnails.component';
 
-// TODO: Match type check casing
+// TODO: Match type check casting
 
 @NgModule({
   declarations: [
