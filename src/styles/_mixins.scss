@@ -22,27 +22,6 @@
 // ---------------------------------------------
 // Text Mixins
 // ---------------------------------------------
-@mixin vertical-heading($text, $space-top, $bgColor: $brand-inverse, $txtColor: $white) {
-  content: $text;
-  text-transform: uppercase;
-  transform: rotate(-90deg);
-  transform-origin: bottom left;
-  letter-spacing: 1.1px;
-  color: $txtColor;
-  background-color: $bgColor;
-  padding: 0 6px;
-  position: absolute;
-  top: $space-top;
-
-  @include media-breakpoint-down(sm) {
-    width: 100%;
-    transform: none;
-    padding: 6px;
-    position: relative;
-    top: 0;
-  }
-}
-
 @mixin anchor($color: $brand-primary, $decoration: none, $hoverColor: $brand-primary) {
   color: $color;
   text-decoration: $decoration;

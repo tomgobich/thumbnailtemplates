@@ -1,65 +1,69 @@
-<header class="flex-container">
-  <!-- Logo -->
-  <div class="logo-wrapper">
-    <img
-      class="logo"
-      alt="ThumbTemps"
-      src="src/assets/images/thumbtemps@2x.png">
-  </div>
-  <!-- Main Nav -->
-  <nav class="left-content">
-    <ul class="site-nav clearfix">
-      <li><a routerLink="/">Home</a></li>
-      <li><a routerLink="/thumbnails">Thumbnails</a></li>
+
+<nav class="uk-dark uk-navbar-container uk-margin" uk-navbar>
+
+  <!-- Navbar Left -->
+  <div class="uk-navbar-left">
+    <ul class="uk-navbar-nav">
+      <li>
+        <a
+          class="uk-navbar-item uk-logo"
+          routerLink="/">
+          <img
+            class="logo"
+            alt="ThumbTemps"
+            src="src/assets/images/thumbtemps@2x.png">
+        </a>
+      </li>
       <li>
         <span
-          class="link"
-          [class.active]="isNavMoreActive"
-          (click)="toggleIsNavMoreActive()">
-          <div class="pos-rel inline">
-            <i class="zmdi zmdi-more"></i>
-            More
-            <ul
-              class="site-nav-more"
-              [class.active]="isNavMoreActive">
-              <li><a routerLink="/leaderboard">Leaderboard</a></li>
-              <li><a routerLink="/license">License</a></li>
-              <li><a routerLink="/contact">Contact</a></li>
-            </ul>
+          class="uk-navbar-toggle pointer">
+          <div class="menu-wrapper">
+            <span uk-navbar-toggle-icon></span>
+            <span class="uk-margin-small-left offset3">
+              Menu
+            </span>
           </div>
+          <div class="uk-navbar-dropdown">
+              <ul class="uk-nav uk-navbar-dropdown-nav">
+                <li><a routerLink="/">Home</a></li>
+                <li><a routerLink="/thumbnails">Thumbnails</a></li>
+                <li><a routerLink="/leaderboard">Leaderboard</a></li>
+                <li><a routerLink="/license">License</a></li>
+                <li><a routerLink="/contact">Contact</a></li>
+              </ul>
+            </div>
         </span>
       </li>
     </ul>
-  </nav>
-  <!-- Auth Nav -->
-  <nav class="right-content">
-    <ul class="auth-nav clearfix">
+  </div>
+
+  <!-- Navbar Right -->
+  <div class="nav-overlay uk-navbar-right">
+    <ul class="uk-navbar-nav">
       <li>
-        <a routerLink="/">
-          <i class="zmdi zmdi-search"></i>
-        </a>
+          <a
+            class="uk-navbar-toggle"
+            uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
+            href="#">
+          </a>
       </li>
       <li *ngIf="authService.isAuthenticated">
         <a routerLink="/upload/thumbnail">
-          <i class="zmdi zmdi-upload"></i>
+          <span uk-icon="icon: upload"></span>
         </a>
       </li>
       <li *ngIf="authService.avatar">
-        <div
-          class="link"
-          [class.active]="isProfileNavActive"
-          (click)="toggleIsProfileNavActive()">
-          <div class="pos-rel inline">
-            <img class="avatar" [src]="authService.avatar">
-            <ul
-              class="auth-nav-more"
-              [class.active]="isProfileNavActive">
-              <li><a [routerLink]="['/user', authService?.username || {}]">Profile</a></li>
-              <li><a routerLink="/user/dashboard">Dashboard</a></li>
-              <li><a routerLink="/user/settings">Settings</a></li>
-              <li><a routerLink="/" (click)="authService.logout()">Logout</a></li>
-            </ul>
-          </div>
+        <a href="#">
+          <img class="avatar" [src]="authService.avatar">
+        </a>
+        <div class="uk-navbar-dropdown">
+          <ul class="uk-nav uk-navbar-dropdown-nav">
+            <li class="uk-nav-header">Welcome ...</li>
+            <li><a [routerLink]="['/user', authService?.username || {}]">Profile</a></li>
+            <li><a routerLink="/user/dashboard">Dashboard</a></li>
+            <li><a routerLink="/user/settings">Settings</a></li>
+            <li><a routerLink="/" (click)="authService.logout()">Logout</a></li>
+          </ul>
         </div>
       </li>
       <li *ngIf="!authService.isAuthenticated">
@@ -69,5 +73,16 @@
         <a routerLink="/signup">Signup</a>
       </li>
     </ul>
-  </nav>
-</header>
+  </div>
+
+  <!-- Navbar Search Overlay -->
+  <div class="nav-overlay uk-navbar-right uk-flex-1" hidden>
+    <div class="uk-navbar-item uk-width-expand">
+      <form class="uk-search uk-search-navbar uk-width-1-1">
+        <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+      </form>
+    </div>
+    <a class="uk-navbar-toggle" uk-close uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+  </div>
+
+</nav>

@@ -4,11 +4,11 @@
 // TODO: Change Variables from Bootstrap to UIKit
 
 // Bootstrap Mixins
-@import './bootstrap/mixins';
+// @import './bootstrap/mixins';
 
 // Site Variables
+// @import './uikit/variables-theme.scss';
 @import 'variables';
-@import './uikit/variables-theme.scss';
 
 @import './uikit/mixins-theme.scss';
 @import 'mixins';

@@ -2,6 +2,14 @@
 @import 'mixins';
 
 
+* {
+  box-sizing: border-box;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 // ---------------------------------------------
 // Grid Utilities
 // ---------------------------------------------
@@ -47,23 +55,23 @@
   }
 }
 
-.table-md-up {
-  @include media-breakpoint-up (md) {
-    display: table;
+// .table-md-up {
+//   @include media-breakpoint-up (md) {
+//     display: table;
 
-    .table-row {
-      display: table-row;
+//     .table-row {
+//       display: table-row;
 
-      .table-cell {
-        display: table-cell;
+//       .table-cell {
+//         display: table-cell;
 
-        &.v-middle {
-          vertical-align: middle;
-        }
-      }
-    }
-  }
-}
+//         &.v-middle {
+//           vertical-align: middle;
+//         }
+//       }
+//     }
+//   }
+// }
 
 
 
@@ -93,13 +101,6 @@ h1, h2, h3, h4, h5, h6,
 
 .req {
   color: $red;
-}
-
-.row.vert-title {
-  position: relative;
-  &.featured:before { @include vertical-heading("Featured", 63px); }
-  &.liked:before    { @include vertical-heading("Most Liked", 74px); }
-  &.new:before      { @include vertical-heading("Newest", 48px); }
 }
 
 .pos-rel {

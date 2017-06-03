@@ -5,123 +5,23 @@
   margin-bottom: 0;
 }
 
-header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: $gray-dark;
-  color: $white;
-  padding: 0 15px;
-  margin-bottom: $pad-3;
+.logo {
+  max-width: 75px;
+  padding: 6px 0;
+  float: left;
+}
 
-  .logo-wrapper {
-    flex: 0 0 20%;
-    flex: 0 0 calc(0% + 75px);
-  }
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
 
-  .left-content {
-    flex: 0 0 40%;
-    flex: 0 0 calc(50% - 75px);
-    text-align: left;
-  }
+.uk-search-navbar .uk-search-input {
+  font-size: 1.2em;
+}
 
-  .right-content {
-    flex: 0 0 40%;
-    flex: 0 0 calc(50% - 75px);
-    text-align: right;
-  }
-
-  .logo {
-    max-width: 75px;
-    padding: 6px 0;
-    float: left;
-  }
-
-  .auth-nav {
-    justify-content: flex-end;
-
-    li {
-      min-width: 50px;
-    }
-  }
-
-  .site-nav,
-  .auth-nav {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    > li {
-
-      a,
-      .link {
-        height: 65px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        text-decoration: none;
-        padding: 0 10px;
-
-        &:hover,
-        &.active {
-          background-color: $brand-primary;
-          background-image: linear-gradient(to bottom right, rgba($brand-secondary, .6), rgba($brand-primary, .6));
-          text-decoration: none;
-        }
-      }
-    }
-
-    .site-nav-more,
-    .auth-nav-more {
-      list-style: none;
-      background-color: $gray-light;
-      box-shadow: 1px 1px 3px $rgba1;
-      font-size: 90%;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity $anim-fast;
-      padding: 6px 0;
-      margin: 0;
-      position: absolute;
-      top: 44px;
-      left: -10px;
-      z-index: 999;
-
-      a,
-      .link {
-        min-width: 100px;
-        height: unset;
-        display: flex;
-        justify-content: flex-start;
-        padding: 4px 30px 4px 10px;
-      }
-
-      &.active {
-        opacity: 1;
-        pointer-events: unset;
-      }
-    }
-
-    .auth-nav-more {
-      top: 47px;
-      right: -10px;
-      left: unset;
-
-      a,
-      .link {
-        justify-content: flex-end;
-        padding: 4px 10px 4px 30px;
-      }
-    }
-
-    .avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-    }
-  }
+.offset3 {
+  position: relative;
+  top: 3px;
 }

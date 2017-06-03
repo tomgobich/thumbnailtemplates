@@ -1,59 +1,73 @@
 <!-- Featured Section -->
-<div class="row" *ngIf="featuredThumbnails.length > 0">
-  <div class="col-12">
-    <div class="row-title">
-      <h3>
-        Featured
-      </h3>
-    </div>
+<div
+  class="uk-margin"
+  *ngIf="featuredThumbnails.length > 0">
+  <div class="row-title">
+    <h3>
+      Featured
+    </h3>
   </div>
-  <div class="col-12">
-    <partial-thumbnail *ngFor="let thumb of featuredThumbnails" [thumb]="thumb"></partial-thumbnail>
+
+  <div
+    uk-grid
+    class="uk-grid-small uk-child-width-1-4@s uk-grid-collapse">
+    <partial-thumbnail
+      *ngFor="let thumb of featuredThumbnails"
+      [thumb]="thumb">
+    </partial-thumbnail>
   </div>
 </div>
 
 <!-- Responsive Ad -->
- <div class="row">
-  <div class="col-12 no-pad">
-    <div class="center-block adblock">
-      <partial-responsive-ad></partial-responsive-ad>
-    </div>
+ <div class="uk-margin" >
+  <div class="center-block adblock">
+    <partial-responsive-ad></partial-responsive-ad>
   </div>
 </div>
 
 <!-- Popular Section -->
-<div class="row" *ngIf="mostLikedThumbnails.length > 0">
-  <div class="col-12">
+<div
+  class="uk-margin"
+  *ngIf="mostLikedThumbnails.length > 0">
     <div class="row-title">
       <h3>
         Most Liked
       </h3>
     </div>
-  </div>
-  <div class="col-12">
-    <partial-thumbnail *ngFor="let thumb of mostLikedThumbnails" [thumb]="thumb"></partial-thumbnail>
+
+  <div
+    uk-grid
+    class="uk-grid-small uk-child-width-1-4@s uk-grid-collapse">
+    <partial-thumbnail
+      *ngFor="let thumb of mostLikedThumbnails"
+      [thumb]="thumb">
+    </partial-thumbnail>
   </div>
 </div>
 
 <!-- Responsive Ad -->
- <div class="row">
-  <div class="col-12 no-pad">
-    <div class="center-block adblock">
-      <partial-responsive-ad></partial-responsive-ad>
-    </div>
+ <div class="uk-margin" >
+  <div class="center-block adblock">
+    <partial-responsive-ad></partial-responsive-ad>
   </div>
 </div>
 
 <!-- Newest Section -->
-<div class="row " *ngIf="newestThumbnails.length > 0">
-  <div class="col-12">
+<div
+  class="uk-margin"
+  *ngIf="newestThumbnails.length > 0">
     <div class="row-title">
       <h3>
         Newest
       </h3>
     </div>
-  </div>
-  <div class="col-12">
-    <partial-thumbnail *ngFor="let thumb of newestThumbnails" [thumb]="thumb"></partial-thumbnail>
+
+  <div
+    uk-grid
+    class="uk-grid-small uk-child-width-1-4@s uk-grid-collapse">
+    <partial-thumbnail
+      *ngFor="let thumb of newestThumbnails"
+      [thumb]="thumb">
+    </partial-thumbnail>
   </div>
 </div>

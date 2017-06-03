@@ -1,13 +1,10 @@
 // General variable structure
 //
 // Variable format should follow the `$component-modifier-state-property` order.
-
+@import './uikit/variables-theme';
 
 // Colors
 //
-// Grayscale and brand colors for use across Bootstrap.
-
-// Start with assigning color names to specific hex values.
 $white:  #fff !default;
 $black:  #333 !default;
 $red:    #d9534f !default;
@@ -20,6 +17,7 @@ $pink:   #ff5b77 !default;
 $purple: #613d7c !default;
 
 // Create grayscale
+//
 $gray-dark:                 #292b2c !default;
 $gray:                      #464a4c !default;
 $gray-light:                #636c72 !default;
@@ -27,6 +25,7 @@ $gray-lighter:              #eceeef !default;
 $gray-lightest:             #f7f7f9 !default;
 
 // Reassign color vars to semantic color scheme
+//
 $brand-primary:             #333399 !default;
 $brand-secondary:           #ff00cc !default;
 $brand-success:             $green !default;
@@ -47,9 +46,8 @@ $anim-slow: 600ms ease;
 $font-family-sans-serif: 'Abel', sans-serif;
 $font-family-sans-serif-2: 'Ubuntu', sans-serif;
 
-// ---------------------------------------------
 // Spacing Utilities
-// ---------------------------------------------
+//
 $pad-1: 4px;
 $pad-2: 8px;
 $pad-3: 15px;
@@ -60,89 +58,3 @@ $mar-2: 8px;
 $mar-3: 15px;
 $mar-4: 30px;
 
-
-// Options
-//
-// Quickly modify global styling by enabling or disabling optional features.
-
-$enable-rounded:            false !default;
-
-
-
-// Spacing
-//
-// Control the default styling of most Bootstrap elements by modifying these
-// variables. Mostly focused on spacing.
-// You can add more entries to the $spacers map, should you need more variation.
-
-$spacer:   1rem !default;
-$spacer-x: $spacer !default;
-$spacer-y: $spacer !default;
-
-// This variable affects the `.h-*` and `.w-*` classes.
-$sizes: (
-  25: 25%,
-  50: 50%,
-  75: 75%,
-  100: 100%
-) !default;
-
-// Body
-//
-// Settings for the `<body>` element.
-
-$body-bg:       $white !default;
-$body-color:    $gray-dark !default;
-$inverse-bg:    $gray-dark !default;
-$inverse-color: $gray-lighter !default;
-
-
-// Links
-//
-// Style anchor elements.
-
-$link-color:            $brand-primary !default;
-$link-decoration:       none !default;
-$link-hover-color:      darken($link-color, 15%) !default;
-$link-hover-decoration: underline !default;
-
-
-// Grid breakpoints
-//
-// Define the minimum dimensions at which your layout will change,
-// adapting to different screen sizes, for use in media queries.
-
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px
-) !default;
-
-
-// Grid containers
-//
-// Define the maximum width of `.container` for different screen sizes.
-
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px
-) !default;
-
-
-// Grid columns
-//
-// Set the number of columns and specify the width of the gutters.
-
-$grid-columns:               12 !default;
-$grid-gutter-width-base:     30px !default;
-$grid-gutter-widths: (
-  xs: $grid-gutter-width-base,
-  sm: $grid-gutter-width-base,
-  md: $grid-gutter-width-base,
-  lg: $grid-gutter-width-base,
-  xl: $grid-gutter-width-base
-) !default;

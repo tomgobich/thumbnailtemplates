@@ -1,12 +1,12 @@
-<div class="row " *ngIf="thumbnails.length > 0">
-  <div class="col-12">
+<div *ngIf="thumbnails.length > 0">
+  <div>
     <div class="row-title">
       <h3>
         {{ activeCategoryName }} Thumbnails
       </h3>
     </div>
   </div>
-  <div class="col-4">
+  <div>
     <span>
       Categories:
     </span>
@@ -21,7 +21,9 @@
       </option>
     </select>
   </div>
-  <div class="col-12">
+  <div
+    uk-grid
+    class="uk-grid-small uk-child-width-1-4@s uk-grid-collapse">
     <partial-thumbnail
       *ngFor="let thumb of thumbnails"
       [thumb]="thumb">
