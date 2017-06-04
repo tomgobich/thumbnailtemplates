@@ -1,5 +1,5 @@
 
-<nav class="uk-dark uk-navbar-container uk-margin" uk-navbar>
+<nav class="uk-navbar-container uk-container uk-container-expand uk-margin" uk-navbar>
 
   <!-- Navbar Left -->
   <div class="uk-navbar-left">
@@ -58,7 +58,7 @@
         </a>
         <div class="uk-navbar-dropdown">
           <ul class="uk-nav uk-navbar-dropdown-nav">
-            <li class="uk-nav-header">Welcome ...</li>
+            <li class="uk-nav-header">Welcome {{ username }}</li>
             <li><a [routerLink]="['/user', authService?.username || {}]">Profile</a></li>
             <li><a routerLink="/user/dashboard">Dashboard</a></li>
             <li><a routerLink="/user/settings">Settings</a></li>

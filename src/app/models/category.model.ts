@@ -1,4 +1,4 @@
 export interface Category {
-  intCategoryID: Number,
-  strCategory: String
+  intCategoryID: number,
+  strCategory: string
 }

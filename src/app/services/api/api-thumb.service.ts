@@ -16,13 +16,15 @@ export class ApiThumbService {
   /**
    * Gets all thumbnails, with optional limit
    *
-   * @param {Number} [limit]
+   * @param {string} [category]
+   * @param {number} [limit]
+   * @param {number} [skip]
    * @returns
    *
    * @memberof ApiThumbService
    */
-  getThumbnails(limit?: Number, skip?: Number, intCategoryID?: Number) {
-    return this.http.get(`${this.apiUrl}/thumbnails/all/${limit}/${skip}/${intCategoryID}`).map(res => res.json())
+  getThumbnails(category: string, limit?: number, skip?: number) {
+    return this.http.get(`${this.apiUrl}/thumbnails/all/${category}/${limit}/${skip}`).map(res => res.json())
   }
 
   /**

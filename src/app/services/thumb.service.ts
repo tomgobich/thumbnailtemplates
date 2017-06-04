@@ -18,15 +18,15 @@ export class ThumbService {
   /**
    * Gets array of thumbnails
    *
-   * @param {Number} [limit]
-   * @param {Number} [skip]
-   * @param {Number} [intCategoryID]
+   * @param {number} [limit]
+   * @param {number} [skip]
+   * @param {string} [category]
    * @returns
    *
    * @memberof ThumbService
    */
-  getThumbnails(limit?: Number, skip?: Number, intCategoryID?: Number) {
-    return this.apiThumbService.getThumbnails(limit, skip, intCategoryID)
+  getThumbnails(category: string, limit?: number, skip?: number) {
+    return this.apiThumbService.getThumbnails(category, limit, skip)
   }
 
   /**

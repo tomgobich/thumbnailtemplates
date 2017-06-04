@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
       })
     })
 
-    this.thumbService.getThumbnails(16).subscribe(thumbnails => {
+    this.thumbService.getThumbnails('all', 16).subscribe(thumbnails => {
       thumbnails.forEach(thumb => {
         this.newestThumbnails.push(this.utilitiesService.buildThumbnail(thumb))
       })

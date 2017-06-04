@@ -1,12 +1,12 @@
 <div *ngIf="thumbnails.length > 0">
-  <div>
+  <div class="uk-margin">
     <div class="row-title">
       <h3>
-        {{ activeCategoryName }} Thumbnails
+        {{ activeCategory }} Thumbnails
       </h3>
     </div>
   </div>
-  <div>
+  <div class="uk-margin">
     <span>
       Categories:
     </span>
@@ -16,17 +16,25 @@
       <option
         *ngFor="let category of categories"
         [value]="category.intCategoryID"
-        [selected]="category.intCategoryID == activeCategoryID">
+        [selected]="category.strCategory.toLowerCase() == activeCategory.toLowerCase()">
         {{ category.strCategory }}
       </option>
     </select>
   </div>
   <div
     uk-grid
-    class="uk-grid-small uk-child-width-1-4@s uk-grid-collapse">
+    class="uk-grid-small uk-child-width-1-4@s uk-grid-collapse uk-margin">
     <partial-thumbnail
       *ngFor="let thumb of thumbnails"
       [thumb]="thumb">
     </partial-thumbnail>
   </div>
+
+  <ul class="uk-pagination uk-flex-center" uk-margin>
+    <li><a href="#"><span uk-pagination-previous></span></a></li>
+    <li *ngFor="let page of pagination">
+      <a [routerLink]="['/thumbnails', activeCategory.toLowerCase(), page]">{{ page }}</a>
+    </li>
+    <li><a href="#"><span uk-pagination-next></span></a></li>
+  </ul>
 </div>

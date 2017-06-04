@@ -7,34 +7,38 @@ import { ValidateService } from '../../../../services/validate.service'
   encapsulation: ViewEncapsulation.None,
   template: `
     <div [formGroup]="parent" class="form-group">
+      <div
+        [title]="tooltip"
+        uk-tooltip="pos: bottom-right">
         <input
-            #twitter
-            type="text"
-            class="form-control"
-            (focus)="setInitialFocusValue()"
-            (focusout)="clearValueIfDefault()"
-            [tabIndex]="tabIndex"
-            formControlName="twitter">
+          #twitter
+          type="text"
+          class="form-control"
+          (focus)="setInitialFocusValue()"
+          (focusout)="clearValueIfDefault()"
+          [tabIndex]="tabIndex"
+          formControlName="twitter">
         <label
-            class="inline-label"
-            [class.active]="parent.get('twitter').value">
-            Twitter Url
-            <span class="faded" *ngIf="optional">
-                - Optional
-            </span>
+          class="inline-label"
+          [class.active]="parent.get('twitter').value">
+          Twitter Url
+          <span class="faded" *ngIf="optional">
+            - Optional
+          </span>
         </label>
         <div
-            class="invalid"
-            *ngIf="validateService.maxLength(parent, 'twitter')">
-            <i class="zmdi zmdi-alert-circle"></i>
-            Please limit your Twitter username to 50 characters
+          class="invalid"
+          *ngIf="validateService.maxLength(parent, 'twitter')">
+          <i class="zmdi zmdi-alert-circle"></i>
+          Please limit your Twitter username to 50 characters
         </div>
         <div
-            class="invalid"
-            *ngIf="validateService.url(parent, 'twitter')">
-            <i class="zmdi zmdi-alert-circle"></i>
-            Please enter a full and valid URL, ex: http://twitter.com/thumbtemps
+          class="invalid"
+          *ngIf="validateService.url(parent, 'twitter')">
+          <i class="zmdi zmdi-alert-circle"></i>
+          Please enter a full and valid URL, ex: http://twitter.com/thumbtemps
         </div>
+      </div>
     </div>
   `
 })
@@ -45,6 +49,7 @@ export class TwitterComponent {
   @Input() tabIndex: number
 
   isFirstFocus: boolean = true
+  tooltip: string = "Example: http://twitter.com/thumbtemps"
 
   constructor(
     private validateService: ValidateService

@@ -30,6 +30,10 @@ const routes: Routes = [
     ,component: BrowseThumbnailsComponent
   }
   ,{
+     path: 'thumbnails/:category/:activePage'
+    ,component: BrowseThumbnailsComponent
+  }
+  ,{
      path: 'protected'
     ,component: HomeComponent
     ,canActivate: [AuthGuardService]

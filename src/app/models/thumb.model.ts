@@ -3,25 +3,25 @@ import { Category } from './category.model'
 import { Image } from './image.model'
 
 export interface Thumb {
-  strTemplateID: String
-  strTemplateTitle: String
-  strTemplateAlias: String
-  strTemplateDescription: String
-  strTemplateKeywords: String
-  strTemplateUploadDate: String
-  strTemplateDownload: String
-  intTemplateDownloadCount: Number
-  intTemplateSortOrder: String
-  intTemplateViewCount: String
-  intTemplateLikeCount: Number
-  strTemplateDownloadContents: String
+  strTemplateID: string
+  strTemplateTitle: string
+  strTemplateAlias: string
+  strTemplateDescription: string
+  strTemplateKeywords: string
+  strTemplateUploadDate: string
+  strTemplateDownload: string
+  intTemplateDownloadCount: number
+  intTemplateSortOrder: string
+  intTemplateViewCount: string
+  intTemplateLikeCount: number
+  strTemplateDownloadContents: string
   dteTemplateLastUpdatedDate: Date
   dteTemplateReleaseDate: Date
-  intTemplateStatusID: Number
-  strFontID: String
-  strFont: String
-  strFontDownload: String
-  intFontSortOrder: Number
+  intTemplateStatusID: number
+  strFontID: string
+  strFont: string
+  strFontDownload: string
+  intFontSortOrder: number
   category: Category
   image: Image
   user: User

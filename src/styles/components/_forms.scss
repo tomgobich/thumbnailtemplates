@@ -53,7 +53,9 @@ textarea.form-control {
   }
 }
 
-input {
+input,
+textarea,
+select {
   font-family: $font-family-sans-serif;
   transition: border-color 300ms ease;
 

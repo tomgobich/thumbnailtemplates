@@ -9,6 +9,7 @@ export const environment = {
   ,imageUrl: 'http://thumbnailtemplates.com/images/thumbs/'
   ,imageUploadUrl: 'http://localhost:8080/upload.php'
   ,localImageUrl: 'src/assets/images'
+  ,paginationToShow: 7
 };
 
 export const regex = {

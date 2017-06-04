@@ -7,34 +7,38 @@ import { ValidateService } from '../../../../services/validate.service'
   encapsulation: ViewEncapsulation.None,
   template: `
     <div [formGroup]="parent" class="form-group">
+      <div
+        [title]="tooltip"
+        uk-tooltip="pos: bottom-right">
         <input
-            #youtube
-            type="text"
-            class="form-control"
-            (focus)="setInitialFocusValue()"
-            (focusout)="clearValueIfDefault()"
-            [tabIndex]="tabIndex"
-            formControlName="youtube">
+          #youtube
+          type="text"
+          class="form-control"
+          (focus)="setInitialFocusValue()"
+          (focusout)="clearValueIfDefault()"
+          [tabIndex]="tabIndex"
+          formControlName="youtube">
         <label
-            class="inline-label"
-            [class.active]="parent.get('youtube').value">
-            YouTube Url
-            <span class="faded" *ngIf="optional">
-                - Optional
-            </span>
+          class="inline-label"
+          [class.active]="parent.get('youtube').value">
+          YouTube Url
+          <span class="faded" *ngIf="optional">
+            - Optional
+          </span>
         </label>
         <div
-            class="invalid"
-            *ngIf="validateService.maxLength(parent, 'youtube')">
-            <i class="zmdi zmdi-alert-circle"></i>
-            Please limit your YouTube username to 50 characters
+          class="invalid"
+          *ngIf="validateService.maxLength(parent, 'youtube')">
+          <i class="zmdi zmdi-alert-circle"></i>
+          Please limit your YouTube username to 50 characters
         </div>
         <div
-            class="invalid"
-            *ngIf="validateService.url(parent, 'youtube')">
-            <i class="zmdi zmdi-alert-circle"></i>
-            Please enter a full and valid URL, ex: http://youtube.com/user/thumbtemps
+          class="invalid"
+          *ngIf="validateService.url(parent, 'youtube')">
+          <i class="zmdi zmdi-alert-circle"></i>
+          Please enter a full and valid URL, ex: http://youtube.com/user/thumbtemps
         </div>
+      </div>
     </div>
   `
 })
@@ -45,6 +49,7 @@ export class YouTubeComponent {
   @Input() tabIndex: number
 
   isFirstFocus: boolean = true
+  tooltip: string = "Example: http://youtube.com/thumbtemps"
 
   constructor(
     private validateService: ValidateService

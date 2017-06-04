@@ -32,7 +32,7 @@ export class AuthService {
         this.user = user
         this.avatar = this.getAvatar(user.email, 50)
         this.isAuthenticated = true
-        setTimeout(() => this.getUsernameByUid(user.uid), 2500)
+        this.getUsernameByUid(user.uid)
       }
       else {
         this.initializeAllVariables()
@@ -69,6 +69,7 @@ export class AuthService {
     .signupUser(signup)
     .then(response => {
       this.UID = response.data.user.uid
+      this.username = response.data.user.username
       this.signupSuccess = response.data.message
       this.signupError = response.hasError ? response.message : ''
       if (!response.hasError) this.router.navigate(['/'])

@@ -9,12 +9,16 @@ import { environment } from '../../../environments/environment'
 })
 export class HeaderPartialComponent implements OnInit {
 
+  username: String
   isNavMoreActive: boolean = false
   isProfileNavActive: boolean = false
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.username = this.authService.username
   }
 
   toggleIsNavMoreActive() {

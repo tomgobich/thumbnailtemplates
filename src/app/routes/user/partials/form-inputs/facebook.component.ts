@@ -7,6 +7,9 @@ import { ValidateService } from '../../../../services/validate.service'
   encapsulation: ViewEncapsulation.None,
   template: `
     <div [formGroup]="parent" class="form-group">
+      <div
+        [title]="tooltip"
+        uk-tooltip="pos: bottom-right">
         <input
             type="text"
             class="form-control"
@@ -34,6 +37,7 @@ import { ValidateService } from '../../../../services/validate.service'
             <i class="zmdi zmdi-alert-circle"></i>
             Please enter a full and valid URL, ex: http://facebook.com/thumbtemps
         </div>
+      </div>
     </div>
   `
 })
@@ -44,6 +48,7 @@ export class FacebookComponent {
   @Input() tabIndex: number
 
   isFirstFocus: boolean = true
+  tooltip: string = "Example: http://facebook.com/thumbnailtemplates"
 
   constructor(
     private validateService: ValidateService
