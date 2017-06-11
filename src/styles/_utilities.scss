@@ -10,6 +10,12 @@
   cursor: pointer;
 }
 
+.gradient {
+  height: 6px;
+  background-color: $brand-primary;
+  background-image: linear-gradient(to right, $brand-secondary, $brand-primary);
+}
+
 // ---------------------------------------------
 // Grid Utilities
 // ---------------------------------------------

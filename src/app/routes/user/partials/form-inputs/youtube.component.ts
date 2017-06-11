@@ -49,7 +49,7 @@ export class YouTubeComponent {
   @Input() tabIndex: number
 
   isFirstFocus: boolean = true
-  tooltip: string = "Example: http://youtube.com/thumbtemps"
+  tooltip: string = "Example: http://youtube.com/user/thumbtemps"
 
   constructor(
     private validateService: ValidateService

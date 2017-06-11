@@ -21,6 +21,8 @@ export class BrowseThumbnailsComponent implements OnInit {
   categories: Array<Category> = [{ intCategoryID: null, strCategory: 'All' }]
   pagination: Array<number>
   paginationToShow: number = environment.paginationToShow
+  paginationMax: number = 1
+  limits: Array<number> = [8, 16, 24, 32]
   limit: number = 16
 
   activeCategory: string = "all"
@@ -38,10 +40,13 @@ export class BrowseThumbnailsComponent implements OnInit {
       this.activeCategory = params["category"] || 'all'
       this.activePage = parseInt(params["activePage"]) || 1
 
-      let skip = this.activePage * this.limit == 1 * this.limit ? 0 : this.activePage * this.limit
+      this.route.queryParams.subscribe(queryParams => {
+        this.limit = parseInt(queryParams["show"]) || 16
 
-      this.getPagination(this.activePage)
-      this.getThumbnails(this.activeCategory, this.limit, skip)
+        let skip = this.activePage * this.limit == 1 * this.limit ? 0 : this.activePage * this.limit
+
+        this.getThumbnails(this.activeCategory, this.limit, skip)
+      })
     })
 
     this.getCategories()
@@ -50,10 +55,12 @@ export class BrowseThumbnailsComponent implements OnInit {
   getThumbnails(category: string, limit: number, skip?: number) {
     this.thumbnails = []
     this.thumbService.getThumbnails(category.toLowerCase(), limit, skip).subscribe(thumbnails => {
-      thumbnails.forEach(thumb => {
+      thumbnails.results.forEach(thumb => {
         this.thumbnails.push(this.utilitiesService.buildThumbnail(thumb))
       })
-      console.log({thumbnails})
+
+      this.paginationMax = thumbnails.count / this.limit
+      this.getPagination(this.activePage)
     })
   }
 
@@ -74,13 +81,20 @@ export class BrowseThumbnailsComponent implements OnInit {
     for (let i = start; arrayIndex < end; i++, arrayIndex++) {
       let current = page + i
       current > 0 ? this.pagination[arrayIndex] = current : arrayIndex--
+      if (current == this.paginationMax) break
     }
   }
 
   updateCategory(event: Event) {
     let selectedCategory = <HTMLSelectElement>event.currentTarget
-    this.activeCategory = this.categories[selectedCategory.selectedIndex].strCategory
+    this.activeCategory = this.categories[selectedCategory.selectedIndex].strCategory.toLowerCase()
     this.router.navigate(['/thumbnails', this.activeCategory, this.activePage])
+  }
+
+  updateLimit(event: Event) {
+    let selectedLimit = <HTMLSelectElement>event.currentTarget
+    let show = this.limits[selectedLimit.selectedIndex]
+    this.router.navigate(['/thumbnails', this.activeCategory, this.activePage], { queryParams: { show } })
   }
 
 }

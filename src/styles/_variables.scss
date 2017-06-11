@@ -1,7 +1,3 @@
-// General variable structure
-//
-// Variable format should follow the `$component-modifier-state-property` order.
-@import './uikit/variables-theme';
 
 // Colors
 //
@@ -61,3 +57,7 @@ $mar-2: 8px;
 $mar-3: 15px;
 $mar-4: 30px;
 
+// UIkit Alterations
+//
+$global-link-color: $brand-primary !default;
+$global-link-hover-color: $brand-secondary !default;

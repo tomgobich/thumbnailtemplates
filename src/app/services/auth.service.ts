@@ -7,6 +7,8 @@ import { md5 } from './md5.service';
 import { ApiAuthService } from './api/api-auth.service'
 import 'rxjs/add/operator/toPromise';
 
+declare var UIkit: any;
+
 @Injectable()
 export class AuthService {
 
@@ -53,7 +55,18 @@ export class AuthService {
     .then(response => {
       this.UID = response.data.uid
       this.loginError = response.hasError ? response.message : ''
-      if (!response.hasError) this.router.navigate(['/'])
+      if (!response.hasError) {
+        this.apiAuthService
+        .getUsernameByUid(this.UID)
+        .then(response => {
+          this.username = response
+          UIkit.notification(`<span uk-icon="icon: sign-in"></span> Welcome back ${this.username}!`, {status: 'success'});
+        })
+        this.router.navigate(['/'])
+      }
+      else {
+        UIkit.notification(`<span uk-icon="icon: close"></span> ${response.message}`, {status: 'error'});
+      }
     })
   }
 
@@ -72,7 +85,13 @@ export class AuthService {
       this.username = response.data.user.username
       this.signupSuccess = response.data.message
       this.signupError = response.hasError ? response.message : ''
-      if (!response.hasError) this.router.navigate(['/'])
+      if (!response.hasError) {
+        UIkit.notification(`<span uk-icon="icon: check"></span> Welcome to ThumbTemps, ${this.username}!`, {status: 'success'});
+        this.router.navigate(['/'])
+      }
+      else {
+        UIkit.notification(`<span uk-icon="icon: close"></span> ${response.message}`, {status: 'error'});
+      }
     })
   }
 
@@ -84,6 +103,7 @@ export class AuthService {
    */
   logout() {
     this.apiAuthService.logoutUser();
+    UIkit.notification(`<span uk-icon="icon: sign-out"></span> Goodbye for now, ${this.username}!`, {status: 'success'});
     this.initializeAllVariables();
     this.router.navigate(['/login'])
   }

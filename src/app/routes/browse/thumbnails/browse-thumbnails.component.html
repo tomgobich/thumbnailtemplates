@@ -1,25 +1,52 @@
 <div *ngIf="thumbnails.length > 0">
   <div class="uk-margin">
     <div class="row-title">
-      <h3>
+      <h3 class="page-title">
         {{ activeCategory }} Thumbnails
       </h3>
     </div>
   </div>
   <div class="uk-margin">
+
     <span>
-      Categories:
+      Category:
     </span>
-    <select
-      #category
-      (change)="updateCategory($event)">
-      <option
-        *ngFor="let category of categories"
-        [value]="category.intCategoryID"
-        [selected]="category.strCategory.toLowerCase() == activeCategory.toLowerCase()">
-        {{ category.strCategory }}
-      </option>
-    </select>
+    <div uk-form-custom="target: > * > span:last">
+      <select
+        #category
+        (change)="updateCategory($event)">
+        <option
+          *ngFor="let category of categories"
+          [value]="category.intCategoryID"
+          [selected]="category.strCategory.toLowerCase() == activeCategory.toLowerCase()">
+          {{ category.strCategory }}
+        </option>
+      </select>
+      <span class="uk-link">
+        <span uk-icon="icon: pencil"></span>
+        <span></span>
+      </span>
+    </div>
+
+    <span class="uk-margin-left">
+      Show:
+    </span>
+    <div uk-form-custom="target: > * > span:last">
+      <select
+        #show
+        (change)="updateLimit($event)">
+        <option
+          *ngFor="let l of limits"
+          [value]="l"
+          [selected]="l == limit">
+          {{ l }}
+        </option>
+      </select>
+      <span class="uk-link">
+        <span uk-icon="icon: pencil"></span>
+        <span></span>
+      </span>
+    </div>
   </div>
   <div
     uk-grid
