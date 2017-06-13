@@ -60,7 +60,11 @@
   <ul class="uk-pagination uk-flex-center" uk-margin>
     <li><a href="#"><span uk-pagination-previous></span></a></li>
     <li *ngFor="let page of pagination">
-      <a [routerLink]="['/thumbnails', activeCategory.toLowerCase(), page]">{{ page }}</a>
+      <a 
+        [routerLink]="['/thumbnails', activeCategory.toLowerCase(), page]"
+        [queryParams]="{show: limit}">
+        {{ page }}
+      </a>
     </li>
     <li><a href="#"><span uk-pagination-next></span></a></li>
   </ul>

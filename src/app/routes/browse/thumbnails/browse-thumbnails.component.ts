@@ -54,12 +54,12 @@ export class BrowseThumbnailsComponent implements OnInit {
 
   getThumbnails(category: string, limit: number, skip?: number) {
     this.thumbnails = []
-    this.thumbService.getThumbnails(category.toLowerCase(), limit, skip).subscribe(thumbnails => {
-      thumbnails.results.forEach(thumb => {
+    this.thumbService.getThumbnails(category.toLowerCase(), limit, skip).subscribe(thumbResults => {
+      thumbResults.results.forEach(thumb => {
         this.thumbnails.push(this.utilitiesService.buildThumbnail(thumb))
       })
 
-      this.paginationMax = thumbnails.count / this.limit
+      this.paginationMax = Math.floor(thumbResults.count / this.limit)
       this.getPagination(this.activePage)
     })
   }
@@ -74,14 +74,27 @@ export class BrowseThumbnailsComponent implements OnInit {
 
   getPagination(page: number) {
     this.pagination = []
-    let start = Math.floor(-(this.paginationToShow / 2) + 1)    // Go back to put active in middle
-    let end = this.paginationToShow                             // Length of pagination array
-    let arrayIndex = 0                                          // Current index to input value
+    let show = Math.floor(this.paginationToShow / 2)
+    let start = page - show > 0 ? page - show : 1
+    let end = page + show > this.paginationMax ? this.paginationMax : page + show
+    let arrayIndex = 0;
 
-    for (let i = start; arrayIndex < end; i++, arrayIndex++) {
-      let current = page + i
-      current > 0 ? this.pagination[arrayIndex] = current : arrayIndex--
-      if (current == this.paginationMax) break
+    console.log({
+      start,
+      end,
+      max: this.paginationMax
+    })
+
+    if ((end - start) + 1 < this.paginationToShow) {
+      start = (end - this.paginationToShow) + 1 > 0 ? (end - this.paginationToShow) + 1 : 1
+    }
+
+    if ((start + end) - 1 < this.paginationToShow) {
+      end = (start + this.paginationToShow) - 1 > this.paginationMax ? this.paginationMax : (start + this.paginationToShow) - 1
+    }
+
+    for (let i = start; i <= end; i++, arrayIndex++) {
+      this.pagination[arrayIndex] = i
     }
   }
 
