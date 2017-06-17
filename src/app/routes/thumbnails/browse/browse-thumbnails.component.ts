@@ -7,7 +7,6 @@ import { Category } from '../../../models/category.model'
 
 import { environment } from '../../../../environments/environment'
 
-// TODO: Return total count to get total number of pages
 // TODO: Move pagination into own partial component
 
 @Component({
@@ -79,12 +78,6 @@ export class BrowseThumbnailsComponent implements OnInit {
     let end = page + show > this.paginationMax ? this.paginationMax : page + show
     let arrayIndex = 0;
 
-    console.log({
-      start,
-      end,
-      max: this.paginationMax
-    })
-
     if ((end - start) + 1 < this.paginationToShow) {
       start = (end - this.paginationToShow) + 1 > 0 ? (end - this.paginationToShow) + 1 : 1
     }
@@ -101,13 +94,13 @@ export class BrowseThumbnailsComponent implements OnInit {
   updateCategory(event: Event) {
     let selectedCategory = <HTMLSelectElement>event.currentTarget
     this.activeCategory = this.categories[selectedCategory.selectedIndex].strCategory.toLowerCase()
-    this.router.navigate(['/thumbnails', this.activeCategory, this.activePage])
+    this.router.navigate(['/thumbnails/browse', this.activeCategory, this.activePage])
   }
 
   updateLimit(event: Event) {
     let selectedLimit = <HTMLSelectElement>event.currentTarget
     let show = this.limits[selectedLimit.selectedIndex]
-    this.router.navigate(['/thumbnails', this.activeCategory, this.activePage], { queryParams: { show } })
+    this.router.navigate(['/thumbnails/browse', this.activeCategory, this.activePage], { queryParams: { show } })
   }
 
 }

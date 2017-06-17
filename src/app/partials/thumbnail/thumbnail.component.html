@@ -1,4 +1,7 @@
-<div class="thumbnail-block" *ngIf="thumb" routerLink="/thumbnails/{{ thumb.strTemplateAlias }}">
+<div 
+  class="thumbnail-block pointer" 
+  *ngIf="thumb" 
+  [routerLink]="['/thumbnails/template', thumb.strTemplateAlias]">
   <img class="thumbnail-img" [src]="thumbImage">
   <div class="thumbnail-block-hover">
     <div class="thumbnail-block-details">

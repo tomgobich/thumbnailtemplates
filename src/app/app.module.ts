@@ -5,8 +5,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { Ng2ImgToolsModule } from 'ng2-img-tools';
-import { FirebaseModule } from './firebase.module';
-import { AppRoutingModule } from './app-routing.module';
+import { FirebaseModule } from './modules/firebase.module';
+import { AppRoutingModule } from './modules/app-routing.module';
 import { Ng2UploaderModule } from 'ng2-uploader'
 import { ClickOutsideModule } from 'ng-click-outside'
 import { UploadModule } from './routes/upload/upload.module'
@@ -28,10 +28,10 @@ import { ResponsiveAdComponent } from './partials/responsive-ad/responsive-ad.co
 import { ThumbnailComponent } from './partials/thumbnail/thumbnail.component';
 import { ProfileComponent } from './routes/user/profile/profile.component';
 
-import 'rxjs/Rx';
-import { BrowseThumbnailsComponent } from './routes/browse/thumbnails/browse-thumbnails.component';
+import { BrowseThumbnailsComponent } from './routes/thumbnails/browse/browse-thumbnails.component';
+import { ThumbnailTemplateComponent } from './routes/thumbnails/thumbnail-template/thumbnail-template.component'
 
-// TODO: Match type check casting
+import 'rxjs/Rx';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import { BrowseThumbnailsComponent } from './routes/browse/thumbnails/browse-thu
     ResponsiveAdComponent,
     ThumbnailComponent,
     ProfileComponent,
-    BrowseThumbnailsComponent
+    BrowseThumbnailsComponent,
+    ThumbnailTemplateComponent
   ],
   imports: [
     BrowserModule,

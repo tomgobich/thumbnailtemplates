@@ -16,6 +16,30 @@ export class ThumbService {
     ) { }
 
   /**
+   * Gets a single thumbnail by it's Id
+   * 
+   * @param {string} Id 
+   * @returns 
+   * 
+   * @memberof ThumbService
+   */
+  getThumbnailById(Id: string) {
+    return this.apiThumbService.getThumbnailById(Id)
+  }
+
+  /**
+   * Gets a single thumbnail by it's alias
+   * 
+   * @param {string} alias 
+   * @returns 
+   * 
+   * @memberof ThumbService
+   */
+  getThumbnailByAlias(alias: string) {
+    return this.apiThumbService.getThumbnailByAlias(alias)
+  }
+
+  /**
    * Gets array of thumbnails
    *
    * @param {number} [limit]

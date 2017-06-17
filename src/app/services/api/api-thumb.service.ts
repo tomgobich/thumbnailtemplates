@@ -14,6 +14,30 @@ export class ApiThumbService {
   ) { }
 
   /**
+   * Gets single thumbnail by it's Id
+   * 
+   * @param {string} Id 
+   * @returns 
+   * 
+   * @memberof ApiThumbService
+   */
+  getThumbnailById(Id: string) {
+    return this.http.get(`${this.apiUrl}/thumbnail/id/${Id}`).map(res => res.json())
+  }
+
+  /**
+   * Gets a single thumbnail by it's alias
+   * 
+   * @param {string} alias 
+   * @returns 
+   * 
+   * @memberof ApiThumbService
+   */
+  getThumbnailByAlias(alias: string) {
+    return this.http.get(`${this.apiUrl}/thumbnail/alias/${alias}`).map(res => res.json())
+  }
+
+  /**
    * Gets all thumbnails, with optional limit
    *
    * @param {string} [category]
