@@ -22,8 +22,8 @@ $gray-lightest:             #f7f7f9 !default;
 
 // Reassign color vars to semantic color scheme
 //
-$brand-primary:             #333399 !default;
-$brand-secondary:           #ff00cc !default;
+$brand-primary:             #2575fc !default;
+$brand-secondary:           #6a11cb !default;
 $brand-success:             $green !default;
 $brand-info:                $teal !default;
 $brand-warning:             $orange !default;
@@ -43,7 +43,7 @@ $font-family-sans-serif: 'Abel', sans-serif;
 $font-family-sans-serif-2: 'Ubuntu', sans-serif;
 
 $font-family-body: 'Abel', sans-serif;
-$font-family-heading: 'Ubuntu', sans-serif;
+$font-family-heading: $font-family-body;
 
 // Spacing Utilities
 //

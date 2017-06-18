@@ -78,6 +78,18 @@ export class ThumbService {
   }
 
   /**
+   * Gets array of images for a single thumbnail by it's Id
+   * 
+   * @param {string} id 
+   * @returns 
+   * 
+   * @memberof ThumbService
+   */
+  getThumbnailImagesById(id: string) {
+    return this.apiThumbService.getThumbnailImagesById(id)
+  }
+
+  /**
    * Gets array of categories
    *
    * @returns

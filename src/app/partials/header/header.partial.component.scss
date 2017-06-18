@@ -6,8 +6,11 @@
 }
 
 .logo {
-  max-width: 75px;
-  padding: 6px 0;
+  font-family: $font-family-body;
+}
+
+img.logo {
+  max-width: 130px;
   float: left;
 }
 

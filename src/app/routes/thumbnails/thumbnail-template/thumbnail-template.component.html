@@ -1,6 +1,29 @@
-<p>
-  thumbnail-template works!
-</p>
-<div *ngIf="thumb">
-  {{ thumb.strTemplateTitle }}
+<div *ngIf="thumb" class="uk-margin">
+  <h2 class="uk-heading-line">
+    <span>
+      {{ thumb.strTemplateTitle }}
+    </span>
+  </h2>
+  <div class="uk-child-width-1-6@m uk-grid-small" uk-grid>
+    <div *ngFor="let image of imageGallery">
+      <a 
+        href="#imageGalleryModal"
+        (click)="modalImage = image"
+        uk-toggle>
+        <img
+        class="uk-responsive-width uk-box-shadow-hover-large"
+        [src]="thumbService.imagePath + image.strAlias">
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="imageGalleryModal" uk-modal="center: true">
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-outside" type="button" uk-close></button>
+        <img
+          *ngIf="modalImage"
+          class="uk-responsive-width"
+          [src]="thumbService.imagePath + modalImage.strAlias">
+    </div>
 </div>

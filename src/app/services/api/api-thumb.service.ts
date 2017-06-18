@@ -76,6 +76,18 @@ export class ApiThumbService {
   }
 
   /**
+   * Gets all images for a single thumbnail by it's Id
+   * 
+   * @param {string} id 
+   * @returns 
+   * 
+   * @memberof ApiThumbService
+   */
+  getThumbnailImagesById(id: string) {
+    return this.http.get(`${this.apiUrl}/thumbnail/images/${id}`).map(res => res.json())
+  }
+
+  /**
    * Gets listing of categories
    *
    * @returns

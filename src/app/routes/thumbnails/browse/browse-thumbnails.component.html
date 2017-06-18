@@ -1,8 +1,10 @@
 <div *ngIf="thumbnails.length > 0">
   <div class="uk-margin">
     <div class="row-title">
-      <h3 class="page-title">
-        {{ activeCategory }} Thumbnails
+      <h3 class="uk-heading-line">
+        <span>
+          {{ activeCategory }} Thumbnails
+        </span>
       </h3>
     </div>
   </div>
@@ -57,7 +59,7 @@
     </partial-thumbnail>
   </div>
 
-  <ul class="uk-pagination uk-flex-center" uk-margin>
+  <ul class="uk-pagination uk-flex-center uk-margin-xl-bottom">
     <li><a href="#"><span uk-pagination-previous></span></a></li>
     <li *ngFor="let page of pagination">
       <a 
