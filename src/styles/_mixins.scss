@@ -19,6 +19,35 @@
   }
 }
 
+@mixin breakpoint($direction, $class) {
+  $widthProp: max-width;
+
+  // Direction
+  @if $direction == up {
+    $widthProp: min-width;
+  }
+  @else if $direction != down {
+    @warn "Breakpoint mixin direction supports: up, down";
+  }
+
+  // Media query
+  @if $class == sm {
+    @media (#{$widthProp}: $breakpoint-medium) { @content; }
+  }
+  @else if $class == md {
+    @media (#{$widthProp}: $breakpoint-medium) { @content; }
+  }
+  @else if $class == lg {
+    @media (#{$widthProp}: $breakpoint-large) { @content; }
+  }
+  @else if $class == xl {
+    @media (#{$widthProp}: $breakpoint-xlarge) { @content; }
+  }
+  @else {
+    @warn "Breakpoint mixin class supports: sm, md, lg, xl";
+  }
+}
+
 // ---------------------------------------------
 // Text Mixins
 // ---------------------------------------------

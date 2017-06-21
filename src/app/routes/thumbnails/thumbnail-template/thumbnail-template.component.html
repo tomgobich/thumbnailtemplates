@@ -4,7 +4,7 @@
       {{ thumb.strTemplateTitle }}
     </span>
   </h2>
-  <div class="uk-child-width-1-6@m uk-grid-small" uk-grid>
+  <div class="uk-grid-small uk-flex-inline uk-flex-left uk-flex-between uk-margin-bottom">
     <div *ngFor="let image of imageGallery">
       <a 
         href="#imageGalleryModal"
@@ -15,6 +15,21 @@
         [src]="thumbService.imagePath + image.strAlias">
       </a>
     </div>
+  </div>
+  <div class="content-350">
+    <p class="uk-text-lead">
+      {{ thumb.strTemplateDescription }}
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eros purus, varius id sagittis et, feugiat at leo. Nulla facilisis est mi, in porttitor magna varius vel. 
+      Duis vel purus eget erat condimentum feugiat. Phasellus ultrices quam nunc, vel sollicitudin magna pretium nec. Vestibulum vestibulum porttitor turpis vel rhoncus. 
+      Aenean sollicitudin, ligula id venenatis aliquam, sapien quam congue tortor, in cursus magna turpis ut ligula. Aliquam sagittis est sit amet arcu vestibulum, eu luctus sem suscipit. 
+      Aenean non lorem a nibh porta hendrerit. Aliquam erat volutpat. Mauris cursus placerat iaculis. Integer sagittis, ante vehicula scelerisque venenatis, quam felis facilisis risus, eu commodo urna massa vel sem. 
+      Quisque faucibus sodales dui, eget vestibulum dui consectetur ut. Sed sit amet egestas neque. Nunc magna justo, pulvinar vitae mi vitae, fermentum interdum justo.
+    </p>
+  </div>
+  <div class="aside-350">
+    <!-- aside content -->
   </div>
 </div>
 

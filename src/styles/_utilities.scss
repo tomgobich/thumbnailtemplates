@@ -25,6 +25,30 @@
   clear: both;
 }
 
+$asideSize: 350;
+.content-#{$asideSize} {
+  width: 75%;
+  width: calc(100% - #{$asideSize}px);
+  padding-right: 15px;
+  float: left;
+}
+
+.aside-#{$asideSize} {
+  width: 25%;
+  width: calc(0px + #{$asideSize}px);
+  padding-left: 15px;
+  float: left;
+}
+
+.content-300,
+.aside-300 {
+  @include breakpoint(down, sm) {
+    width: 100%;
+    padding-left: 0;
+    float: unset;
+  }
+}
+
 .pos-relative {
   position: relative;
   top: 0;
