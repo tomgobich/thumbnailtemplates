@@ -4,32 +4,61 @@
       {{ thumb.strTemplateTitle }}
     </span>
   </h2>
-  <div class="uk-grid-small uk-flex-inline uk-flex-left uk-flex-between uk-margin-bottom">
-    <div *ngFor="let image of imageGallery">
-      <a 
-        href="#imageGalleryModal"
-        (click)="modalImage = image"
-        uk-toggle>
-        <img
-        class="uk-responsive-width uk-box-shadow-hover-large"
-        [src]="thumbService.imagePath + image.strAlias">
-      </a>
+  <div class="uk-margin-bottom">
+    <div class="image-gallery uk-visible-toggle">
+      <div class="arrow-left uk-hidden-hover">
+        <span uk-icon="icon: chevron-left"></span>
+      </div>
+
+      <div class="uk-grid-small uk-flex-inline uk-flex-left uk-flex-between">
+        <div *ngFor="let image of imageGallery">
+          <a 
+            href="#imageGalleryModal"
+            (click)="modalImage = image"
+            uk-toggle>
+            <img
+            class="uk-responsive-width uk-box-shadow-hover-large thumb-gallery"
+            [src]="thumbService.imagePath + image.strAlias">
+          </a>
+        </div>
+      </div>
+      
+      <div class="arrow-right uk-hidden-hover">
+        <span uk-icon="icon: chevron-right"></span>
+      </div>
     </div>
   </div>
   <div class="content-350">
-    <p class="uk-text-lead">
+    <p class="uk-text-lead text-lead-adjust">
       {{ thumb.strTemplateDescription }}
     </p>
+
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eros purus, varius id sagittis et, feugiat at leo. Nulla facilisis est mi, in porttitor magna varius vel. 
-      Duis vel purus eget erat condimentum feugiat. Phasellus ultrices quam nunc, vel sollicitudin magna pretium nec. Vestibulum vestibulum porttitor turpis vel rhoncus. 
-      Aenean sollicitudin, ligula id venenatis aliquam, sapien quam congue tortor, in cursus magna turpis ut ligula. Aliquam sagittis est sit amet arcu vestibulum, eu luctus sem suscipit. 
-      Aenean non lorem a nibh porta hendrerit. Aliquam erat volutpat. Mauris cursus placerat iaculis. Integer sagittis, ante vehicula scelerisque venenatis, quam felis facilisis risus, eu commodo urna massa vel sem. 
-      Quisque faucibus sodales dui, eget vestibulum dui consectetur ut. Sed sit amet egestas neque. Nunc magna justo, pulvinar vitae mi vitae, fermentum interdum justo.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tincidunt vestibulum neque eget volutpat. Sed malesuada faucibus metus, quis rhoncus odio varius fringilla. Suspendisse blandit condimentum lacus, at porta mi efficitur eget. Aliquam vehicula nunc id ipsum convallis interdum. Suspendisse potenti. Curabitur sit amet sapien varius, pellentesque quam id, tincidunt ante. Mauris feugiat est risus, vitae euismod orci ornare ut. Vestibulum vitae odio in purus ornare auctor. Duis eu ante et arcu sodales auctor at et sapien. Duis suscipit tortor non dolor rutrum tristique. Maecenas id auctor sem. Maecenas congue lobortis leo at viverra. Integer et ligula vel diam aliquam pellentesque. Cras nisl elit, elementum a nisl ac, eleifend euismod lectus. Pellentesque mollis sagittis tortor eu bibendum.
     </p>
+    <p>
+      Pellentesque aliquet lacinia lacus nec lobortis. Nam elementum commodo tempus. In scelerisque nec risus vel hendrerit. Cras quis felis vehicula, rhoncus felis sed, faucibus massa. Praesent aliquet arcu vitae nisl mattis convallis. Suspendisse pretium ut ex vel fermentum. Praesent et nulla sem. Quisque bibendum nibh at ultricies lobortis. Maecenas et tincidunt mi.
+    </p>
+    <p>
+      Maecenas gravida vulputate nisl id ultricies. Donec bibendum, ligula ac pretium euismod, ipsum nibh rutrum erat, et ultrices erat justo nec eros. Proin pretium ex nisi, a molestie risus suscipit eget. Vivamus scelerisque mattis erat, id consequat urna elementum a. Fusce fermentum arcu neque, quis semper sapien faucibus sit amet. Fusce eu quam sagittis, dignissim leo ac, ornare ipsum. Quisque hendrerit urna id lacus egestas, ac finibus lorem imperdiet. Nunc scelerisque tellus in volutpat laoreet.
+    </p>
+
+    <button class="uk-button uk-button-primary uk-margin uk-margin-small-right">
+      <span class="uk-margin-small-right" uk-icon="icon: download; ratio: .8"></span>
+      <span>Download</span>
+    </button>
+    <button class="uk-button uk-button-default uk-margin uk-margin-small-right">
+      <span class="uk-margin-small-right" uk-icon="icon: heart; ratio: .8"></span>
+      <span>Like</span>
+    </button>
+    <button class="uk-button uk-button-link uk-margin-small-left">
+      Report
+    </button>
+
   </div>
   <div class="aside-350">
     <!-- aside content -->
+    <img src="http://placehold.it/350x300">
   </div>
 </div>
 

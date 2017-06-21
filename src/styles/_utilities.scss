@@ -16,6 +16,11 @@
   background-image: linear-gradient(to right, $brand-secondary, $brand-primary);
 }
 
+button .uk-icon {
+  position: relative;
+  top: -2px;
+}
+
 // ---------------------------------------------
 // Grid Utilities
 // ---------------------------------------------

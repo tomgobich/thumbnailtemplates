@@ -6,3 +6,36 @@
 .flex-nowrap {
     flex-wrap: nowrap;
 }
+
+.text-lead-adjust {
+    font-size: 120%;
+}
+
+.thumb-gallery {
+    width: 100%;
+    min-width: 320px;
+    max-width: 720px;
+}
+
+.image-gallery {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    .arrow-left,
+    .arrow-right {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        background-color: rgba(black, .3);
+        color: white;
+        padding: 0 10px;
+        position: absolute;
+        z-index: 600;
+    }
+
+    .arrow-right {
+        right: 0;
+    }
+}
