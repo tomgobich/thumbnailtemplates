@@ -4,26 +4,36 @@
       {{ thumb.strTemplateTitle }}
     </span>
   </h2>
-  <div class="uk-margin-bottom">
-    <div class="image-gallery uk-visible-toggle">
-      <div class="arrow-left uk-hidden-hover">
+  <div class="uk-margin-bottom" (mouseenter)="setScrollable($event)">
+    <div 
+      class="image-gallery uk-visible-toggle" 
+      *ngIf="imageGallery">
+      <div 
+        class="arrow-left uk-hidden-hover" 
+        *ngIf="isScrollableLeft"
+        (mouseenter)="scrollLeft($event)"
+        (mouseleave)="scrollNone($event)">
         <span uk-icon="icon: chevron-left"></span>
       </div>
 
-      <div class="uk-grid-small uk-flex-inline uk-flex-left uk-flex-between">
-        <div *ngFor="let image of imageGallery">
+      <div class="uk-grid-collapse uk-flex-inline uk-flex-left uk-flex-between gallery-slider">
+        <div class="gallery-image" *ngFor="let image of imageGallery">
           <a 
             href="#imageGalleryModal"
             (click)="modalImage = image"
             uk-toggle>
             <img
-            class="uk-responsive-width uk-box-shadow-hover-large thumb-gallery"
-            [src]="thumbService.imagePath + image.strAlias">
+              class="uk-responsive-width uk-box-shadow-hover-large thumb-gallery"
+              [src]="thumbService.imagePath + image.strAlias">
           </a>
         </div>
       </div>
       
-      <div class="arrow-right uk-hidden-hover">
+      <div 
+        class="arrow-right uk-hidden-hover" 
+        *ngIf="isScrollableRight"
+        (mouseenter)="scrollRight($event)"
+        (mouseleave)="scrollNone($event)">
         <span uk-icon="icon: chevron-right"></span>
       </div>
     </div>

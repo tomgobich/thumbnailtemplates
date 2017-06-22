@@ -18,6 +18,11 @@ export class ThumbnailTemplateComponent implements OnInit {
   imageGallery: Array<Image>
   modalImage: Image
 
+  isScrollableLeft: boolean = true
+  isScrollableRight: boolean = true
+  isScrollingLeft: boolean = false
+  isScrollingRight: boolean = false
+
   constructor(
      private route: ActivatedRoute
     ,private thumbService: ThumbService
@@ -34,6 +39,33 @@ export class ThumbnailTemplateComponent implements OnInit {
         this.thumbService.getThumbnailImagesById(this.thumb.strTemplateID).subscribe(images => this.imageGallery = images)
       })
     })
+  }
+
+  setScrollable($event: MouseEvent) {
+    // let target = (<HTMLDivElement>$event.target) 
+    // let galleryLength = target.querySelectorAll('.gallery-image').length
+    // let galleryItemWidth = target.querySelector('.gallery-image').clientWidth
+    // let targetWidth = target.clientWidth
+
+    // if (galleryLength * galleryItemWidth > targetWidth) {
+    //   this.isScrollableRight = true
+    // }
+  }
+
+  scrollLeft($event: MouseEvent) {
+    let target = (<HTMLDivElement>$event.target)
+    target.parentElement.querySelector('.gallery-slider').classList.add('scroll-left')    
+  }
+
+  scrollRight($event: MouseEvent) {
+    let target = (<HTMLDivElement>$event.target)
+    target.parentElement.querySelector('.gallery-slider').classList.add('scroll-right')
+  }
+
+  scrollNone($event: MouseEvent) {
+    let target = (<HTMLDivElement>$event.target)
+    target.parentElement.querySelector('.gallery-slider').classList.remove('scroll-right')
+    target.parentElement.querySelector('.gallery-slider').classList.remove('scroll-left')
   }
 
 }

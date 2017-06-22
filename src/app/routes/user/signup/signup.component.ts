@@ -36,11 +36,7 @@ export class SignupComponent implements AfterViewInit {
     ,private authService: AuthService
     ,private apiAuthService: ApiAuthService
     ,private validateService: ValidateService
-  ) {
-
-
-
-  }
+  ) {  }
 
   ngAfterViewInit() {
     // this.renderer.invokeElementMethod(this.email.nativeElement, 'focus')
